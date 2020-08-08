@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import Dropdown from "react-dropdown"
 import 'react-dropdown/style.css';
 
@@ -20,8 +21,6 @@ const giNoGiOptions = {
   nogi: "No Gi",
   gi: "Gi"
 }
-
-
 
 export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([])
@@ -66,13 +65,15 @@ export default function PlayerSearch({ }) {
     <ul>
       {found.length > 0
         ? (found.map(player => {
-          const { firstName, lastName, weightClass, wins, losses, draws } = player
+          const { _id, firstName, lastName, weightClass, wins, losses, draws } = player
           return <li key={player._id}>
-            <div style={{ display: "flex" }}>
-              <div>{firstName} {lastName}</div>
-              <div>{weightClass}</div>
-              <div>win: {wins} loss: {losses} draw: {draws}</div>
-            </div>
+            <Link to={`/profiles/${_id}`}>
+              <div style={{ display: "flex" }}>
+                <div>{firstName} {lastName}</div>
+                <div>{weightClass}</div>
+                <div>win: {wins} loss: {losses} draw: {draws}</div>
+              </div>
+            </Link>
           </li>
         })) : "There are no fighters in that weight class"}
 
