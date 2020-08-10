@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import Dropdown from "react-dropdown"
-import 'react-dropdown/style.css';
+
 
 import { apiFetch } from "../../modules/api-fetch"
 
-const weightClassOptions = {
-  Absolute: "Absolute",
-  Flyweight: "Flyweight: 57.5 and under",
-  Lightweight: "Lightweight: 64.1 - 70",
-  Welterweight: "Welterweight: 70.1 - 76",
-  Middleweight: "Middleweight: 76.1 - 82.3",
-  Cruiserweight: "Cruiserweight: 82.4 - 88.3",
-  LightHeavyweight: "Light-Heavyweight: 88.4 - 94.3",
-  Heavyweight: "Heavyweight: 94.4 - 100.4",
-  SuperHeavyweight: "Super-Heavyweight: 100.5 and over"
-}
-
-const giNoGiOptions = {
-  nogi: "No Gi",
-  gi: "Gi"
-}
+import GiNoGiDropdown from "../../ui/dropdowns/ginogi"
+import WeightClassDropdown from "../../ui/dropdowns/weight-class"
 
 export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([])
@@ -49,18 +34,9 @@ export default function PlayerSearch({ }) {
     <div style={{
       display: "flex"
     }}>
-      <Dropdown options={Object.keys(giNoGiOptions).map(value => ({
-        value, label: giNoGiOptions[value]
-      }))}
-        onChange={val => setGiNoGi(val.value)}
-        value={giNoGi}
-      />
-      <Dropdown options={Object.keys(weightClassOptions).map(value => ({
-        value, label: weightClassOptions[value]
-      }))}
-        onChange={val => setWeightClass(val.value)}
-        value={weightClass}
-      />
+      <GiNoGiDropdown value={giNoGi} setValue={setGiNoGi} />
+      <WeightClassDropdown value={weightClass} setValue={setWeightClass} />
+
     </div>
     <ul>
       {found.length > 0

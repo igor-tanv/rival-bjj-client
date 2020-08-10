@@ -1,11 +1,26 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
 import Contracts from "./contracts"
 
-export default function Profile(props) {
-  return <div>
-    <div>Fighter name: {props.firstName} {props.lastName}</div>
-    ...
+function Profile({ history, _id, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 
-    <Contracts contracts={props.contracts} />
-  </div>
+  return <div>
+    <div>Name: {firstName} {lastName}</div>
+    <div>Fight Record (W/L/D): {wins}/{losses}/{draws}</div>
+    <div>School: {school}</div>
+    <div>Gi Rank: {gi}</div>
+    <div>No Gi Rank: {nogi}</div>
+    <div>Weight: {weightClass}</div>
+    <div>Quality Rating: {qualityRating} / 5</div>
+
+    <button onClick={() => history.push(`/challenges/new/${_id}`)}>Issue challenge</button>
+
+    <h3>Match history</h3>
+    {
+      contracts.length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
+    }
+  </div >
 }
+
+
+export default withRouter(Profile)
