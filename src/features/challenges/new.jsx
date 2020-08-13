@@ -4,7 +4,8 @@ import DateTimePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment"
 
-import ChallengeNote from "./note"
+import ChallengeNote from "./notes/challengeNote"
+import FeeNote from "./notes/feeNote"
 import { apiFetch } from "../../modules/api-fetch"
 import TextField from "../../ui/text-field"
 
@@ -146,9 +147,8 @@ function IssueChallenge({ match }) {
           }))
         }} />
       </div>
-
-
     </form>
+    <FeeNote />
   </div>
 }
 
