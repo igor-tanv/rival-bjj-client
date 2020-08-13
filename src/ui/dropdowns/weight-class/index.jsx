@@ -3,7 +3,7 @@ import Dropdown from "react-dropdown"
 import 'react-dropdown/style.css';
 
 export const weightClassOptions = {
-  Absolute: "Absolute",
+  OpenWeight: "Open Weight",
   Flyweight: "Flyweight: 57.5 and under",
   Lightweight: "Lightweight: 64.1 - 70",
   Welterweight: "Welterweight: 70.1 - 76",

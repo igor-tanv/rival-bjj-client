@@ -4,16 +4,16 @@ import { Link } from "react-router-dom"
 
 import { apiFetch } from "../../modules/api-fetch"
 
-import GiNoGiDropdown from "../../ui/dropdowns/ginogi"
-import WeightClassDropdown from "../../ui/dropdowns/weight-class"
+import GiNoGiDropdown, { giNoGiOptions } from "../../ui/dropdowns/ginogi"
+import WeightClassDropdown, { weightClassOptions } from "../../ui/dropdowns/weight-class"
 
 export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([])
-  const [giNoGi, setGiNoGi] = useState("nogi")
-  const [weightClass, setWeightClass] = useState("Absolute")
+  const [giNoGi, setGiNoGi] = useState(Object.keys(giNoGiOptions)[0])
+  const [weightClass, setWeightClass] = useState(Object.keys(weightClassOptions)[0])
 
   useEffect(() => {
-    apiFetch("players.json").then(json => setPlayers(json.players))
+    apiFetch("players").then(json => setPlayers(json.players))
   }, [])
 
   function search(players) {
@@ -25,7 +25,7 @@ export default function PlayerSearch({ }) {
   }
 
   function filterByWeightClass(sorted) {
-    if (weightClass === "Absolute") return sorted
+    if (weightClass === "OpenWeight") return sorted
     return sorted.filter(player => player.weightClass === weightClass)
   }
 
