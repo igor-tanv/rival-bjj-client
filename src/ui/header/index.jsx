@@ -6,7 +6,7 @@ export default function Header() {
   return <div className="header">
     <Navbar bg="primary" variant="dark">
       <Nav className="mr-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
+        <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="#profile">My Profile</Nav.Link>
         <Nav.Link href="#login">Login</Nav.Link>
         <Nav.Link href="#register">Register</Nav.Link>
