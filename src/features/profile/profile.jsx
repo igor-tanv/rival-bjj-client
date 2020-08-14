@@ -13,7 +13,7 @@ function Profile({ history, _id, lastName, firstName, wins, losses, draws, schoo
     <div>Weight: {weightClass}</div>
     <div>Quality Rating: {qualityRating} / 5</div>
 
-    <button onClick={() => history.push(`/challenges/new/${_id}`)}>Issue challenge</button>
+    <button onClick={() => history.push(`/contracts/new/${_id}`)}>Issue Challenge</button>
 
     <h3>Match history</h3>
     {

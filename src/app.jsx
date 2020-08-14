@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Homepage from "./features/homepage"
 import Login from "./features/login"
 import Profile from "./features/profile"
-import IssueChallenge from "./features/challenges/new"
+import IssueContract from "./features/contracts/new"
 
 export default function App() {
   return (
@@ -23,8 +23,8 @@ export default function App() {
           <Profile />
         </Route>
 
-        <Route exact path="/challenges/new/:id">
-          <IssueChallenge />
+        <Route exact path="/contracts/new/:id">
+          <IssueContract />
         </Route>
 
       </Switch>

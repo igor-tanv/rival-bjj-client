@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function ChallengeNote() {
+export default function ContractNote() {
 
   return <div>
     <h5>NOTE: If you plan to host this match at your school it's your responsibility to provide:</h5>

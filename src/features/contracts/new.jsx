@@ -4,8 +4,8 @@ import DateTimePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment"
 
-import ChallengeNote from "./notes/challengeNote"
-import FeeNote from "./notes/feeNote"
+import ContractNote from "./notes/contract-note"
+import FeeNote from "./notes/fee-note"
 import { apiFetch } from "../../modules/api-fetch"
 import TextField from "../../ui/text-field"
 
@@ -26,7 +26,7 @@ const defaultValues = {
   playerComments: ""
 }
 
-function IssueChallenge({ match }) {
+function IssueContract({ match }) {
   const [values, setValues] = useState(defaultValues)
   const [opponent, setOpponent] = useState({ firstName: "", lastName: "" })
 
@@ -38,7 +38,7 @@ function IssueChallenge({ match }) {
     <h1>Challenge Contract</h1>
     <h3>You are challenging {opponent.firstName} {opponent.lastName} to a match!</h3>
 
-    <ChallengeNote />
+    <ContractNote />
 
     <form onSubmit={e => e.preventDefault()}>
 
@@ -152,4 +152,4 @@ function IssueChallenge({ match }) {
   </div>
 }
 
-export default withRouter(IssueChallenge)
+export default withRouter(IssueContract)
