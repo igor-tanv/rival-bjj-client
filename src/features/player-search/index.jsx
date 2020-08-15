@@ -21,7 +21,7 @@ export default function PlayerSearch({ }) {
   }
 
   function sortByGiNoGi(players) {
-    return players.sort((a, b) => a[giNoGi] - b[giNoGi])
+    return players.sort((a, b) => b[giNoGi] - a[giNoGi])
   }
 
   function filterByWeightClass(sorted) {
