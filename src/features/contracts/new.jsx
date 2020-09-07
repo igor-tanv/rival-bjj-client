@@ -11,7 +11,6 @@ import TextField from "../../ui/text-field"
 
 import GiNoGiDropdown, { giNoGiOptions } from "../../ui/dropdowns/ginogi"
 import WeightClassDropdown, { weightClassOptions } from "../../ui/dropdowns/weight-class"
-import MatchLengthDropdown, { matchLengthOptions } from "../../ui/dropdowns/match-length"
 
 const defaultValues = {
   playerId: "",
@@ -19,7 +18,6 @@ const defaultValues = {
   dateTime: new Date(),
   weightClass: Object.values(weightClassOptions)[0],
   location: "",
-  matchLength: Object.values(matchLengthOptions)[0],
   refereeFirstName: "",
   refereeLastName: "",
   rules: Object.values(giNoGiOptions)[0],
@@ -97,15 +95,6 @@ function IssueContract({ match }) {
           }}
         />
 
-      </div>
-
-      <div>
-        <label>Match length </label>
-        <MatchLengthDropdown value={values.matchLength} setValue={(val) => {
-          setValues(prev => ({
-            ...prev, matchLength: val
-          }))
-        }} />
       </div>
 
       <div>
