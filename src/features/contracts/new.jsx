@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
-import DateTimePicker from 'react-datepicker'
-import "react-datepicker/dist/react-datepicker.css";
+import DateTimePicker from "../../ui/date-time-picker"
 import moment from "moment"
 
 import ContractNote from "./notes/contract-note"
 import FeeNote from "./notes/fee-note"
 import { apiFetch } from "../../modules/api-fetch"
 import TextField from "../../ui/text-field"
+import TextArea from "../../ui/text-area"
 
 import GiNoGiDropdown, { giNoGiOptions } from "../../ui/dropdowns/ginogi"
 import WeightClassDropdown, { weightClassOptions } from "../../ui/dropdowns/weight-class"
@@ -53,6 +53,7 @@ function IssueContract({ match }) {
       <div>
         <label>Match Date and Starting Time</label>
         <DateTimePicker
+          className="__text-field-component"
           showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
           selected={values.dateTime}
@@ -128,7 +129,7 @@ function IssueContract({ match }) {
       <div>
         <label>Comments</label>
 
-        <textarea value={values.playerComments} onChange={e => {
+        <TextArea value={values.playerComments} onChange={e => {
           const playerComments = e.target.value
           setValues(prev => ({
             ...prev,

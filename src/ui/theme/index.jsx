@@ -2,10 +2,14 @@ import React from "react"
 import Header from "../header"
 import Footer from "../footer"
 
+import "./styles.css"
+
 export default function Theme({ children }) {
   return <>
     <Header />
-    {children}
+    <div className="container">
+      {children}
+    </div>
     <Footer />
   </>
 }
