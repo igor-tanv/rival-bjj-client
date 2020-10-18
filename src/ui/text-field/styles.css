@@ -1,4 +1,8 @@
-.__text-field-component {
+.__rival_text-field {
+  position: relative;
+}
+
+.__rival_text-field .__rival_text-field-component {
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -11,4 +15,13 @@
   outline: none;
   padding: 8px 52px 8px 10px;
   transition: all 200ms ease;
+}
+
+.__rival_text-field .errors {
+  position: absolute;
+  text-align: right;
+  right: 0.5rem;
+  top: 20%;
+  color: red;
+  z-index: 1;
 }

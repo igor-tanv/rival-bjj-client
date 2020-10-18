@@ -8,9 +8,15 @@ import FeeNote from "./notes/fee-note"
 import { apiFetch } from "../../modules/api-fetch"
 import TextField from "../../ui/text-field"
 import TextArea from "../../ui/text-area"
+import Button from "../../ui/button"
 
 import GiNoGiDropdown, { giNoGiOptions } from "../../ui/dropdowns/ginogi"
 import WeightClassDropdown, { weightClassOptions } from "../../ui/dropdowns/weight-class"
+
+
+function isRequired(v) {
+  return v && v.length > 0 ? null : "is required"
+}
 
 const defaultValues = {
   playerId: "",
@@ -18,8 +24,7 @@ const defaultValues = {
   dateTime: new Date(),
   weightClass: Object.values(weightClassOptions)[0],
   location: "",
-  refereeFirstName: "",
-  refereeLastName: "",
+  refereeName: "",
   rules: Object.values(giNoGiOptions)[0],
   playerComments: ""
 }
@@ -28,9 +33,32 @@ function IssueContract({ match }) {
   const [values, setValues] = useState(defaultValues)
   const [opponent, setOpponent] = useState({ firstName: "", lastName: "" })
 
+  const validations = {
+    location: [isRequired],
+    refereeName: [isRequired]
+  }
+
+  const [errors, setErrors] = useState(Object.keys(validations).reduce((acc, key) => {
+    acc[key] = null
+    return acc
+  }, {}))
+
   useEffect(() => {
     apiFetch(`players/${match.params.id}`).then(json => setOpponent(json.player))
   }, [])
+
+
+  function valid() {
+    return Object.keys(validations).flatMap(key => validations[key].map(v => v(values[key]))).every(e => e === null)
+  }
+
+  function validate(key, validations) {
+    const errors = validations.map(v => v(values[key]))
+    setErrors(prev => ({
+      ...prev,
+      [key]: errors
+    }))
+  }
 
   return <div>
     <h1>Challenge Contract</h1>
@@ -53,7 +81,7 @@ function IssueContract({ match }) {
       <div>
         <label>Match Date and Starting Time</label>
         <DateTimePicker
-          className="__text-field-component"
+          className="__rival_text-field-component"
           showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
           selected={values.dateTime}
@@ -87,6 +115,8 @@ function IssueContract({ match }) {
         <TextField
           placeholder="Enter the School Name"
           value={values.location}
+          validate={() => validate("location", validations["location"])}
+          errors={errors.location}
           onChange={val => {
             const location = val
             setValues(prev => ({
@@ -99,28 +129,16 @@ function IssueContract({ match }) {
       </div>
 
       <div>
-        <label>Referee First Name</label>
+        <label>Referee Name</label>
         <TextField
-          value={values.refereeFirstName}
+          value={values.refereeName}
+          validate={() => validate("refereeName", validations["refereeName"])}
+          errors={errors.refereeName}
           onChange={val => {
-            const refereeFirstName = val
+            const refereeName = val
             setValues(prev => ({
               ...prev,
-              refereeFirstName
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Referee Last Name</label>
-        <TextField
-          value={values.refereeLastName}
-          onChange={val => {
-            const refereeLastName = val
-            setValues(prev => ({
-              ...prev,
-              refereeLastName
+              refereeName
             }))
           }}
         />
@@ -137,6 +155,7 @@ function IssueContract({ match }) {
           }))
         }} />
       </div>
+      <Button disabled={!valid()}>Send challenge!</Button>
     </form>
     <FeeNote />
   </div>
