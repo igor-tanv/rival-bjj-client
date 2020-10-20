@@ -18,6 +18,10 @@ function isRequired(v) {
   return v && v.length > 0 ? null : "is required"
 }
 
+function didAgree(checked) {
+  return checked ? null : "must be agreed to"
+}
+
 const defaultValues = {
   playerId: "",
   opponentId: "",
@@ -26,16 +30,18 @@ const defaultValues = {
   location: "",
   refereeName: "",
   rules: Object.values(giNoGiOptions)[0],
-  playerComments: ""
+  playerComments: "",
+  acceptsTos: false
 }
 
 function IssueContract({ match }) {
-  const [values, setValues] = useState(defaultValues)
+  const [values, setValues] = useState({ ...defaultValues, opponentId: match.params.id })
   const [opponent, setOpponent] = useState({ firstName: "", lastName: "" })
 
   const validations = {
     location: [isRequired],
-    refereeName: [isRequired]
+    refereeName: [isRequired],
+    acceptsTos: [didAgree]
   }
 
   const [errors, setErrors] = useState(Object.keys(validations).reduce((acc, key) => {
@@ -60,13 +66,20 @@ function IssueContract({ match }) {
     }))
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    apiFetch(`contracts`, "post", values).then(json => {
+      debugger
+    })
+  }
+
   return <div>
     <h1>Challenge Contract</h1>
     <h3>You are challenging {opponent.firstName} {opponent.lastName} to a match!</h3>
 
     <ContractNote />
 
-    <form onSubmit={e => e.preventDefault()}>
+    <form onSubmit={handleSubmit}>
 
       <div>
         <label>Match type</label>
@@ -155,9 +168,22 @@ function IssueContract({ match }) {
           }))
         }} />
       </div>
-      <Button disabled={!valid()}>Send challenge!</Button>
+      <div>
+        <label htmlFor="">
+          <input type="checkbox" onChange={(e) => {
+            const acceptsTos = e.target.checked
+            setValues(prev => ({
+              ...prev, acceptsTos
+            }))
+          }} value={values.acceptsTos} />
+      I have <a href="">read and accept the match rules</a>
+        </label>
+      </div>
+      <Button disabled={!valid()}>Send Contract to Opponent</Button>
     </form>
     <FeeNote />
+
+
   </div>
 }
 

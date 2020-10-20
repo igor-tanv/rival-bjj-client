@@ -1,13 +1,23 @@
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+import fetch from "isomorphic-fetch";
+require("es6-promises");
 
-export function apiFetch(path, method, data = {}) {
-  return fetch(`//${process.env.REACT_APP_HOST}/api/${path}`)
-    .then(function (response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    })
+export function apiFetch(path, method, data) {
+  const options = {};
+  const headers = {
+    "Content-Type": "application/json",
+    Accepts: "application/json",
+  };
+  if (!method) method = "GET";
+  if (method.toUpperCase() !== "GET") {
+    options["body"] = JSON.stringify(data);
+  }
 
+  const url = `//${process.env.REACT_APP_HOST}/api/${path}`;
+
+  return fetch(url, {
+    method: method.toUpperCase(),
+    headers,
+
+    ...options,
+  }).then((response) => response.json());
 }
