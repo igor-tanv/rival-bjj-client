@@ -170,12 +170,14 @@ function IssueContract({ match }) {
       </div>
       <div>
         <label htmlFor="">
-          <input type="checkbox" onChange={(e) => {
-            const acceptsTos = e.target.checked
-            setValues(prev => ({
-              ...prev, acceptsTos
-            }))
-          }} value={values.acceptsTos} />
+          <input
+            type="checkbox" onChange={(e) => {
+              const acceptsTos = e.target.checked
+              setValues(prev => ({
+                ...prev, acceptsTos
+              }))
+            }}
+            value={values.acceptsTos} />
       I have <a href="">read and accept the match rules</a>
         </label>
       </div>
