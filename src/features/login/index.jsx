@@ -1,26 +1,32 @@
 import React, { useState } from "react"
+import { apiFetch } from "../../modules/api-fetch"
 
 export default function Login({ }) {
-
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
-  async function login({ username, password }) {
-    await new Promise((resolve, reject) =>
-      setTimeout(() => {
-        if (username === 'username' && password === 'password')
-          resolve();
-        else reject();
-      }, 1000),
-    );
-  }
+  const [error, setError] = useState(null)
 
   // how do we extract login info from e.target and pass to login function? 
   async function onSubmit(e) {
     e.preventDefault();
-    try {
-      await login({});
-    } catch (error) { }
+    setError(null)
+    apiFetch("sessions", "POST", {
+      email, password
+    }).then(json => {
+      if (json.error) {
+        setError(json.error)
+        setEmail("")
+        setPassword("")
+        return
+      }
+      localStorage.setItem("jwt", json.jwt)
+      localStorage.setItem("playerId", json.id)
+      window.location = `/profiles/${json.id}`
+    }).catch(error => {
+      setError("Sorry, there was a server error, please contact igor!")
+
+      return
+    })
   }
 
 
@@ -28,15 +34,16 @@ export default function Login({ }) {
     <div className='login-container'>
       <form onSubmit={onSubmit}>
         <p>Login</p>
+        {error && <span className="error">{error}</span>}
         <input
           type='text'
-          placeholder='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder='Your email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
-          type='text'
+          type='password'
           placeholder='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
