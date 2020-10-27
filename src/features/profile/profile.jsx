@@ -13,7 +13,8 @@ function Profile({ history, _id, lastName, firstName, wins, losses, draws, schoo
     <div>Weight: {weightClass}</div>
     <div>Quality Rating: {qualityRating} / 5</div>
 
-    <button onClick={() => history.push(`/contracts/new/${_id}`)}>Issue Challenge</button>
+    {localStorage.getItem("playerId") !== _id && <button onClick={() => history.push(`/contracts/new/${_id}`)}>Issue Challenge</button>}
+
 
     <h3>Match history</h3>
     {

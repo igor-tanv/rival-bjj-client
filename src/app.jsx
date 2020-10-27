@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Theme from "./ui/theme"
+import JwtRoute from "./jwt-route"
 
 import Homepage from "./features/homepage"
 import Login from "./features/login"
@@ -25,9 +26,9 @@ export default function App() {
             <Profile />
           </Route>
 
-          <Route exact path="/contracts/new/:id">
+          <JwtRoute exact path="/contracts/new/:id">
             <IssueContract />
-          </Route>
+          </JwtRoute>
 
         </Switch>
       </BrowserRouter>
