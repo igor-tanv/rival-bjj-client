@@ -6,7 +6,6 @@ export default function Login({ }) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState(null)
 
-  // how do we extract login info from e.target and pass to login function? 
   async function onSubmit(e) {
     e.preventDefault();
     setError(null)

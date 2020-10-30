@@ -35,7 +35,9 @@ const defaultValues = {
 }
 
 function IssueContract({ match }) {
-  const [values, setValues] = useState({ ...defaultValues, opponentId: match.params.id })
+  const [values, setValues] = useState({
+    ...defaultValues, playerId: localStorage.getItem("playerId"), opponentId: match.params.id
+  })
   const [opponent, setOpponent] = useState({ firstName: "", lastName: "" })
 
   const validations = {
@@ -69,6 +71,8 @@ function IssueContract({ match }) {
   function handleSubmit(e) {
     e.preventDefault()
     apiFetch(`contracts`, "post", values).then(json => {
+      console.dir(json)
+    }).catch(error => {
       debugger
     })
   }
@@ -160,8 +164,8 @@ function IssueContract({ match }) {
       <div>
         <label>Comments</label>
 
-        <TextArea value={values.playerComments} onChange={e => {
-          const playerComments = e.target.value
+        <TextArea value={values.playerComments} onChange={val => {
+          const playerComments = val
           setValues(prev => ({
             ...prev,
             playerComments

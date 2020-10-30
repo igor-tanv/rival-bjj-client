@@ -10,8 +10,9 @@ import IssueContract from "./features/contracts/new"
 
 export default function App() {
   return (
-    <Theme>
-      <BrowserRouter>
+
+    <BrowserRouter>
+      <Theme>
         <Switch>
 
           <Route exact path="/">
@@ -31,7 +32,8 @@ export default function App() {
           </JwtRoute>
 
         </Switch>
-      </BrowserRouter>
-    </Theme>
+      </Theme>
+    </BrowserRouter>
+
   )
 }
