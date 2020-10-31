@@ -7,14 +7,12 @@ function JwtRoute({ history, children, path }) {
 
   useEffect(() => {
     const prevPath = window.location.pathname
-    console.dir(prevPath)
     // get the jwt
     const jwt = localStorage.getItem("jwt")
     if (!jwt) history.push("/login")
 
     apiFetch(`sessions/verify`, "post", { jwt }).then(json => {
       if (json.error) {
-        console.dir(json.error)
         localStorage.clear()
         localStorage.setItem("redirectUrl", prevPath)
 

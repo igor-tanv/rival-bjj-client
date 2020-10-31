@@ -71,7 +71,6 @@ function IssueContract({ match }) {
   function handleSubmit(e) {
     e.preventDefault()
     apiFetch(`contracts`, "post", values).then(json => {
-      console.dir(json)
     }).catch(error => {
       debugger
     })

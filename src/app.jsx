@@ -7,6 +7,7 @@ import Homepage from "./features/homepage"
 import Login from "./features/login"
 import Profile from "./features/profile"
 import IssueContract from "./features/contracts/new"
+import Register from "./features/register"
 
 export default function App() {
   return (
@@ -21,6 +22,10 @@ export default function App() {
 
           <Route exact path="/login">
             <Login />
+          </Route>
+
+          <Route exact path="/register">
+            <Register />
           </Route>
 
           <Route exact path="/profiles/:id">
