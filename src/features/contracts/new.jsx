@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
-import moment from "moment"
-
-import ContractNote from "./notes/contract-note"
-import FeeNote from "./notes/fee-note"
-
-import DateTimePicker from "../../ui/date-time-picker"
-import Dropdown from "../../ui/dropdown"
-import TextField from "../../ui/text-field"
-import TextArea from "../../ui/text-area"
-import Button from "../../ui/button"
 
 import { apiFetch } from "../../modules/api-fetch"
-import { toValueLabel } from "../../modules/object"
+import Form from "./form"
 
 import weightClasses from "../../data/weight-classes.json"
 import matchTypes from "../../data/match-types.json"
@@ -41,7 +31,9 @@ function IssueContract({ match }) {
   const [values, setValues] = useState({
     ...defaultValues, playerId: localStorage.getItem("playerId"), opponentId: match.params.id
   })
+  const [submitted, setSubmitted] = useState(false)
   const [opponent, setOpponent] = useState({ firstName: "", lastName: "" })
+
 
   const validations = {
     location: [isRequired],
@@ -74,6 +66,7 @@ function IssueContract({ match }) {
   function handleSubmit(e) {
     e.preventDefault()
     apiFetch(`contracts`, "post", values).then(json => {
+      setSubmitted(true)
     }).catch(error => {
       debugger
     })
@@ -81,115 +74,21 @@ function IssueContract({ match }) {
 
   return <div>
     <h1>Challenge Contract</h1>
-    <h3>You are challenging {opponent.firstName} {opponent.lastName} to a match!</h3>
 
-    <ContractNote />
-
-    <form onSubmit={handleSubmit}>
-
-      <div>
-        <label>Match type</label>
-        <Dropdown options={toValueLabel(matchTypes)} onChange={(val) => {
-
-          setValues(prev => ({
-            ...prev, rules: val
-          }))
-        }} value={values.rules} />
-      </div>
-
-      <div>
-        <label>Match Date and Starting Time</label>
-        <DateTimePicker
-          className="__rival_text-field-component"
-          showTimeSelect
-          dateFormat="MMMM d, yyyy h:mm aa"
-          selected={values.dateTime}
-          onChange={val => {
-            const dateTime = val
-
-            if (moment(new Date()) > moment(val)) {
-              alert("You cant select a time in the past")
-              return
-            }
-
-            setValues(prev => ({
-              ...prev,
-              dateTime
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Weight class</label>
-        <Dropdown options={toValueLabel(weightClasses)} onChange={(val) => {
-          setValues(prev => ({
-            ...prev, weightClass: val
-          }))
-        }} value={values.weightClass} />
-      </div>
-
-      <div>
-        <label>Match Location</label>
-        <TextField
-          placeholder="Enter the School Name"
-          value={values.location}
-          validate={() => validate("location", validations["location"])}
-          errors={errors.location}
-          onChange={val => {
-            const location = val
-            setValues(prev => ({
-              ...prev,
-              location
-            }))
-          }}
-        />
-
-      </div>
-
-      <div>
-        <label>Referee Name</label>
-        <TextField
-          value={values.refereeName}
-          validate={() => validate("refereeName", validations["refereeName"])}
-          errors={errors.refereeName}
-          onChange={val => {
-            const refereeName = val
-            setValues(prev => ({
-              ...prev,
-              refereeName
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Comments</label>
-
-        <TextArea value={values.playerComments} onChange={val => {
-          const playerComments = val
-          setValues(prev => ({
-            ...prev,
-            playerComments
-          }))
-        }} />
-      </div>
-      <div>
-        <label htmlFor="">
-          <input
-            type="checkbox" onChange={(e) => {
-              const acceptsTos = e.target.checked
-              setValues(prev => ({
-                ...prev, acceptsTos
-              }))
-            }}
-            value={values.acceptsTos} />
-      I have <a href="">read and accept the match rules</a>
-        </label>
-      </div>
-      <Button disabled={!valid()}>Send Contract to Opponent</Button>
-    </form>
-    <FeeNote />
+    {submitted ? <>
+      <h3>You have challenged {opponent.firstName} {opponent.lastName} to a match!</h3>
+      <h4>When they accept or reject you will be notified via email</h4>
+    </> : <Form
+        handleSubmit={handleSubmit}
+        opponent={opponent}
+        values={values}
+        setValues={setValues}
+        matchTypes={matchTypes}
+        weightClasses={weightClasses}
+        valid={valid}
+        errors={errors}
+        validate={validate}
+        validations={validations} />}
 
 
   </div>

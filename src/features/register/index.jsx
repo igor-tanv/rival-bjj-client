@@ -5,8 +5,8 @@ import { apiFetch } from "../../modules/api-fetch"
 import TextField from "../../ui/text-field"
 import Button from "../../ui/button"
 
+import "./styles.css"
 
-//new
 import weightClasses from "../../data/weight-classes.json"
 import giScores from "../../data/gi-scores.json"
 import nogiScores from "../../data/nogi-scores.json"
@@ -42,8 +42,6 @@ function didAgree(checked) {
 // filter out open weight class
 const filteredWeightClasses = toValueLabel(weightClasses).filter(obj => obj.value !== "OpenWeight")
 
-
-
 // NOTE: Add community tab 
 const defaultValues = {
   firstName: "",
@@ -61,12 +59,14 @@ const defaultValues = {
 }
 
 function Register({ registration }) {
+
   const [values, setValues] = useState(defaultValues)
+
 
   const validations = {
     firstName: [isRequired],
     lastName: [isRequired],
-    birthDate: [isRequired],
+    birthYear: [isRequired],
     email: [isPassword],
     password: [isPassword],
     school: [isRequired],
@@ -80,7 +80,9 @@ function Register({ registration }) {
   }, {}))
 
   function valid() {
-    return Object.keys(validations).flatMap(key => validations[key].map(v => v(values[key]))).every(e => e === null)
+    const errors = Object.keys(validations).flatMap(key => validations[key].map(v => v(values[key])))
+
+    return errors.every(e => e === null)
   }
 
   function validate(key, validations) {
@@ -101,183 +103,169 @@ function Register({ registration }) {
 
   return <div>
     <h1>Competitor Registration</h1>
-
     <form onSubmit={handleSubmit} autoComplete="off">
 
-      <div>
-        <label>First Name</label>
-        <TextField
-          value={values.firstName}
-          validate={() => validate("firstName", validations["firstName"])}
-          errors={errors.firstName}
-          onChange={val => {
-            const firstName = val
-            setValues(prev => ({
-              ...prev,
-              firstName
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Last Name</label>
-        <TextField
-          value={values.lastName}
-          validate={() => validate("lastName", validations["lastName"])}
-          errors={errors.lastName}
-          onChange={val => {
-            const lastName = val
-            setValues(prev => ({
-              ...prev,
-              lastName
-            }))
-          }}
-        />
-      </div>
 
 
-      <div>
-        <label>Year of Birth</label>
-        <TextField
-          className="__rival_text-field-component"
 
-          selected={values.birthYear}
-          onChange={birthYear => setValues(prev => ({
+      <TextField
+        label="First Name"
+        value={values.firstName}
+        validate={() => validate("firstName", validations["firstName"])}
+        errors={errors.firstName}
+        onChange={val => {
+          const firstName = val
+          setValues(prev => ({
             ...prev,
-            birthYear
-          }))}
-        />
-      </div>
+            firstName
+          }))
+        }}
 
-      <div>
-        <label>Email</label>
-        <TextField
-          autoComplete="off"
-          type="email"
-          value={values.email}
-          validate={() => validate("email", validations["email"])}
-          errors={errors.email}
-          onChange={val => {
-            const email = val
-            setValues(prev => ({
-              ...prev,
-              email
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Password</label>
-        <TextField
-          type="password"
-          autoComplete="off"
-          value={values.password}
-          validate={() => validate("password", validations["password"])}
-          errors={errors.password}
-          onChange={val => {
-            const password = val
-            setValues(prev => ({
-              ...prev,
-              password
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Competitor Weight Class</label>
-        <Dropdown options={filteredWeightClasses}
-          onChange={val => {
-            const weightClass = val
-            setValues(prev => ({
-              ...prev,
-              weightClass
-            }))
-          }}
-          value={values.weightClass}
-        />
-      </div>
-
-      <div>
-        <label>Gender</label>
-        <Dropdown options={toValueLabel(genders)}
-          onChange={val => {
-            const gender = val
-            setValues(prev => ({
-              ...prev,
-              gender
-            }))
-          }}
-          value={values.gender}
-        />
-      </div>
-
-      <div>
-        <label>Gi experience</label>
-        <Dropdown options={toValueLabel(giScores)}
-          onChange={val => {
-            const gi = val
-            setValues(prev => ({
-              ...prev,
-              gi
-            }))
-          }}
-          value={values.gi}
-        />
-      </div>
-
-      <div>
-        <label>NoGi experience</label>
-        <Dropdown options={toValueLabel(nogiScores)}
-          onChange={val => {
-            const nogi = val
-            setValues(prev => ({
-              ...prev,
-              nogi
-            }))
-          }}
-          value={values.nogi}
-        />
-      </div>
-
-      <div>
-        <label>School Name</label>
-        <TextField
-          placeholder="Enter Your School Name"
-          value={values.location}
-          validate={() => validate("school", validations["school"])}
-          errors={errors.school}
-          onChange={val => {
-            const school = val
-            setValues(prev => ({
-              ...prev,
-              school
-            }))
-          }}
-        />
-
-      </div>
+      />
 
 
 
 
-      <div>
-        <label>Avatar</label>
-        <TextField
-          value={values.avatar}
-          validate={() => validate("avatar", validations["avatar"])}
-          errors={errors.avatar}
-          onChange={val => {
-            const avatar = val
-            setValues(prev => ({
-              ...prev,
-              avatar
-            }))
-          }}
-        />
-      </div>
+      <TextField
+        value={values.lastName}
+        validate={() => validate("lastName", validations["lastName"])}
+        errors={errors.lastName}
+        onChange={val => {
+          const lastName = val
+          setValues(prev => ({
+            ...prev,
+            lastName
+          }))
+        }}
+        label="Last Name"
+      />
+
+
+
+
+      <TextField
+        className="__rival_text-field-component"
+        label="Year of Birth"
+        value={values.birthYear}
+        onChange={birthYear => setValues(prev => ({
+          ...prev,
+          birthYear
+        }))}
+      />
+
+
+      <TextField
+        label="Email"
+        autoComplete="off"
+        type="email"
+        value={values.email}
+        validate={() => validate("email", validations["email"])}
+        errors={errors.email}
+        onChange={val => {
+          const email = val
+          setValues(prev => ({
+            ...prev,
+            email
+          }))
+        }}
+      />
+
+
+      <TextField
+        label="Password"
+        type="password"
+        autoComplete="off"
+        value={values.password}
+        validate={() => validate("password", validations["password"])}
+        errors={errors.password}
+        onChange={val => {
+          const password = val
+          setValues(prev => ({
+            ...prev,
+            password
+          }))
+        }}
+      />
+
+
+      <Dropdown options={filteredWeightClasses}
+        onChange={val => {
+          const weightClass = val
+          setValues(prev => ({
+            ...prev,
+            weightClass
+          }))
+        }}
+        value={values.weightClass}
+        label="Select your competition wieght class"
+      />
+
+
+      <Dropdown options={toValueLabel(genders)}
+        onChange={val => {
+          const gender = val
+          setValues(prev => ({
+            ...prev,
+            gender
+          }))
+        }}
+        value={values.gender}
+        label="What is your gender?"
+      />
+
+
+      <Dropdown options={toValueLabel(giScores)}
+        onChange={val => {
+          const gi = val
+          setValues(prev => ({
+            ...prev,
+            gi
+          }))
+        }}
+        value={values.gi}
+        label="Select your gi experienc"
+      />
+
+      <Dropdown options={toValueLabel(nogiScores)}
+        onChange={val => {
+          const nogi = val
+          setValues(prev => ({
+            ...prev,
+            nogi
+          }))
+        }}
+        value={values.nogi}
+        label="Select your no gi experience"
+      />
+
+      <TextField
+        value={values.school}
+        validate={() => validate("school", validations["school"])}
+        errors={errors.school}
+        onChange={val => {
+          const school = val
+          setValues(prev => ({
+            ...prev,
+            school
+          }))
+        }}
+        label="Enter Your School Name"
+      />
+
+
+
+      <label htmlFor="">Upload an Avatar</label>
+      <TextField
+        type="file"
+        value={values.avatar}
+        validate={() => validate("avatar", validations["avatar"])}
+        errors={errors.avatar}
+        onChange={avatar => setValues(prev => ({
+          ...prev,
+          avatar
+        }))}
+
+      />
 
       <div>
         <label htmlFor="">
@@ -291,12 +279,13 @@ function Register({ registration }) {
             value={values.acceptsTos} />
       I have read and agree to follow these <a href=""> rules</a>
         </label>
+
       </div>
       <Button disabled={!valid()}>Register Your Profile</Button>
     </form>
 
 
-  </div>
+  </div >
 }
 
 export default withRouter(Register)
