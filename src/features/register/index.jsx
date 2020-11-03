@@ -1,15 +1,18 @@
 import React, { useState } from "react"
 import { withRouter } from "react-router-dom"
-import Dropdown from "react-dropdown"
-import 'react-dropdown/style.css';
+import Dropdown from "../../ui/dropdown"
 import { apiFetch } from "../../modules/api-fetch"
 import TextField from "../../ui/text-field"
 import Button from "../../ui/button"
 
-import weightClassesData from "../../data/weight-classes.json"
-import GenderDropdown, { genderOptions } from "../../ui/dropdowns/gender"
-import GiExperienceDropdown, { giExperienceOptions } from "../../ui/dropdowns/gi-experience"
-import NoGiExperienceDropdown, { nogiExperienceOptions } from "../../ui/dropdowns/nogi-experience"
+
+//new
+import weightClasses from "../../data/weight-classes.json"
+import giScores from "../../data/gi-scores.json"
+import nogiScores from "../../data/nogi-scores.json"
+import genders from "../../data/genders.json"
+
+import { toValueLabel } from "../../modules/object"
 
 function isRequired(v) {
   return v && v.length > 0 ? null : "is required"
@@ -36,7 +39,10 @@ function didAgree(checked) {
   return checked ? null : "must be agreed to"
 }
 
-const weightClasses = weightClassData.filter(wc => )
+// filter out open weight class
+const filteredWeightClasses = toValueLabel(weightClasses).filter(obj => obj.value !== "OpenWeight")
+
+
 
 // NOTE: Add community tab 
 const defaultValues = {
@@ -45,11 +51,11 @@ const defaultValues = {
   birthYear: "",
   email: "",
   password: "",
-  weightClass: weightClasses[0],
+  weightClass: "",
   school: "",
-  gender: Object.values(genderOptions)[0],
-  gi: Object.values(giExperienceOptions)[0],
-  nogi: Object.values(nogiExperienceOptions)[0],
+  gender: "",
+  gi: "",
+  nogi: "",
   avatar: "",
   acceptsTos: false
 }
@@ -182,18 +188,57 @@ function Register({ registration }) {
 
       <div>
         <label>Competitor Weight Class</label>
-
-
-        <Dropdown options={
-          weightClasses.map(value => ({
-            value, label: weightClasses[value]
-          }))
-        }
-          onChange={val => setValues(prev => ({
-            ...prev,
-            weightClass: val.value
-          }))}
+        <Dropdown options={filteredWeightClasses}
+          onChange={val => {
+            const weightClass = val
+            setValues(prev => ({
+              ...prev,
+              weightClass
+            }))
+          }}
           value={values.weightClass}
+        />
+      </div>
+
+      <div>
+        <label>Gender</label>
+        <Dropdown options={toValueLabel(genders)}
+          onChange={val => {
+            const gender = val
+            setValues(prev => ({
+              ...prev,
+              gender
+            }))
+          }}
+          value={values.gender}
+        />
+      </div>
+
+      <div>
+        <label>Gi experience</label>
+        <Dropdown options={toValueLabel(giScores)}
+          onChange={val => {
+            const gi = val
+            setValues(prev => ({
+              ...prev,
+              gi
+            }))
+          }}
+          value={values.gi}
+        />
+      </div>
+
+      <div>
+        <label>NoGi experience</label>
+        <Dropdown options={toValueLabel(nogiScores)}
+          onChange={val => {
+            const nogi = val
+            setValues(prev => ({
+              ...prev,
+              nogi
+            }))
+          }}
+          value={values.nogi}
         />
       </div>
 
@@ -215,32 +260,8 @@ function Register({ registration }) {
 
       </div>
 
-      <div>
-        <label>Gender</label>
-        <GenderDropdown value={values.gender} setValue={(val) => {
-          setValues(prev => ({
-            ...prev, gender: val
-          }))
-        }} />
-      </div>
 
-      <div>
-        <label>Gi Experience</label>
-        <GiExperienceDropdown value={values.gi} setValue={(val) => {
-          setValues(prev => ({
-            ...prev, gi: val
-          }))
-        }} />
-      </div>
 
-      <div>
-        <label>No-Gi Experience</label>
-        <NoGiExperienceDropdown value={values.nogi} setValue={(val) => {
-          setValues(prev => ({
-            ...prev, nogi: val
-          }))
-        }} />
-      </div>
 
       <div>
         <label>Avatar</label>

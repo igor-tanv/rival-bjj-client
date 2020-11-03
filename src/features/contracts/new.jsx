@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom"
-import DateTimePicker from "../../ui/date-time-picker"
 import moment from "moment"
 
 import ContractNote from "./notes/contract-note"
 import FeeNote from "./notes/fee-note"
-import { apiFetch } from "../../modules/api-fetch"
+
+import DateTimePicker from "../../ui/date-time-picker"
+import Dropdown from "../../ui/dropdown"
 import TextField from "../../ui/text-field"
 import TextArea from "../../ui/text-area"
 import Button from "../../ui/button"
 
-import GiNoGiDropdown, { giNoGiOptions } from "../../ui/dropdowns/ginogi"
-import WeightClassDropdown, { weightClassOptions } from "../../ui/dropdowns/weight-class"
+import { apiFetch } from "../../modules/api-fetch"
+import { toValueLabel } from "../../modules/object"
 
+import weightClasses from "../../data/weight-classes.json"
+import matchTypes from "../../data/match-types.json"
 
 function isRequired(v) {
   return v && v.length > 0 ? null : "is required"
@@ -26,10 +29,10 @@ const defaultValues = {
   playerId: "",
   opponentId: "",
   dateTime: new Date(),
-  weightClass: Object.values(weightClassOptions)[0],
+  weightClass: Object.values(weightClasses)[0],
   location: "",
   refereeName: "",
-  rules: Object.values(giNoGiOptions)[0],
+  rules: Object.values(matchTypes)[0],
   playerComments: "",
   acceptsTos: false
 }
@@ -86,12 +89,12 @@ function IssueContract({ match }) {
 
       <div>
         <label>Match type</label>
-        <GiNoGiDropdown value={values.rules} setValue={(val) => {
+        <Dropdown options={toValueLabel(matchTypes)} onChange={(val) => {
 
           setValues(prev => ({
             ...prev, rules: val
           }))
-        }} />
+        }} value={values.rules} />
       </div>
 
       <div>
@@ -119,11 +122,11 @@ function IssueContract({ match }) {
 
       <div>
         <label>Weight class</label>
-        <WeightClassDropdown value={values.weightClass} setValue={(val) => {
+        <Dropdown options={toValueLabel(weightClasses)} onChange={(val) => {
           setValues(prev => ({
             ...prev, weightClass: val
           }))
-        }} />
+        }} value={values.weightClass} />
       </div>
 
       <div>
