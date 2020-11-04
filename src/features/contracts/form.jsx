@@ -13,10 +13,17 @@ import { toValueLabel } from "../../modules/object"
 
 
 
-export default function Form({ opponent, handleSubmit,
+export default function Form({
+  opponent,
+  handleSubmit,
   values,
   setValues,
-  matchTypes, weightClasses, validations, validate, errors, valid }) {
+  matchTypes,
+  weightClasses,
+  validations,
+  validate,
+  errors,
+  valid }) {
 
   return <>
     <h3>You are challenging {opponent.firstName} {opponent.lastName} to a match!</h3>
@@ -27,12 +34,14 @@ export default function Form({ opponent, handleSubmit,
 
       <div>
         <label>Match type</label>
-        <Dropdown options={toValueLabel(matchTypes)} onChange={(val) => {
-
-          setValues(prev => ({
-            ...prev, rules: val
-          }))
-        }} value={values.rules} />
+        <Dropdown
+          options={toValueLabel(matchTypes)}
+          onChange={(val) => {
+            setValues(prev => ({
+              ...prev, rules: val
+            }))
+          }}
+          value={values.rules} />
       </div>
 
       <div>
@@ -44,12 +53,10 @@ export default function Form({ opponent, handleSubmit,
           selected={values.dateTime}
           onChange={val => {
             const dateTime = val
-
             if (moment(new Date()) > moment(val)) {
               alert("You cant select a time in the past")
               return
             }
-
             setValues(prev => ({
               ...prev,
               dateTime
@@ -58,59 +65,62 @@ export default function Form({ opponent, handleSubmit,
         />
       </div>
 
-      <div>
-        <label>Weight class</label>
-        <Dropdown options={toValueLabel(weightClasses)} onChange={(val) => {
-          setValues(prev => ({
-            ...prev, weightClass: val
-          }))
-        }} value={values.weightClass} />
-      </div>
 
-      <div>
-        <label>Match Location</label>
-        <TextField
-          placeholder="Enter the School Name"
-          value={values.location}
-          validate={() => validate("location", validations["location"])}
-          errors={errors.location}
-          onChange={val => {
-            const location = val
-            setValues(prev => ({
-              ...prev,
-              location
-            }))
-          }}
-        />
-
-      </div>
-
-      <div>
-        <label>Referee Name</label>
-        <TextField
-          value={values.refereeName}
-          validate={() => validate("refereeName", validations["refereeName"])}
-          errors={errors.refereeName}
-          onChange={val => {
-            const refereeName = val
-            setValues(prev => ({
-              ...prev,
-              refereeName
-            }))
-          }}
-        />
-      </div>
-
-      <div>
-        <label>Comments</label>
-
-        <TextArea value={values.playerComments} onChange={val => {
-          const playerComments = val
+      <Dropdown
+        options={toValueLabel(weightClasses)}
+        onChange={val => {
+          const weightClass = val
           setValues(prev => ({
             ...prev,
-            playerComments
+            weightClass
           }))
-        }} />
+        }}
+        value={values.weightClass}
+        label="Select your competition weight class"
+      />
+
+
+      <TextField
+        label="Enter the School Name"
+        value={values.location}
+        validate={() => validate("location", validations["location"])}
+        errors={errors.location}
+        onChange={val => {
+          const location = val
+          setValues(prev => ({
+            ...prev,
+            location
+          }))
+        }}
+      />
+
+
+      <TextField
+        label="Enter Referee Name"
+        value={values.refereeName}
+        validate={() => validate("refereeName", validations["refereeName"])}
+        errors={errors.refereeName}
+        onChange={val => {
+          const refereeName = val
+          setValues(prev => ({
+            ...prev,
+            refereeName
+          }))
+        }}
+      />
+
+      <div>
+        <label>Request Rule Exceptions</label>
+        <TextArea
+          value={values.ruleExceptions}
+          onChange={val => {
+            const ruleExceptions = val
+            setValues(prev => ({
+              ...prev,
+              ruleExceptions
+            }))
+          }}
+          placeholder="e.g. No Heel Hooks" />
       </div>
       <div>
         <label htmlFor="">

@@ -104,10 +104,6 @@ function Register({ registration }) {
   return <div>
     <h1>Competitor Registration</h1>
     <form onSubmit={handleSubmit} autoComplete="off">
-
-
-
-
       <TextField
         label="First Name"
         value={values.firstName}
@@ -120,13 +116,10 @@ function Register({ registration }) {
             firstName
           }))
         }}
-
       />
 
-
-
-
       <TextField
+        label="Last Name"
         value={values.lastName}
         validate={() => validate("lastName", validations["lastName"])}
         errors={errors.lastName}
@@ -137,22 +130,18 @@ function Register({ registration }) {
             lastName
           }))
         }}
-        label="Last Name"
       />
 
-
-
-
       <TextField
-        className="__rival_text-field-component"
         label="Year of Birth"
         value={values.birthYear}
+        validate={() => validate("birthYear", validations["birthYear"])}
+        errors={errors.birthYear}
         onChange={birthYear => setValues(prev => ({
           ...prev,
           birthYear
         }))}
       />
-
 
       <TextField
         label="Email"
@@ -188,7 +177,8 @@ function Register({ registration }) {
       />
 
 
-      <Dropdown options={filteredWeightClasses}
+      <Dropdown
+        options={filteredWeightClasses}
         onChange={val => {
           const weightClass = val
           setValues(prev => ({
@@ -197,11 +187,12 @@ function Register({ registration }) {
           }))
         }}
         value={values.weightClass}
-        label="Select your competition wieght class"
+        label="Select your competition weight class"
       />
 
 
-      <Dropdown options={toValueLabel(genders)}
+      <Dropdown
+        options={toValueLabel(genders)}
         onChange={val => {
           const gender = val
           setValues(prev => ({
@@ -214,7 +205,8 @@ function Register({ registration }) {
       />
 
 
-      <Dropdown options={toValueLabel(giScores)}
+      <Dropdown
+        options={toValueLabel(giScores)}
         onChange={val => {
           const gi = val
           setValues(prev => ({
@@ -223,10 +215,11 @@ function Register({ registration }) {
           }))
         }}
         value={values.gi}
-        label="Select your gi experienc"
+        label="Select your Gi experience"
       />
 
-      <Dropdown options={toValueLabel(nogiScores)}
+      <Dropdown
+        options={toValueLabel(nogiScores)}
         onChange={val => {
           const nogi = val
           setValues(prev => ({
@@ -235,10 +228,11 @@ function Register({ registration }) {
           }))
         }}
         value={values.nogi}
-        label="Select your no gi experience"
+        label="Select your No Gi experience"
       />
 
       <TextField
+        label="Enter Your School Name"
         value={values.school}
         validate={() => validate("school", validations["school"])}
         errors={errors.school}
@@ -249,7 +243,6 @@ function Register({ registration }) {
             school
           }))
         }}
-        label="Enter Your School Name"
       />
 
 
@@ -264,7 +257,6 @@ function Register({ registration }) {
           ...prev,
           avatar
         }))}
-
       />
 
       <div>

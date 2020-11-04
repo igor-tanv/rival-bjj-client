@@ -23,7 +23,7 @@ const defaultValues = {
   location: "",
   refereeName: "",
   rules: Object.values(matchTypes)[0],
-  playerComments: "",
+  ruleExceptions: "",
   acceptsTos: false
 }
 
