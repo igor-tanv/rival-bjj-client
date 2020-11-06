@@ -10,7 +10,7 @@ function Profile({ match }) {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    apiFetch(`players/${match.params.id}`).then(json => {
+    apiFetch(`players/${match.params.id || localStorage.getItem("playerId")}`).then(json => {
       setPlayer(json.player)
       setLoaded(true)
     })

@@ -20,7 +20,9 @@ export default function Login({ }) {
       }
       localStorage.setItem("jwt", json.jwt)
       localStorage.setItem("playerId", json.id)
-      window.location = localStorage.getItem("redirectUrl") || `/profiles/${json.id}`
+      const redirectUrl = localStorage.getItem("redirectUrl")
+      localStorage.removeItem("redirectUrl")
+      window.location = redirectUrl || `/profiles/${json.id}`
     }).catch(error => {
       setError("Sorry, there was a server error, please contact igor!")
 

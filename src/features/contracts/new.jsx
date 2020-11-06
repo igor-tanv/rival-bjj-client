@@ -19,10 +19,10 @@ const defaultValues = {
   playerId: "",
   opponentId: "",
   dateTime: new Date(),
-  weightClass: Object.values(weightClasses)[0],
+  weightClass: null,
   location: "",
   refereeName: "",
-  rules: Object.values(matchTypes)[0],
+  rules: null,
   ruleExceptions: "",
   acceptsTos: false
 }
@@ -89,8 +89,6 @@ function IssueContract({ match }) {
         errors={errors}
         validate={validate}
         validations={validations} />}
-
-
   </div>
 }
 

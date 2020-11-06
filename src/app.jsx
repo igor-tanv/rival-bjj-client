@@ -6,6 +6,7 @@ import JwtRoute from "./jwt-route"
 import Homepage from "./features/homepage"
 import Login from "./features/login"
 import Profile from "./features/profile"
+import Contracts from "./features/contracts"
 import IssueContract from "./features/contracts/new"
 import Register from "./features/register"
 
@@ -27,6 +28,14 @@ export default function App() {
           <Route exact path="/register">
             <Register />
           </Route>
+
+          <JwtRoute exact path="/profile">
+            <Profile />
+          </JwtRoute>
+
+          <JwtRoute exact path="/contracts">
+            <Contracts />
+          </JwtRoute>
 
           <Route exact path="/profiles/:id">
             <Profile />

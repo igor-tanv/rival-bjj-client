@@ -5,7 +5,8 @@ import 'react-dropdown/style.css'
 
 export default function Dropdown({ options, value, onChange, label }) {
 
-  return <ReactDropdown options={options}
+  return <ReactDropdown
+    options={options}
     placeholder={label}
     onChange={option => onChange(option.value)}
     value={value}
