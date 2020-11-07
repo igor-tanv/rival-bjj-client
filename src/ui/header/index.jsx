@@ -1,11 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import HorizontalList from "../horizontal-list"
 
 
 export default function Header() {
   return <div className="header">
 
     <div className="container">
+
       <ul className="horizontal">
         <li><Link to="/">Home</Link></li>
         {

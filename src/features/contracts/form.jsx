@@ -50,16 +50,16 @@ export default function Form({
           className="__rival_text-field-component"
           showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
-          selected={values.dateTime}
+          selected={values.startsAt}
           onChange={val => {
-            const dateTime = val
+            const startsAt = val
             if (moment(new Date()) > moment(val)) {
               alert("You cant select a time in the past")
               return
             }
             setValues(prev => ({
               ...prev,
-              dateTime
+              startsAt
             }))
           }}
         />

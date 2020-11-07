@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Contract({
+  playerId,
   playerFirstName,
   playerLastName,
   opponentFirstName,
@@ -9,7 +10,9 @@ export default function Contract({
   ruleExceptions,
   datetime,
   weightClass,
-
 }) {
-  return;
+  return <div className="contract">
+    <div>{playerFirstName}</div>
+    <div>{playerLastName}</div>
+  </div>
 }

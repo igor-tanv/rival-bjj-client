@@ -18,7 +18,7 @@ function didAgree(checked) {
 const defaultValues = {
   playerId: "",
   opponentId: "",
-  dateTime: new Date(),
+  startsAt: new Date(),
   weightClass: null,
   location: "",
   refereeName: "",
@@ -65,8 +65,12 @@ function IssueContract({ match }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    apiFetch(`contracts`, "post", values).then(json => {
-      setSubmitted(true)
+    apiFetch(`contracts`, "post", {
+      ...values,
+      startsAt: values.startsAt.valueOf()
+    }).then(json => {
+      debugger
+      //setSubmitted(true)
     }).catch(error => {
       debugger
     })
