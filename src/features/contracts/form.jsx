@@ -38,10 +38,10 @@ export default function Form({
           options={toValueLabel(matchTypes)}
           onChange={(val) => {
             setValues(prev => ({
-              ...prev, rules: val
+              ...prev, type: val
             }))
           }}
-          value={values.rules} />
+          value={values.type} />
       </div>
 
       <div>

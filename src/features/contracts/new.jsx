@@ -11,6 +11,10 @@ function isRequired(v) {
   return v && v.length > 0 ? null : "is required"
 }
 
+function isSelected(v) {
+  return v ? null : "is required"
+}
+
 function didAgree(checked) {
   return checked ? null : "must be agreed to"
 }
@@ -22,7 +26,7 @@ const defaultValues = {
   weightClass: null,
   location: "",
   refereeName: "",
-  rules: null,
+  type: null,
   ruleExceptions: "",
   acceptsTos: false
 }
@@ -36,6 +40,8 @@ function IssueContract({ match }) {
 
 
   const validations = {
+    weightClass: [isSelected],
+    type: [isSelected],
     location: [isRequired],
     refereeName: [isRequired],
     acceptsTos: [didAgree]
@@ -69,10 +75,9 @@ function IssueContract({ match }) {
       ...values,
       startsAt: values.startsAt.valueOf()
     }).then(json => {
-      debugger
-      //setSubmitted(true)
+      setSubmitted(true)
     }).catch(error => {
-      debugger
+      console.log(error)
     })
   }
 

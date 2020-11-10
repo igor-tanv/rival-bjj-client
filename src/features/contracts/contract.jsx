@@ -6,7 +6,7 @@ export default function Contract({
   playerLastName,
   opponentFirstName,
   opponentLastName,
-  rules,
+  type,
   ruleExceptions,
   datetime,
   weightClass,
