@@ -1,0 +1,8 @@
+li span {
+  padding: 0.5rem 1rem;
+}
+
+li span.active {
+  color: white;
+  background-color: #e06c6c;
+}
