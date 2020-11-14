@@ -54,7 +54,6 @@ const defaultValues = {
   gender: "",
   gi: "",
   nogi: "",
-  avatar: "",
   acceptsTos: false
 }
 
@@ -70,7 +69,6 @@ function Register({ registration }) {
     email: [isPassword],
     password: [isPassword],
     school: [isRequired],
-    avatar: [isRequired],
     acceptsTos: [didAgree],
   }
 
@@ -243,20 +241,6 @@ function Register({ registration }) {
             school
           }))
         }}
-      />
-
-
-
-      <label htmlFor="">Upload an Avatar</label>
-      <TextField
-        type="file"
-        value={values.avatar}
-        validate={() => validate("avatar", validations["avatar"])}
-        errors={errors.avatar}
-        onChange={avatar => setValues(prev => ({
-          ...prev,
-          avatar
-        }))}
       />
 
       <div>

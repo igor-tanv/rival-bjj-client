@@ -7,7 +7,7 @@ import "./styles.css"
 
 export default function Contracts() {
   const [contracts, setContracts] = useState([])
-  const filters = ["All", "Sent", "Received", "Declined", "Accepted"]
+  const filters = ["All", "Sent", "Received", "Declined", "Accepted", "Cancelled"]
   const [filter, setFilter] = useState(filters[0])
   const [openDetails, setOpenDetails] = useState(false)
   const [selectedContract, setSelectedContract] = useState(null)
@@ -18,6 +18,7 @@ export default function Contracts() {
     })
   }, [])
 
+  // can we combine accept and decline into a single fucntion?
   function accept() {
     apiFetch(`contracts/${selectedContract.id}/accept`, "post").then(json => {
       updateContractStatus(json.contract.status)
@@ -26,6 +27,13 @@ export default function Contracts() {
 
   function decline() {
     apiFetch(`contracts/${selectedContract.id}/decline`, "post").then(json => {
+      updateContractStatus(json.contract.status)
+    })
+  }
+
+  // is this ok?
+  function cancel() {
+    apiFetch(`contracts/${selectedContract.id}/cancel`, "post", { "playerId": localStorage.getItem("playerId") }).then(json => {
       updateContractStatus(json.contract.status)
     })
   }
@@ -44,10 +52,10 @@ export default function Contracts() {
     setOpenDetails(false)
   }
 
+
   function filterBy(contracts) {
     if (filter === "All") return contracts
     return contracts.filter(contract => {
-      console.dir(contract.status)
       if (filter === "Sent" && localStorage.getItem("playerId") === contract.playerId && contract.status === "sent")
         return contract
       if (filter === "Received" && localStorage.getItem("playerId") !== contract.playerId && contract.status === "sent")
@@ -56,7 +64,8 @@ export default function Contracts() {
         return contract
       if (filter === "Accepted" && contract.status === "accepted")
         return contract
-
+      if (filter === "Cancelled" && contract.status === "cancelled")
+        return contract
     })
   }
 
@@ -84,7 +93,7 @@ export default function Contracts() {
         <td>{contract.opponentFirstName} {contract.opponentLastName}</td>
         <td>{contract.method}</td>
         <td>{
-          filter === "Received" && <a onClick={() => {
+          (filter === "Received" || filter === "Accepted") && <a onClick={() => {
             setSelectedContract(contract)
             setOpenDetails(true)
           }}>See details</a>
@@ -104,14 +113,24 @@ export default function Contracts() {
       padding: "2rem",
     }}>
 
-      <div>{selectedContract && selectedContract.playerFirstName} vs. {selectedContract && selectedContract.opponentFirstName}</div>
+
+      <div>{selectedContract && selectedContract.playerFirstName} vs. {selectedContract && selectedContract.opponentFirstName}
+      </div>
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, voluptatem maxime nam quaerat ut iure sit quam recusandae doloribus voluptas dignissimos quis illo, placeat esse veniam aliquam, quasi nostrum cumque?</p>
 
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum blanditiis sapiente, sunt sint animi reiciendis ratione quisquam labore maiores nam aperiam dolorem vero et quibusdam similique enim praesentium aliquid fuga.</p>
 
-      <button type="primary" onClick={accept}>Accept</button>
-      <button type="secondary" onClick={decline}>Decline</button>
-      <a onClick={() => setOpenDetails(false)}>Cancel, and close</a>
+      {filter === "Accepted" ?
+        <div>
+          <Button type="primary" onClick={cancel}>Cancel</Button>
+          <a onClick={() => setOpenDetails(false)}>Close</a>
+        </div> :
+        <div>
+          <Button type="primary" onClick={accept}>Accept</Button>
+          <Button type="secondary" onClick={decline}>Decline</Button>
+          <a onClick={() => setOpenDetails(false)}>Close</a>
+        </div>}
+
 
     </div>
 
