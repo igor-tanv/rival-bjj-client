@@ -115,14 +115,21 @@ export default function Contracts() {
 
 
       <div>{selectedContract && selectedContract.playerFirstName} vs. {selectedContract && selectedContract.opponentFirstName}
+        <p>Where: {selectedContract && selectedContract.location}</p>
+        <p>When: {selectedContract && selectedContract.startsAt}</p>
+        <p>Type: {selectedContract && selectedContract.type}</p>
+        <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
+        <p>Rule Exceptions: {selectedContract && selectedContract.ruleExceptions}</p>
+        <p>Referee: {selectedContract && selectedContract.refereeName}</p>
       </div>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, voluptatem maxime nam quaerat ut iure sit quam recusandae doloribus voluptas dignissimos quis illo, placeat esse veniam aliquam, quasi nostrum cumque?</p>
 
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum blanditiis sapiente, sunt sint animi reiciendis ratione quisquam labore maiores nam aperiam dolorem vero et quibusdam similique enim praesentium aliquid fuga.</p>
+
+
 
       {filter === "Accepted" ?
         <div>
           <Button type="primary" onClick={cancel}>Cancel</Button>
+          <button>Print Contract</button>
           <a onClick={() => setOpenDetails(false)}>Close</a>
         </div> :
         <div>
