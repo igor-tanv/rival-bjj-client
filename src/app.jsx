@@ -29,6 +29,7 @@ export default function App() {
             <Register />
           </Route>
 
+
           <JwtRoute exact path="/profile">
             <Profile />
           </JwtRoute>
