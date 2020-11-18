@@ -9,6 +9,7 @@ import Profile from "./features/profile"
 import Contracts from "./features/contracts"
 import IssueContract from "./features/contracts/new"
 import Register from "./features/register"
+import Chat from "./features/chat"
 
 export default function App() {
   return (
@@ -28,8 +29,9 @@ export default function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-
-
+          <Route path='/chat/:recipient'>
+            <Chat />
+          </Route>
           <JwtRoute exact path="/profile">
             <Profile />
           </JwtRoute>
