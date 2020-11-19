@@ -10,10 +10,11 @@ import Contracts from "./features/contracts"
 import IssueContract from "./features/contracts/new"
 import Register from "./features/register"
 import Chat from "./features/chat"
+import ConfirmEmail from "./features/confirm-email"
+import UploadAvatar from "./features/upload-avatar"
 
 export default function App() {
   return (
-
     <BrowserRouter>
       <Theme>
         <Switch>
@@ -29,9 +30,19 @@ export default function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-          <Route path='/chat/:recipient'>
-            <Chat />
+
+          <Route exact path="/confirm">
+            <ConfirmEmail />
           </Route>
+
+          <Route exact path="/upload-avatar">
+            <UploadAvatar />
+          </Route>
+
+          <JwtRoute path='/chat/:recipient'>
+            <Chat />
+          </JwtRoute>
+
           <JwtRoute exact path="/profile">
             <Profile />
           </JwtRoute>
