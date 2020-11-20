@@ -1,55 +1,24 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
-import TextField from "../../ui/text-field"
-import Button from "../../ui/button"
 import { apiFetch } from "../../modules/api-fetch"
 
+import Form from "../register/form"
+
 export default function Update({ }) {
-  const defaultValues = {
-    firstName: ""
-  }
+
+  const [player, setPlayer] = useState({})
   const [complete, setComplete] = useState(false)
-  const [values, setValues] = useState(defaultValues)
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    apiFetch(`update`, "post", values).then((json) => {
-      if (json.errors) {
-        debugger
-        // const errors = Object.keys(json.errors).reduce((acc, key) => {
-        //   acc[key] = [json.errors[key].message]
-        //   return acc
-        // }, {})
-
-        // setErrors(prev => ({
-        //   ...prev,
-        //   ...errors
-        // }))
-        //return
-      }
-      setComplete(true)
-    }).catch(error => {
-      debugger
+  useEffect(() => {
+    apiFetch(`players/${localStorage.getItem("playerId")}`).then(json => {
+      setPlayer(json.player)
     })
-  }
+  }, [])
 
   return <div>
-    <h1>Update Your Profile</h1>
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <TextField
-        label="First Name"
-        value={values.firstName}
-        //validate={() => validate("firstName", validations["firstName"])}
-        //errors={errors.firstName}
-        onChange={val => {
-          const firstName = val
-          setValues(prev => ({
-            ...prev,
-            firstName
-          }))
-        }}
-      />
-      <Button>Update Your Profile</Button>
-    </form>
-  </div>
+
+    <Form setComplete={setComplete} />
+
+  </div >
+
 }

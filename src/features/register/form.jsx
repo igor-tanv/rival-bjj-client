@@ -17,6 +17,11 @@ function isRequired(v) {
   return v && v.length > 0 ? null : "is required"
 }
 
+function isValidAge(v) {
+  // we need to check the age range (15-75) and cannot be from future
+  return parseInt(v) && v.toString().length === 4 ? null : "enter your 4 digit birthyear"
+}
+
 function atLeast(v, n) {
   return v && v.length >= n ? null : `must be at least ${n} characters`
 }
@@ -64,7 +69,7 @@ export default function RegisterForm({ setComplete }) {
   const validations = {
     firstName: [isRequired],
     lastName: [isRequired],
-    birthYear: [isRequired],
+    birthYear: [isValidAge],
     email: [isPassword],
     password: [isPassword],
     school: [isRequired],
@@ -78,7 +83,6 @@ export default function RegisterForm({ setComplete }) {
 
   function valid() {
     const errors = Object.keys(validations).flatMap(key => validations[key].map(v => v(values[key])))
-
     return errors.every(e => e === null)
   }
 
@@ -203,10 +207,7 @@ export default function RegisterForm({ setComplete }) {
       <div>
         <label>Avatar</label>
         <div>
-
           <input type="file" ref={fileRef} onChange={imageChanged} />
-
-
         </div>
         {
           values.avatar

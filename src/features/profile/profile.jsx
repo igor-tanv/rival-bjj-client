@@ -20,7 +20,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
 
 
     {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/contracts`)}>My Contracts</button>}
-    {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/update`)}>Update Profile</button>}
+    {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/profiles/edit`)}>Update My Profile</button>}
     <h3>Match history</h3>
     {
       contracts.length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
