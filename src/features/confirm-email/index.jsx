@@ -20,7 +20,7 @@ function ConfirmEmail({ history }) {
         setError(json.errors)
         return
       }
-      history.push("/upload-avatar")
+      history.push("/profile")
     })
   }
 

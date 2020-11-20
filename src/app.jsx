@@ -11,7 +11,8 @@ import IssueContract from "./features/contracts/new"
 import Register from "./features/register"
 import Chat from "./features/chat"
 import ConfirmEmail from "./features/confirm-email"
-import UploadAvatar from "./features/upload-avatar"
+
+import EditProfile from "./features/profile/edit"
 
 export default function App() {
   return (
@@ -35,9 +36,6 @@ export default function App() {
             <ConfirmEmail />
           </Route>
 
-          <Route exact path="/upload-avatar">
-            <UploadAvatar />
-          </Route>
 
           <JwtRoute path='/chat/:recipient'>
             <Chat />
@@ -51,6 +49,10 @@ export default function App() {
             <Contracts />
           </JwtRoute>
 
+          <JwtRoute exact path="/profiles/edit">
+            <EditProfile />
+          </JwtRoute>
+
           <Route exact path="/profiles/:id">
             <Profile />
           </Route>
@@ -58,6 +60,8 @@ export default function App() {
           <JwtRoute exact path="/contracts/new/:id">
             <IssueContract />
           </JwtRoute>
+
+
 
         </Switch>
       </Theme>

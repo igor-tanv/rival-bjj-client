@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 
 import Dropdown from "../../ui/dropdown"
 import { apiFetch } from "../../modules/api-fetch"
@@ -51,14 +51,15 @@ const defaultValues = {
   weightClass: "",
   school: "",
   gender: "",
+  avatar: "",
   gi: "",
   nogi: "",
   acceptsTos: false
 }
 
 export default function RegisterForm({ setComplete }) {
-
   const [values, setValues] = useState(defaultValues)
+  const fileRef = useRef()
 
   const validations = {
     firstName: [isRequired],
@@ -87,6 +88,19 @@ export default function RegisterForm({ setComplete }) {
       ...prev,
       [key]: errors
     }))
+  }
+
+  function imageChanged() {
+    const file = fileRef.current && fileRef.current.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = function (e) {
+      setValues(prev => ({
+        ...prev,
+        avatar: reader.result
+      }))
+    }
   }
 
   function handleSubmit(e) {
@@ -184,6 +198,23 @@ export default function RegisterForm({ setComplete }) {
           }))
         }}
       />
+
+
+      <div>
+        <label>Avatar</label>
+        <div>
+
+          <input type="file" ref={fileRef} onChange={imageChanged} />
+
+
+        </div>
+        {
+          values.avatar
+            ? <div><img src={values.avatar} alt="" width={100} /> </div >
+            : ""
+        }
+      </div>
+
 
 
       <Dropdown

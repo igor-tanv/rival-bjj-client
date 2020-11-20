@@ -6,7 +6,6 @@ function toSentence(camelCase) {
 }
 
 export default function Contracts({ contracts }) {
-  // this returns an error if there the player has no contracts
   return <table>
     <thead>
       <tr>
