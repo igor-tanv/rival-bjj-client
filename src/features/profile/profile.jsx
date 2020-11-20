@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom"
 import Contracts from "./contracts"
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
+  console.log(6, avatar)
 
   return <div>
     <div>Name: {firstName} {lastName}</div>
@@ -13,7 +14,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
     <div>Weight: {weightClass}</div>
     <div>Quality Rating: {qualityRating} / 5</div>
 
-    <div><img src={avatar} alt="" /></div>
+    {avatar ? <div><img src={avatar} alt="" /></div> : <div><img src={process.env.PUBLIC_URL + '/cover.jpg'} alt="" /></div>}
 
     {localStorage.getItem("playerId") !== _id && <button onClick={() => history.push(`/contracts/new/${_id}`)}>Issue Challenge</button>}
     {localStorage.getItem("playerId") !== _id && <button onClick={() => history.push(`/chat/${_id}`)}>Chat</button>}
