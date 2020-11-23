@@ -14,6 +14,8 @@ import ConfirmEmail from "./features/confirm-email"
 
 import EditProfile from "./features/profile/edit"
 
+import "./styles.css"
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -45,12 +47,12 @@ export default function App() {
             <Profile />
           </JwtRoute>
 
-          <JwtRoute exact path="/contracts">
-            <Contracts />
+          <JwtRoute exact path="/profile/edit">
+            <EditProfile />
           </JwtRoute>
 
-          <JwtRoute exact path="/profiles/edit">
-            <EditProfile />
+          <JwtRoute exact path="/contracts">
+            <Contracts />
           </JwtRoute>
 
           <Route exact path="/profiles/:id">

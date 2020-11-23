@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react"
 
 import { apiFetch } from "../../modules/api-fetch"
 
-import Form from "../register/form"
+import Form from "../profile/form"
 
 export default function Update({ }) {
 
-  const [player, setPlayer] = useState({})
-  const [complete, setComplete] = useState(false)
+  const [player, setPlayer] = useState()
 
   useEffect(() => {
     apiFetch(`players/${localStorage.getItem("playerId")}`).then(json => {
@@ -17,7 +16,7 @@ export default function Update({ }) {
 
   return <div>
 
-    <Form setComplete={setComplete} />
+    {player ? <Form player={player} /> : "loading"}
 
   </div >
 

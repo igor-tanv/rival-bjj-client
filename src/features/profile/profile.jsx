@@ -33,7 +33,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
 
 
     {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/contracts`)}>My Contracts</button>}
-    {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/profiles/edit`)}>Update My Profile</button>}
+    {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/profile/edit`)}>Update My Profile</button>}
     {localStorage.getItem("playerId") === _id && <button onClick={() => deletePlayer(localStorage.getItem("playerId"))}>Delete</button>}
     <h3>Match history</h3>
     {

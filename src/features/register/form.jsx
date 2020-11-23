@@ -1,47 +1,22 @@
 import React, { useState, useRef } from "react"
 
+import useForm from "../../hooks/use-form";
+
 import Dropdown from "../../ui/dropdown"
-import { apiFetch } from "../../modules/api-fetch"
+
 import TextField from "../../ui/text-field"
 import Button from "../../ui/button"
+
 import weightClasses from "../../data/weight-classes.json"
 import giScores from "../../data/gi-scores.json"
 import nogiScores from "../../data/nogi-scores.json"
 import genders from "../../data/genders.json"
 
 import { toValueLabel } from "../../modules/object"
+import { isRequired, isValidAge, isPassword, didAgree } from "../../modules/validations";
+import { apiFetch } from "../../modules/api-fetch"
 
 import "./styles.css"
-
-function isRequired(v) {
-  return v && v.length > 0 ? null : "is required"
-}
-
-function isValidAge(v) {
-  // we need to check the age range (15-75) and cannot be from future
-  return parseInt(v) && v.toString().length === 4 ? null : "enter your 4 digit birthyear"
-}
-
-function atLeast(v, n) {
-  return v && v.length >= n ? null : `must be at least ${n} characters`
-}
-
-function hasSpecial(v) {
-  return v && new RegExp(/[\*\@\!\-]/g).test(v) ? null : `must have at least 1 special character (*@-!)`
-}
-
-function isPassword(v) {
-  const errors = [
-    hasSpecial(v),
-    atLeast(v, 7)
-  ].filter(error => error)
-
-  return errors.length <= 0 ? null : errors.join(", ")
-}
-
-function didAgree(checked) {
-  return checked ? null : "must be agreed to"
-}
 
 // filter out open weight class
 const filteredWeightClasses = toValueLabel(weightClasses).filter(obj => obj.value !== "OpenWeight")
@@ -62,37 +37,23 @@ const defaultValues = {
   acceptsTos: false
 }
 
+const validations = {
+  firstName: [isRequired],
+  lastName: [isRequired],
+  birthYear: [isValidAge],
+  email: [isPassword],
+  password: [isPassword],
+  school: [isRequired],
+  acceptsTos: [didAgree],
+}
+
 export default function RegisterForm({ setComplete }) {
   const [values, setValues] = useState(defaultValues)
+  const { errors, setErrors, valid, validate } = useForm({
+    validations,
+    values,
+  });
   const fileRef = useRef()
-
-  const validations = {
-    firstName: [isRequired],
-    lastName: [isRequired],
-    birthYear: [isValidAge],
-    email: [isPassword],
-    password: [isPassword],
-    school: [isRequired],
-    acceptsTos: [didAgree],
-  }
-
-  const [errors, setErrors] = useState(Object.keys(validations).reduce((acc, key) => {
-    acc[key] = null
-    return acc
-  }, {}))
-
-  function valid() {
-    const errors = Object.keys(validations).flatMap(key => validations[key].map(v => v(values[key])))
-    return errors.every(e => e === null)
-  }
-
-  function validate(key, validations) {
-    const errors = validations.map(v => v(values[key]))
-    setErrors(prev => ({
-      ...prev,
-      [key]: errors
-    }))
-  }
 
   function imageChanged() {
     const file = fileRef.current && fileRef.current.files[0]
