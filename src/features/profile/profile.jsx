@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom"
 import Contracts from "./contracts"
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
-  console.log(6, avatar)
 
   return <div>
     <div>Name: {firstName} {lastName}</div>
