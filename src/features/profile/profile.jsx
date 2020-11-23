@@ -1,6 +1,19 @@
 import React from "react"
 import { withRouter } from "react-router-dom"
 import Contracts from "./contracts"
+import { apiFetch } from "../../modules/api-fetch"
+
+function deletePlayer(playerId) {
+  apiFetch(`players/delete`, "post", { playerId }).then((json) => {
+    if (!json.errors) {
+      localStorage.removeItem("jwt")
+      window.location = "/"
+      return
+    }
+  }).catch(error => {
+    debugger
+  })
+}
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 
@@ -21,6 +34,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
 
     {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/contracts`)}>My Contracts</button>}
     {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/profiles/edit`)}>Update My Profile</button>}
+    {localStorage.getItem("playerId") === _id && <button onClick={() => deletePlayer(localStorage.getItem("playerId"))}>Delete</button>}
     <h3>Match history</h3>
     {
       contracts.length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
