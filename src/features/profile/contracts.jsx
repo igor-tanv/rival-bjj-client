@@ -18,7 +18,7 @@ export default function Contracts({ contracts }) {
       {contracts.map(contract => <tr>
         <td>{contract.result}</td>
         <td>{contract.type}</td>
-        <td>{contract.opponent.firstName} {contract.opponent.lastName}</td>
+        <td>{contract.opponentfirstName} {contract.opponentlastName}</td>
         <td>{contract.method}</td>
       </tr>)}
     </tbody>
