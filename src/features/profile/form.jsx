@@ -24,7 +24,6 @@ const validations = {
   firstName: [isRequired],
   lastName: [isRequired],
   birthYear: [isValidAge],
-  email: [isPassword],
   school: [isRequired],
 };
 
@@ -51,22 +50,19 @@ export default function EditProfileForm({ player }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    apiFetch(`players`, "patch", values)
+    apiFetch(`players/${localStorage.getItem("playerId")}`, 'patch', values)
       .then((json) => {
-
         if (json.errors) {
           const errors = Object.keys(json.errors).reduce((acc, key) => {
             acc[key] = [json.errors[key].message];
             return acc;
           }, {});
-
           setErrors((prev) => ({
             ...prev,
             ...errors,
           }));
           return;
         }
-        // send them back to the profile view
       })
       .catch((error) => {
         debugger;
@@ -116,22 +112,6 @@ export default function EditProfileForm({ player }) {
               birthYear,
             }))
           }
-        />
-
-        <TextField
-          label="Email"
-          autoComplete="off"
-          type="email"
-          value={values.email}
-          validate={() => validate("email", validations["email"])}
-          errors={errors.email}
-          onChange={(val) => {
-            const email = val;
-            setValues((prev) => ({
-              ...prev,
-              email,
-            }));
-          }}
         />
 
         <div>

@@ -11,7 +11,6 @@ import IssueContract from "./features/contracts/new"
 import Register from "./features/register"
 import Chat from "./features/chat"
 import ConfirmEmail from "./features/confirm-email"
-
 import EditProfile from "./features/profile/edit"
 
 import "./styles.css"
