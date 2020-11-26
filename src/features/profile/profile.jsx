@@ -4,7 +4,7 @@ import Contracts from "./contracts"
 import { apiFetch } from "../../modules/api-fetch"
 
 function deletePlayer(playerId) {
-  apiFetch(`players/delete`, "post", { playerId }).then((json) => {
+  apiFetch(`players/${localStorage.getItem("playerId")}`, 'delete', { playerId }).then((json) => {
     if (!json.errors) {
       localStorage.removeItem("jwt")
       window.location = "/"
