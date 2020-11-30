@@ -8,6 +8,7 @@ import Button from "../../ui/button";
 
 import weightClasses from "../../data/weight-classes.json";
 import genders from "../../data/genders.json";
+import communities from "../../data/communities.json";
 
 import { apiFetch } from "../../modules/api-fetch";
 import { toValueLabel } from "../../modules/object";
@@ -129,6 +130,18 @@ export default function EditProfileForm({ player }) {
         </div>
 
         <Dropdown
+          options={toValueLabel(communities)}
+          onChange={(val) => {
+            const community = val;
+            setValues((prev) => ({
+              ...prev,
+              community,
+            }));
+          }}
+          value={values.community}
+        />
+
+        <Dropdown
           options={filteredWeightClasses}
           onChange={(val) => {
             const weightClass = val;
@@ -138,7 +151,6 @@ export default function EditProfileForm({ player }) {
             }));
           }}
           value={values.weightClass}
-          label="Select your competition weight class"
         />
 
         <Dropdown
@@ -151,11 +163,10 @@ export default function EditProfileForm({ player }) {
             }));
           }}
           value={values.gender}
-          label="What is your gender?"
         />
 
         <TextField
-          label="Enter Your School Name"
+          label="Update Your School Name"
           value={values.school}
           validate={() => validate("school", validations["school"])}
           errors={errors.school}
