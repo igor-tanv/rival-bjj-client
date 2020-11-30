@@ -1,36 +1,63 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import useWebsocket from './use-websocket';
+import { apiFetch } from "../../modules/api-fetch"
 import './styles.css';
 
 function Chat({ match }) {
-  const { socket, readyState, reconnecting, messages } = useWebsocket(
-    {
-      url: 'ws://localhost:3002',
-      onConnected,
-    },
-  );
+  const {
+    socket,
+    reconnecting,
+    messages,
+    setMessages,
+  } = useWebsocket({
+    url: 'ws://127.0.0.1:3002',
+    onConnected,
+  });
   const [message, setMessage] = useState('');
+  const [recipient, setRecipient] = useState({});
 
-  const user = localStorage.getItem('playerId');
+  const playerId = localStorage.getItem("playerId");
+
+  const recipientId = match.params.recipient;
+
+  useEffect(() => {
+
+    apiFetch(`players/${recipientId}`)
+      .then((json) => {
+        setRecipient(json.player)
+      });
+
+    apiFetch(`chats/${recipientId}/${playerId}`)
+      .then((json) =>
+        setMessages(
+          json.map((message) => {
+            return {
+              type: 'say',
+              ...message,
+            };
+          }),
+        ),
+      );
+  }, []);
 
   function onConnected(socket) {
     socket.send(
       JSON.stringify({
         type: 'connect',
-        user,
+        playerId: playerId,
       }),
     );
   }
 
+  // check for empty text fields
   function sendMessage(e) {
-    const { recipient } = match.params;
     e.preventDefault();
     socket.send(
       JSON.stringify({
         type: 'say',
-        sender: user,
-        recipient,
+        sender: playerId,
+        recipient: recipientId,
         text: message,
       }),
     );
@@ -47,7 +74,8 @@ function Chat({ match }) {
               .filter((m) => m.type === 'say')
               .map((m, i) => (
                 <div key={i} className='message'>
-                  {m.sender === user ? 'You' : m.sender}: {m.text}
+                  {m.sender === playerId ? 'You' : recipient.firstName}:{' '}
+                  {m.text}
                 </div>
               ))}
             <input
@@ -58,6 +86,7 @@ function Chat({ match }) {
             <input type='submit' value='Send' />
           </div>
         </div>
+        {recipient && <div>Chatting with {recipient.firstName}</div>}
       </form>
     );
 }

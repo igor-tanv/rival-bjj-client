@@ -6,16 +6,12 @@ export default function useWebsocket({ url, onConnected }) {
   const socket = useRef(null);
 
   useEffect(() => {
-    console.log('running socket hook');
     socket.current = new WebSocket(url);
-
     socket.current.onopen = () => {
-      console.log('connected');
       onConnected(socket.current);
     };
 
     socket.current.onclose = () => {
-      console.log('closed');
       if (socket.current) {
         if (reconnecting) return;
         setReconnecting(true);
@@ -25,7 +21,7 @@ export default function useWebsocket({ url, onConnected }) {
 
     socket.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log('message received ' + data);
+      console.log('message received ', data);
       setMessages((prev) => [...prev, data]);
     };
 
@@ -55,5 +51,6 @@ export default function useWebsocket({ url, onConnected }) {
     readyState: readyState,
     reconnecting,
     messages,
+    setMessages,
   };
 }
