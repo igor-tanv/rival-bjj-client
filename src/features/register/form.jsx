@@ -11,6 +11,7 @@ import weightClasses from "../../data/weight-classes.json"
 import giScores from "../../data/gi-scores.json"
 import nogiScores from "../../data/nogi-scores.json"
 import genders from "../../data/genders.json"
+import communities from "../../data/communities.json"
 
 import { toValueLabel } from "../../modules/object"
 import { isRequired, isValidAge, isPassword, didAgree } from "../../modules/validations";
@@ -21,7 +22,6 @@ import "./styles.css"
 // filter out open weight class
 const filteredWeightClasses = toValueLabel(weightClasses).filter(obj => obj.value !== "OpenWeight")
 
-// NOTE: Add community tab 
 const defaultValues = {
   firstName: "",
   lastName: "",
@@ -34,6 +34,7 @@ const defaultValues = {
   avatar: "",
   gi: "",
   nogi: "",
+  community: "",
   acceptsTos: false
 }
 
@@ -206,6 +207,19 @@ export default function RegisterForm({ setComplete }) {
         label="What is your gender?"
       />
 
+      <Dropdown
+        options={toValueLabel(communities)}
+        onChange={val => {
+          const community = val
+          setValues(prev => ({
+            ...prev,
+            community
+          }))
+        }}
+        value={values.community}
+        label="Select your competition community"
+      />
+      <p>Dont't see your community? Contact admin@rival-bjj.com and we'll add your community.</p>
 
       <Dropdown
         options={toValueLabel(giScores)}

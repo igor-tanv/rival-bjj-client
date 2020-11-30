@@ -8,27 +8,33 @@ import { toValueLabel } from "../../modules/object"
 
 import weightClasses from "../../data/weight-classes.json"
 import matchTypes from "../../data/match-types.json"
+import communities from "../../data/communities.json"
 
 export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([])
   const [giNoGi, setGiNoGi] = useState(Object.keys(matchTypes)[0])
   const [weightClass, setWeightClass] = useState(Object.keys(weightClasses)[0])
+  const [community, setCommunity] = useState(Object.keys(communities)[0])
 
   useEffect(() => {
     apiFetch("players").then(json => setPlayers(json.players))
   }, [])
 
   function search(players) {
-    return filterByWeightClass(sortByGiNoGi(players))
+    return sortByWeightClass(sortByGiNoGi(sortByCommunity(players)))
   }
 
-  function sortByGiNoGi(players) {
-    return players.sort((a, b) => b[giNoGi] - a[giNoGi])
+  function sortByCommunity(players) {
+    return players.filter(player => player.community === community)
   }
 
-  function filterByWeightClass(sorted) {
-    if (weightClass === "OpenWeight") return sorted
-    return sorted.filter(player => player.weightClass === weightClass)
+  function sortByGiNoGi(playersSortedByGiNoGi) {
+    return playersSortedByGiNoGi.sort((a, b) => b[giNoGi] - a[giNoGi])
+  }
+
+  function sortByWeightClass(communityPlayersSortedByGiNoGi) {
+    if (weightClass === "OpenWeight") return communityPlayersSortedByGiNoGi
+    return communityPlayersSortedByGiNoGi.filter(player => player.weightClass === weightClass)
   }
 
   const found = search(players)
@@ -36,9 +42,9 @@ export default function PlayerSearch({ }) {
     <div style={{
       display: "flex"
     }}>
+      <Dropdown options={toValueLabel(communities)} onChange={setCommunity} value={community} />
       <Dropdown options={toValueLabel(matchTypes)} onChange={setGiNoGi} value={giNoGi} />
       <Dropdown options={toValueLabel(weightClasses)} onChange={setWeightClass} value={weightClass} />
-
     </div>
     <ul>
       {found.length > 0
