@@ -1,14 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import HorizontalList from "../horizontal-list"
+import "./styles.css"
 
 
 export default function Header() {
-  return <div className="header">
+  return <header className="header">
 
     <div className="container">
-
-      <ul className="horizontal">
+      <ul className="horizontal-list">
         <li><Link to="/">Home</Link></li>
         {
           localStorage.getItem("jwt")
@@ -30,8 +29,8 @@ export default function Header() {
         <li><Link to="/rules">Rules</Link></li>
         <li><Link to="/faq">FAQ</Link></li>
       </ul>
-    </div>
+    </div >
 
 
-  </div >
+  </header >
 }

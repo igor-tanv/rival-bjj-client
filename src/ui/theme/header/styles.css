@@ -1,0 +1,7 @@
+.horizontal-list {
+  @apply flex space-x-2 list-none p-4 text-white;
+}
+
+.header {
+  @apply bg-blue-700 flex flex-wrap items-center;
+}

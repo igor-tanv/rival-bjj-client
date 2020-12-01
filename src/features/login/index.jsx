@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { apiFetch } from "../../modules/api-fetch"
+import TextField from "../../ui/text-field"
+import Button from "../../ui/button"
 
 export default function Login({ }) {
   const [email, setEmail] = useState("")
@@ -32,24 +34,24 @@ export default function Login({ }) {
 
 
   return (
-    <div className='login-container'>
+    <div className='container'>
       <form onSubmit={onSubmit}>
-        <p>Login</p>
+        <p>Sign in to your Rival account</p>
         {error && <span className="error">{error}</span>}
-        <input
+        <TextField
           type='text'
-          placeholder='Your email'
+          label='Your email'
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(val) => setEmail(val)}
         />
 
-        <input
+        <TextField
           type='password'
-          placeholder='password'
+          label='Password'
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(val) => setPassword(val)}
         />
-        <button type='submit'>Log in</button>
+        <Button type='submit'>Log in</Button>
       </form>
     </div>
   )

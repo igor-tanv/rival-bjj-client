@@ -2,22 +2,34 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Contracts from "./contracts"
 import { apiFetch } from "../../modules/api-fetch"
+import Button from "../../ui/button"
 
 function deletePlayer(playerId) {
   apiFetch(`players/${localStorage.getItem("playerId")}`, 'delete', { playerId }).then((json) => {
-    if (!json.errors) {
-      localStorage.removeItem("jwt")
-      window.location = "/"
+    if (json.errors) {
+      // ??
       return
     }
+
+    localStorage.removeItem("jwt")
+    window.location = "/"
   }).catch(error => {
     debugger
   })
 }
 
+const defaultAvatar = process.env.PUBLIC_URL + '/cover.jpg'
+
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 
   return <div>
+    <div className="flex flex-col items-center justify-center w-full">
+      <img className="rounded-full h-48 w-48" src={avatar ? avatar : defaultAvatar} alt="" />
+      <div>
+        quality rating
+      </div>
+    </div>
+
     <div>Name: {firstName} {lastName}</div>
     <div>Fight Record (W/L/D): {wins}/{losses}/{draws}</div>
     <div>School: {school}</div>
@@ -26,19 +38,30 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
     <div>Weight: {weightClass}</div>
     <div>Quality Rating: {qualityRating} / 5</div>
 
-    {avatar ? <div><img src={avatar} alt="" /></div> : <div><img src={process.env.PUBLIC_URL + '/cover.jpg'} alt="" /></div>}
-
-    {localStorage.getItem("playerId") !== _id && <button onClick={() => history.push(`/contracts/new/${_id}`)}>Issue Challenge</button>}
-    {localStorage.getItem("playerId") !== _id && <button onClick={() => history.push(`/chat/${_id}`)}>Chat</button>}
 
 
-    {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/contracts`)}>My Contracts</button>}
-    {localStorage.getItem("playerId") === _id && <button onClick={() => history.push(`/profile/edit`)}>Update My Profile</button>}
-    {localStorage.getItem("playerId") === _id && <button onClick={() => deletePlayer(localStorage.getItem("playerId"))}>Delete</button>}
-    <h3>Match history</h3>
-    {
-      contracts.length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
-    }
+    <div>
+
+      {localStorage.getItem("playerId") !== _id &&
+        <ul className="horizontal-list">
+          <li><Button onClick={() => history.push(`/contracts/new/${_id}`)}>Issue Challenge</Button></li>
+          <li><Button onClick={() => history.push(`/chat/${_id}`)}>Chat</Button></li>
+
+        </ul>
+      }
+      {localStorage.getItem("playerId") === _id &&
+        <ul className="horizontal-list">
+          <li><Button onClick={() => history.push(`/contracts`)}>My Contracts</Button></li>
+          <li><Button onClick={() => history.push(`/profile/edit`)}>Update My Profile</Button></li>
+          <li><Button onClick={() => deletePlayer(localStorage.getItem("playerId"))}>Delete</Button></li>
+        </ul>
+      }
+
+      <h3>Match history</h3>
+      {
+        contracts.length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
+      }
+    </div>
   </div >
 }
 
