@@ -1,7 +1,11 @@
 import React from "react"
 import { withRouter } from "react-router-dom"
+
 import Contracts from "./contracts"
+import Rating from "./rating"
+
 import { apiFetch } from "../../modules/api-fetch"
+
 import Button from "../../ui/button"
 
 function deletePlayer(playerId) {
@@ -10,7 +14,6 @@ function deletePlayer(playerId) {
       // ??
       return
     }
-
     localStorage.removeItem("jwt")
     window.location = "/"
   }).catch(error => {
@@ -18,7 +21,7 @@ function deletePlayer(playerId) {
   })
 }
 
-const defaultAvatar = process.env.PUBLIC_URL + '/cover.jpg'
+const defaultAvatar = process.env.PUBLIC_URL + 'images/cover.jpg'
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 
@@ -26,7 +29,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
     <div className="flex flex-col items-center justify-center w-full">
       <img className="rounded-full h-48 w-48" src={avatar ? avatar : defaultAvatar} alt="" />
       <div>
-        quality rating
+        quality rating <Rating value={qualityRating} />
       </div>
     </div>
 
@@ -36,7 +39,6 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
     <div>Gi Rank: {gi}</div>
     <div>No Gi Rank: {nogi}</div>
     <div>Weight: {weightClass}</div>
-    <div>Quality Rating: {qualityRating} / 5</div>
 
 
 
