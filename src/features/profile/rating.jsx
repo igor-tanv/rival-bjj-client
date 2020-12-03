@@ -10,7 +10,7 @@ function getStars(value) {
   return stars;
 }
 
-const starPath = `${process.env.PUBLIC_URL} + images/`
+const starPath = process.env.PUBLIC_URL + 'images/'
 
 export default function Rating({ value }) {
   return (
