@@ -275,7 +275,7 @@ export default function RegisterForm({ setComplete }) {
         </label>
 
       </div>
-      <Button disabled={!valid()}>Register Your Profile</Button>
+      <Button type="submit" disabled={!valid()}>Register Your Profile</Button>
     </form>
   </>
 }

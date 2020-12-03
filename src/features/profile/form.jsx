@@ -179,7 +179,7 @@ export default function EditProfileForm({ player }) {
           }}
         />
 
-        <Button disabled={!valid()}>Update Profile</Button>
+        <Button type="submit" disabled={!valid()}>Update Profile</Button>
       </form>
     </>
   );

@@ -135,7 +135,7 @@ export default function Form({
       I have <a href="">read and accept the match rules</a>
         </label>
       </div>
-      <Button disabled={!valid()}>Send Contract to Opponent</Button>
+      <Button type="submit" disabled={!valid()}>Send Contract to Opponent</Button>
     </form>
     <FeeNote />
   </>

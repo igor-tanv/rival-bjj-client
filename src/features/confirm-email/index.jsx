@@ -31,7 +31,7 @@ function ConfirmEmail({ history }) {
       placeholder="enter the code we sent to your email"
       errors={[error && error.code]}
     />
-    <Button>Verify my account</Button>
+    <Button type="submit">Verify my account</Button>
   </form>
 }
 export default withRouter(ConfirmEmail)

@@ -16,7 +16,7 @@ export default function Rating({ value }) {
   return (
     <div>
       {getStars(value).map((value) => (
-        <img src={starPath + `${value}.png`} alt="" width={50} />
+        <img className="inline-block h-8" src={starPath + `${value}.png`} alt="" />
       ))}
     </div>
   );
