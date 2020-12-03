@@ -21,7 +21,8 @@ function deletePlayer(playerId) {
   })
 }
 
-const defaultAvatar = process.env.PUBLIC_URL + 'images/cover.jpg'
+const defaultAvatar = `${process.env.PUBLIC_URL + `images/cover.jpg`}`
+
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 

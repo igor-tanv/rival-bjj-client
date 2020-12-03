@@ -62,8 +62,9 @@ export default function EditProfileForm({ player }) {
             ...prev,
             ...errors,
           }));
-          return;
+          return
         }
+        window.location = `/profiles/${localStorage.getItem("playerId")}`
       })
       .catch((error) => {
         debugger;
