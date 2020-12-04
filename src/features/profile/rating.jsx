@@ -10,13 +10,11 @@ function getStars(value) {
   return stars;
 }
 
-const starPath = process.env.PUBLIC_URL + 'images/'
-
 export default function Rating({ value }) {
   return (
     <div>
       {getStars(value).map((value) => (
-        <img className="inline-block h-8" src={starPath + `${value}.png`} alt="" />
+        <img className="inline-block h-8" src={`images/${value}.png`} alt="" />
       ))}
     </div>
   );
