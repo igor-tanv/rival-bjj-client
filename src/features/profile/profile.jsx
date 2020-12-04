@@ -21,14 +21,12 @@ function deletePlayer(playerId) {
   })
 }
 
-const defaultAvatar = process.env.PUBLIC_URL + `images/cover.jpg`
-
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 
   return <div>
     <div className="flex flex-col items-center justify-center w-full">
-      <img className="rounded-full h-48 w-48" src={avatar ? avatar : defaultAvatar} alt="" />
+      <img className="rounded-full h-48 w-48" src={avatar ? avatar : `images/cover.jpg`} alt="" />
       <div>
         quality rating <Rating value={qualityRating} />
       </div>
