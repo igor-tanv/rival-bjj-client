@@ -41,6 +41,11 @@ const defaultValues = {
 const validations = {
   firstName: [isRequired],
   lastName: [isRequired],
+  weightClass: [isRequired],
+  community: [isRequired],
+  gender: [isRequired],
+  gi: [isRequired],
+  nogi: [isRequired],
   birthYear: [isValidAge],
   email: [isPassword],
   password: [isPassword],
@@ -190,6 +195,7 @@ export default function RegisterForm({ setComplete }) {
           }))
         }}
         value={values.weightClass}
+        validate={() => validate("weightClass", validations["weightClass"])}
         label="Select your competition weight class"
       />
 
@@ -204,6 +210,7 @@ export default function RegisterForm({ setComplete }) {
           }))
         }}
         value={values.gender}
+        validate={() => validate("gender", validations["gender"])}
         label="What is your gender?"
       />
 
@@ -217,6 +224,7 @@ export default function RegisterForm({ setComplete }) {
           }))
         }}
         value={values.community}
+        validate={() => validate("community", validations["community"])}
         label="Select your competition community"
       />
       <p>Dont't see your community? Contact admin@rival-bjj.com and we'll add your community.</p>
@@ -231,6 +239,7 @@ export default function RegisterForm({ setComplete }) {
           }))
         }}
         value={values.gi}
+        validate={() => validate("gi", validations["gi"])}
         label="Select your Gi experience"
       />
 
@@ -244,6 +253,7 @@ export default function RegisterForm({ setComplete }) {
           }))
         }}
         value={values.nogi}
+        validate={() => validate("nogi", validations["nogi"])}
         label="Select your No Gi experience"
       />
 
