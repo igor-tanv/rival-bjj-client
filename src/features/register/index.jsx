@@ -7,7 +7,6 @@ function Register({ }) {
   const [complete, setComplete] = useState(false)
 
   return <div>
-
     {
       complete ? (<div>
         <h1>Check your email!</h1>

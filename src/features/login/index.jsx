@@ -1,5 +1,8 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
+
 import { apiFetch } from "../../modules/api-fetch"
+
 import TextField from "../../ui/text-field"
 import Button from "../../ui/button"
 
@@ -52,6 +55,7 @@ export default function Login({ }) {
           onChange={(val) => setPassword(val)}
         />
         <Button type='submit'>Log in</Button>
+        <Link to="/login/reset">Forgot password?</Link>
       </form>
     </div>
   )

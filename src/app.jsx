@@ -5,6 +5,7 @@ import JwtRoute from "./jwt-route"
 
 import Homepage from "./features/homepage"
 import Login from "./features/login"
+import PasswordReset from "./features/login/reset"
 import Profile from "./features/profile"
 import Contracts from "./features/contracts"
 import IssueContract from "./features/contracts/new"
@@ -27,6 +28,10 @@ export default function App() {
 
           <Route exact path="/login">
             <Login />
+          </Route>
+
+          <Route exact path="/login/reset">
+            <PasswordReset />
           </Route>
 
           <Route exact path="/register">
