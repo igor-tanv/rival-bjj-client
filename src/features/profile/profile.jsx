@@ -23,6 +23,10 @@ function deletePlayer(playerId) {
   })
 }
 
+function filterAcceptedOrCompletedMatches(contracts) {
+  return contracts.filter(c => (c.status === 'accepted') || (c.status === 'completed'))
+}
+
 
 function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draws, school, gi, nogi, weightClass, qualityRating, contracts }) {
 
@@ -40,8 +44,6 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
     <div>Gi Rank: {gi}</div>
     <div>No Gi Rank: {nogi}</div>
     <div>Weight: {weightClass}</div>
-
-
 
     <div>
 
@@ -62,7 +64,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
 
       <h3>Match history</h3>
       {
-        contracts.length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
+        filterAcceptedOrCompletedMatches(contracts).length > 0 ? <Contracts contracts={contracts} /> : "This fighter has not fought yet"
       }
     </div>
   </div >
