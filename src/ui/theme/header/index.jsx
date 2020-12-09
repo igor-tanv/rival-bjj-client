@@ -4,10 +4,10 @@ import "./styles.css"
 
 
 export default function Header() {
-  return <header className="header">
+  return <div className="header">
 
     <div className="container">
-      <ul className="horizontal-list">
+      <ul className="horizontal">
         <li><Link to="/">Home</Link></li>
         {
           localStorage.getItem("jwt")
@@ -32,5 +32,5 @@ export default function Header() {
     </div >
 
 
-  </header >
+  </div >
 }
