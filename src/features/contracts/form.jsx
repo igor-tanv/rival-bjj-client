@@ -11,8 +11,6 @@ import TextArea from "../../ui/text-area"
 import Button from "../../ui/button"
 import { toValueLabel } from "../../modules/object"
 
-
-
 export default function Form({
   opponent,
   handleSubmit,
