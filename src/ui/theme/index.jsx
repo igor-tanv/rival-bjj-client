@@ -1,7 +1,7 @@
 import React from "react"
 import Header from "./header"
 import Footer from "./footer"
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles.css"
 
 export default function Theme({ children }) {
