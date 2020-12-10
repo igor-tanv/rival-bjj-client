@@ -10,6 +10,8 @@ import Button from "../../ui/button"
 
 import "./styles.css";
 
+import defaultAvatar from '../../assets/images/cover.jpg';
+
 function deletePlayer(playerId) {
   apiFetch(`players/${localStorage.getItem("playerId")}`, 'delete', { playerId }).then((json) => {
     if (json.errors) {
@@ -32,7 +34,7 @@ function Profile({ history, _id, avatar, lastName, firstName, wins, losses, draw
 
   return <div>
     <div className="flex flex-col items-center justify-center w-full">
-      <img className="item-avatar" src={avatar ? avatar : `images/cover.jpg`} alt="" />
+      <img className="item-avatar" src={avatar ? avatar : defaultAvatar} alt="" />
       <div>
         quality rating <Rating value={qualityRating} />
       </div>

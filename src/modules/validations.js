@@ -4,8 +4,8 @@ export function isRequired(v) {
 }
 
 export function isValidAge(v) {
-  // we need to check the age range (15-75) and cannot be from future
-  return parseInt(v) && v.toString().length === 4 ? null : "enter your 4 digit birthyear"
+  const currentYear = new Date().getFullYear();
+  return parseInt(v) && currentYear - parseInt(v) >= 15 && currentYear - parseInt(v) <= 75 ? null : "Must be between 15 and 75";
 }
 
 export function atLeast(v, n) {
