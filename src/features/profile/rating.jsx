@@ -10,14 +10,16 @@ function getStars(value) {
   return stars;
 }
 
-const qualityRatingStars = '../../assets/rating-stars'
-
 export default function Rating({ value }) {
-  console.log(`${qualityRatingStars}/${value}.png`)
   return (
     <div>
-      {getStars(value).map((value) => (
-        <img className="inline-block h-8" src={`${qualityRatingStars}/${value}.png`} alt="" />
+      {getStars(value).map((value, i) => (
+        <img
+          key={i}
+          className="inline-block h-8"
+          src={require(`../../assets/rating-stars/${value}.png`)}
+          alt=""
+        />
       ))}
     </div>
   );
