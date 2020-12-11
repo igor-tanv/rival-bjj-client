@@ -10,6 +10,9 @@ import weightClasses from "../../data/weight-classes.json"
 import matchTypes from "../../data/match-types.json"
 import communities from "../../data/communities.json"
 
+import Button from "../../ui/button"
+import Banner from "../../ui/banner"
+
 export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([])
   const [giNoGi, setGiNoGi] = useState(Object.keys(matchTypes)[0])
@@ -39,6 +42,7 @@ export default function PlayerSearch({ }) {
 
   const found = search(players)
   return <div>
+    <Banner/>
     <div style={{
       display: "flex"
     }}>
@@ -56,6 +60,7 @@ export default function PlayerSearch({ }) {
                 <div>{firstName} {lastName}</div>
                 <div>{weightClass}</div>
                 <div>win: {wins} loss: {losses} draw: {draws}</div>
+                <Button>Primary</Button>
               </div>
             </Link>
           </li>
