@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import useWebsocket from './use-websocket';
 import { apiFetch } from "../../modules/api-fetch"
+import Button from "../../ui/button"
 import './styles.css';
+
+console.log(process.env.WEBSOCKET_HOST, process.env.REACT_APP_HOST)
 
 function Chat({ match }) {
   const {
@@ -14,6 +17,7 @@ function Chat({ match }) {
     url: 'ws://127.0.0.1:3002',
     onConnected,
   });
+
   const [message, setMessage] = useState('');
   const [recipient, setRecipient] = useState({});
 
