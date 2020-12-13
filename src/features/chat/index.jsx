@@ -26,12 +26,10 @@ function Chat({ match }) {
   const recipientId = match.params.recipient;
 
   useEffect(() => {
-
     apiFetch(`players/${recipientId}`)
       .then((json) => {
         setRecipient(json.player)
       });
-
     apiFetch(`chats/${recipientId}/${playerId}`)
       .then((json) =>
         setMessages(
@@ -68,6 +66,10 @@ function Chat({ match }) {
     setMessage('');
   }
 
+  function validMessage(m) {
+    return m.trim().length === 0 ? true : false
+  }
+
   return reconnecting ? (
     <div>reconnecting!</div>
   ) : (
@@ -87,7 +89,7 @@ function Chat({ match }) {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <input type='submit' value='Send' />
+            <Button type='submit' disabled={validMessage(message)}>Send</Button>
           </div>
         </div>
         {recipient && <div>Chatting with {recipient.firstName}</div>}
