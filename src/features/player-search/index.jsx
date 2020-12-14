@@ -53,10 +53,19 @@ export default function PlayerSearch({ }) {
     <ul>
       {found.length > 0
         ? (found.map(player => {
-          const { _id, firstName, lastName, weightClass, wins, losses, draws } = player
+          const { _id, firstName, lastName, weightClass, wins, losses, draws, avatar } = player
           return <li key={player._id}>
             <Link to={`/profiles/${_id}`}>
               <div style={{ display: "flex" }}>
+                <img
+                  className="item-avatar"
+                  src={
+                    avatar
+                      ? avatar
+                      : `${process.env.PUBLIC_URL}/assets/images/cover.jpg`
+                  }
+                  alt=""
+                />
                 <div>{firstName} {lastName}</div>
                 <div>{weightClass}</div>
                 <div>win: {wins} loss: {losses} draw: {draws}</div>

@@ -17,7 +17,7 @@ export default function Rating({ value }) {
         <img
           key={i}
           className="inline-block h-8"
-          src={require(`../../assets/rating-stars/${value}.png`)}
+          src={`${process.env.PUBLIC_URL}/assets/rating-stars/${value}.png`}
           alt=""
         />
       ))}
