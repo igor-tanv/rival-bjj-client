@@ -49,6 +49,7 @@ function Profile({
   qualityRating,
   contracts,
 }) {
+  const showedContracts = filterAcceptedOrCompletedMatches(contracts);
   return (
     <div>
       <div className="flex flex-col items-center justify-center w-full">
@@ -57,7 +58,7 @@ function Profile({
           src={
             avatar
               ? avatar
-              : `assets/images/cover.jpg`
+              : `${process.env.PUBLIC_URL}/assets/images/cover.jpg`
           }
           alt=""
         />
@@ -113,11 +114,11 @@ function Profile({
         )}
 
         <h3>Match history</h3>
-        {filterAcceptedOrCompletedMatches(contracts).length > 0 ? (
-          <Contracts contracts={contracts} />
+        {showedContracts.length > 0 ? (
+          <Contracts playerId={_id} contracts={showedContracts} />
         ) : (
-            "This fighter has not fought yet"
-          )}
+          "This fighter has not fought yet"
+        )}
       </div>
     </div>
   );
