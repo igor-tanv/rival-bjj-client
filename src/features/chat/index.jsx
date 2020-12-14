@@ -5,7 +5,7 @@ import { apiFetch } from "../../modules/api-fetch"
 import Button from "../../ui/button"
 import './styles.css';
 
-console.log(process.env.WEBSOCKET_HOST, process.env.REACT_APP_HOST)
+console.log(process.env.REACT_APP_WEBSOCKET_HOST, process.env.REACT_APP_HOST)
 
 function Chat({ match }) {
   const {
@@ -14,7 +14,7 @@ function Chat({ match }) {
     messages,
     setMessages,
   } = useWebsocket({
-    url: 'ws://127.0.0.1:3002',
+    url: process.env.REACT_APP_WEBSOCKET_HOST,
     onConnected,
   });
 
