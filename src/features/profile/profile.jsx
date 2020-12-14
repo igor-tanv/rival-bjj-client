@@ -57,7 +57,7 @@ function Profile({
           src={
             avatar
               ? avatar
-              : `${process.env.PUBLIC_URL}/assets/images/cover.jpg`
+              : `assets/images/cover.jpg`
           }
           alt=""
         />
@@ -116,8 +116,8 @@ function Profile({
         {filterAcceptedOrCompletedMatches(contracts).length > 0 ? (
           <Contracts contracts={contracts} />
         ) : (
-          "This fighter has not fought yet"
-        )}
+            "This fighter has not fought yet"
+          )}
       </div>
     </div>
   );
