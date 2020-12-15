@@ -7,7 +7,7 @@ import "./styles.css"
 export default function Theme({ children }) {
   return <div>
     <Header />
-    <div className="container">
+    <div className="__rival_container">
       {children}
     </div>
     <Footer />

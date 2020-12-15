@@ -1,0 +1,77 @@
+.item-container .info-wrapper .info-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 45px;
+  letter-spacing: -0.3px;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.item-container {
+  display: flex;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px 31px rgba(77, 77, 77, 0.05);
+  height: 172px;
+  position: relative;
+}
+
+.item-container .info-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-container .info-avatar {
+  padding: 15px 10px 15px 20px;
+  width: 160px;
+  height: 177px;
+}
+
+.item-container .info-weight {
+  transform: skew(-20deg);
+  background: #000000;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 25px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  max-width: 150px;
+}
+.item-container .info-wrapper .info-medal {
+  width: 45px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.item-container .info-wrapper .info-rank .rank-type,
+.item-container .info-wrapper .info-school .school {
+  margin-right: 10px;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  color: #939393;
+}
+
+.item-container .info-wrapper .info-rank .rank-score,
+.item-container .info-wrapper .info-school .school-name {
+  margin-right: 10px;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  font-weight: 300;
+  color: #000000;
+}
+
+.profile-link {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  text-decoration-line: underline;
+  color: #d20a0b;
+}
+
+.profile-link .arrow {
+  width: 17px;
+  margin-right: 8px;
+}

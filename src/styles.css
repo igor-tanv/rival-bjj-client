@@ -8,6 +8,11 @@
   font-size: 16px;
 }
 
+body {
+  font-family: 'Oswald', sans-serif !important;
+  background: #F8F8F8;
+}
+
 .container {
   max-width: 800px;
   margin: 1rem auto;

@@ -1,0 +1,40 @@
+.banner-wrapper {
+  height: 550px;
+  width: 100%;
+  background-image: url("/assets/images/banner.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 23%;
+  background-size: cover;
+}
+
+.banner-wrapper .gap {
+  height: 100px;
+  width: 100%;
+}
+
+.banner-wrapper .cover-img {
+  height: 200px;
+  margin: auto;
+  display: flex;
+}
+
+.banner-title, .banner-sub-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #ffffff;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.banner-title {
+  margin-top: 25px;
+}
+
+.banner-button {
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
