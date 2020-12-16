@@ -39,7 +39,7 @@ function Profile({
           src={
             avatar
               ? avatar
-              : `${process.env.PUBLIC_URL}/assets/images/cover.jpg`
+              : `${process.env.PUBLIC_URL}/assets/images/default.png`
           }
           alt=""
         />
@@ -91,8 +91,8 @@ function Profile({
         {showedContracts.length > 0 ? (
           <Contracts playerId={_id} contracts={showedContracts} />
         ) : (
-          "This fighter has not fought yet"
-        )}
+            "This fighter has not fought yet"
+          )}
       </div>
     </div>
   );
