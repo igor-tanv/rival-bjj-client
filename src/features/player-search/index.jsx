@@ -89,7 +89,7 @@ export default function PlayerSearch({ }) {
               <div key={player._id} className="item-container">
                 <img
                   className="info-avatar"
-                  src={avatar ? avatar : `assets/images/test-image.png`}
+                  src={avatar ? avatar : `assets/images/default.png`}
                   alt=""
                 />
                 <div className="info-wrapper">
