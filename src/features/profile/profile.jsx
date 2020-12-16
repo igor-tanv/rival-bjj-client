@@ -4,28 +4,9 @@ import { withRouter } from "react-router-dom";
 import Contracts from "./contracts";
 import Rating from "./rating";
 
-import { apiFetch } from "../../modules/api-fetch";
-
 import Button from "../../ui/button";
 
 import "./styles.css";
-
-function deletePlayer(playerId) {
-  apiFetch(`players/${localStorage.getItem("playerId")}`, "delete", {
-    playerId,
-  })
-    .then((json) => {
-      if (json.errors) {
-        // ??
-        return;
-      }
-      localStorage.removeItem("jwt");
-      window.location = "/";
-    })
-    .catch((error) => {
-      debugger;
-    });
-}
 
 function filterAcceptedOrCompletedMatches(contracts) {
   return contracts.filter(
@@ -100,13 +81,6 @@ function Profile({
             <li>
               <Button onClick={() => history.push(`/profile/edit`)}>
                 Update My Profile
-              </Button>
-            </li>
-            <li>
-              <Button
-                onClick={() => deletePlayer(localStorage.getItem("playerId"))}
-              >
-                Delete
               </Button>
             </li>
           </ul>

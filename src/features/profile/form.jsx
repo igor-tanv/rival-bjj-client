@@ -71,6 +71,23 @@ export default function EditProfileForm({ player }) {
       });
   }
 
+  function deletePlayer(playerId) {
+    apiFetch(`players/${localStorage.getItem("playerId")}`, "delete", {
+      playerId,
+    })
+      .then((json) => {
+        if (json.errors) {
+          // ??
+          return;
+        }
+        localStorage.removeItem("jwt");
+        window.location = "/";
+      })
+      .catch((error) => {
+        debugger;
+      });
+  }
+
   return (
     <>
       <h1>Update my profile</h1>
@@ -180,6 +197,11 @@ export default function EditProfileForm({ player }) {
           }}
         />
 
+        <Button
+          onClick={() => deletePlayer(localStorage.getItem("playerId"))}
+        >
+          Delete
+              </Button>
         <Button type="submit" disabled={!valid()}>Update Profile</Button>
       </form>
     </>
