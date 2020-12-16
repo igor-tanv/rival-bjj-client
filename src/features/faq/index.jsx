@@ -12,7 +12,7 @@ export default function FAQ({ }) {
 
       <h5>2.) How do I challenge someone to a match?</h5>
        1. Register and confirm your profile.
-       2. Find someone you'd like to challenge and go to their profile.
+       2. Find an opponent you'd like to challenge and go to their profile.
        3. Chat with your opponent first. It's up to you and the opponent
        to determine when, where, what weight and what rules the match will be held under.
        4. Once you agree on these details, click "Issue Challenge" and fill in the Match Contract details.
@@ -41,6 +41,12 @@ export default function FAQ({ }) {
         For serious infractions contact the system administrator (provided in the match contract).
         As a general rule, it is always a good idea to save a copy of your contract for any disputes which
         may arise later on.
+
+        <h5>7.)What do the different tabs in my contract mean?</h5>
+       All: all contracts that have your name on import PropTypes from 'prop-types'
+       Sent: All contracts you sent that have not been accepted or declined by the opponent
+       Sent: All contracts you received that have not been accepted or declined by you
+
   </div>
 
 }
