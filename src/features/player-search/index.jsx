@@ -43,6 +43,16 @@ export default function PlayerSearch({}) {
       (player) => player.weightClass === weightClass
     );
   }
+  // <Dropdown
+  //         options={toValueLabel(matchTypes)}
+  //         onChange={setGiNoGi}
+  //         value={giNoGi}
+  //       />
+  //       <Dropdown
+  //         options={toValueLabel(weightClasses)}
+  //         onChange={setWeightClass}
+  //         value={weightClass}
+  //       />
 
   const found = search(players);
   return (
@@ -58,16 +68,7 @@ export default function PlayerSearch({}) {
           onChange={setCommunity}
           value={community}
         />
-        <Dropdown
-          options={toValueLabel(matchTypes)}
-          onChange={setGiNoGi}
-          value={giNoGi}
-        />
-        <Dropdown
-          options={toValueLabel(weightClasses)}
-          onChange={setWeightClass}
-          value={weightClass}
-        />
+
       </div>
       {found.length > 0
         ? found.map((player) => {
