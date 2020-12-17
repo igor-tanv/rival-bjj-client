@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './styles.css';
 import Button from '../../../ui/button';
 
 export default function Header() {
-  const showMenu = true;
+
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <div className="header">
-      <img src="assets/images/category.png" className="menu-icon"></img>
+      <Link onClick={() => setShowMenu(true)}><img src="assets/images/category.png" className="menu-icon"></img></Link>
       <div className="header-title">Rival</div>
       <img src="assets/rating-stars/100.png" className="logo"></img>
       {showMenu ? (
@@ -16,7 +18,7 @@ export default function Header() {
           <div className="screen-wrapper"></div>
           <div className="menu-popup">
             <div className="close-wrapper">
-              <img src="assets/images/close.png" className="close-btn" />
+              <Link onClick={() => setShowMenu(false)}><img src="assets/images/close.png" className="close-btn" /></Link>
             </div>
             <div className="menu-wrapper">
               <Link to="/" className="menu-item">
@@ -47,15 +49,15 @@ export default function Header() {
                   </div>
                 </>
               ) : (
-                <>
-                  <Link to="/login">
-                    <Button>Login</Button>
-                  </Link>
-                  <Link to="/register">
-                    <Button isSecondary={true}>Register</Button>
-                  </Link>
-                </>
-              )}
+                  <>
+                    <Link to="/login">
+                      <Button>Login</Button>
+                    </Link>
+                    <Link to="/register">
+                      <Button isSecondary={true}>Register</Button>
+                    </Link>
+                  </>
+                )}
             </div>
           </div>
         </>
