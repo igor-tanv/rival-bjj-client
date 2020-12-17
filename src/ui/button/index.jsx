@@ -1,14 +1,20 @@
-import React from "react";
-import "./styles.css";
+import React from 'react';
+import './styles.css';
 
 export default function Button({
   children,
   disabled = false,
-  type = "button",
+  type = 'button',
   onClick,
+  isSecondary,
 }) {
   return (
-    <button type={type} onClick={onClick} disabled={disabled} className="__rival_button">
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={isSecondary ? '__rival_button_secondary' : '__rival_button'}
+    >
       {children}
     </button>
   );
