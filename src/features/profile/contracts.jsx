@@ -1,26 +1,49 @@
-import React from "react"
+import React from "react";
+import DateTimePicker from "../../ui/date-time-picker";
+import weightClasses from "../../data/weight-classes.json";
+import matchTypes from "../../data/match-types.json";
+import "./styles.css";
 
-function toSentence(camelCase) {
-  const result = camelCase.replace(/([A-Z])/g, " $1");
-  return result.charAt(0).toUpperCase() + result.slice(1);
-}
+const getWeightClass = (cls) => {
+  return weightClasses[cls].substr(0, weightClasses[cls].indexOf(":"));
+};
 
-export default function Contracts({ contracts }) {
-  return <table>
-    <thead>
-      <tr>
-        {Object.keys(contracts[0]).map(key => <td style={{
-          border: "1px solid black"
-        }}>{toSentence(key)}</td>)}
-      </tr>
-    </thead>
-    <tbody>
-      {contracts.map(contract => <tr>
-        <td>{contract.result}</td>
-        <td>{contract.type}</td>
-        <td>{contract.opponentfirstName} {contract.opponentlastName}</td>
-        <td>{contract.method}</td>
-      </tr>)}
-    </tbody>
-  </table>
+export default function Contracts({ playerId, contracts }) {
+  return (
+    <table className="table-match-history">
+      <thead>
+        <tr>
+          <td>Result:</td>
+          <td>Type:</td>
+          <td>Opponent Name:</td>
+          <td>Method:</td>
+          <td>Date:</td>
+          <td>Weight Class:</td>
+        </tr>
+      </thead>
+      <tbody>
+        {contracts.map((contract, i) => (
+          <tr key={i}>
+            <td>{contract.result}</td>
+            <td>{matchTypes[contract.type]}</td>
+            <td>
+              {playerId === contract.playerId
+                ? `${contract.opponentFirstName} ${contract.opponentLastName}`
+                : `${contract.playerFirstName} ${contract.playerLastName}`}
+            </td>
+            <td>{contract.method}</td>
+            <td>
+              <DateTimePicker
+                className="react-datepicker-no-border"
+                dateFormat="MMMM d, yyyy"
+                selected={contract.startsAt}
+                readOnly
+              />
+            </td>
+            <td>{getWeightClass(contract.weightClass)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import Dropdown from '../../ui/dropdown';
+import Dropdown from "../../ui/dropdown";
 
-import { apiFetch } from '../../modules/api-fetch';
-import { toValueLabel } from '../../modules/object';
+import { apiFetch } from "../../modules/api-fetch";
+import { toValueLabel } from "../../modules/object";
 
-import weightClasses from '../../data/weight-classes.json';
-import matchTypes from '../../data/match-types.json';
-import communities from '../../data/communities.json';
+import weightClasses from "../../data/weight-classes.json";
+import matchTypes from "../../data/match-types.json";
+import communities from "../../data/communities.json";
 
-import Button from '../../ui/button';
-import Banner from '../../ui/banner';
+import Button from "../../ui/button";
+import Banner from "../../ui/banner";
 
-import './styles.css';
+import "./styles.css";
 
 export default function PlayerSearch({}) {
   const [players, setPlayers] = useState([]);
@@ -22,7 +22,7 @@ export default function PlayerSearch({}) {
   const [community, setCommunity] = useState(Object.keys(communities)[0]);
 
   useEffect(() => {
-    apiFetch('players').then((json) => setPlayers(json.players));
+    apiFetch("players").then((json) => setPlayers(json.players));
   }, []);
 
   function search(players) {
@@ -38,7 +38,7 @@ export default function PlayerSearch({}) {
   }
 
   function sortByWeightClass(communityPlayersSortedByGiNoGi) {
-    if (weightClass === 'OpenWeight') return communityPlayersSortedByGiNoGi;
+    if (weightClass === "OpenWeight") return communityPlayersSortedByGiNoGi;
     return communityPlayersSortedByGiNoGi.filter(
       (player) => player.weightClass === weightClass
     );
@@ -54,13 +54,22 @@ export default function PlayerSearch({}) {
   //         value={weightClass}
   //       />
 
+  const getMedalForPlayer = (index) => {
+    const imageNames = ["gold.png", "silver.png", "bronze.png"];
+    return imageNames[index] ? (
+      <img src={`assets/images/${imageNames[index]}`} className="info-medal" />
+    ) : (
+      <div className="info-no-medal">{index + 1}</div>
+    );
+  };
+
   const found = search(players);
   return (
     <div>
       <Banner />
       <div
         style={{
-          display: 'flex',
+          display: "flex",
         }}
       >
         <Dropdown
@@ -71,7 +80,7 @@ export default function PlayerSearch({}) {
 
       </div>
       {found.length > 0
-        ? found.map((player) => {
+        ? found.map((player, i) => {
             const {
               _id,
               firstName,
@@ -86,11 +95,11 @@ export default function PlayerSearch({}) {
               school,
             } = player;
             return (
-              <Link to={`/profiles/${_id}`}>
+              <Link key={i} to={`/profiles/${_id}`}>
                 <div key={player._id} className="item-container">
                   <img
                     className="info-avatar"
-                    src={avatar ? avatar : `assets/images/test-image.png`}
+                    src={avatar ? avatar : `assets/images/default.png`}
                     alt=""
                   />
                   <div className="info-wrapper">
@@ -101,26 +110,36 @@ export default function PlayerSearch({}) {
                     <div className="info-record">
                       Win: {wins} Loss: {losses} Draw: {draws}
                     </div>
-                    <div className="info-rank">
-                      <span className="rank-type">Nogi Rank:</span>
-                      <span className="rank-score">#{nogi}</span>
-                    </div>
+                    {giNoGi === "nogi" ? (
+                      <div className="info-rank">
+                        <span className="rank-type">Nogi Rank:</span>
+                        <span className="rank-score">#{nogi}</span>
+                      </div>
+                    ) : (
+                      <div className="info-rank">
+                        <span className="rank-type">Gi Rank:</span>
+                        <span className="rank-score">#{gi}</span>
+                      </div>
+                    )}
                     <div className="info-school">
                       <span className="school">School:</span>
                       <span className="school-name">{school}</span>
                     </div>
 
                     <Link to={`/profiles/${_id}`} className="profile-link">
-                      <img src="assets/images/profile-link-arrow.png" className="arrow"/>
+                      <img
+                        src="assets/images/profile-link-arrow.png"
+                        className="arrow"
+                      />
                       Visit Profile
                     </Link>
-                    <img src="assets/images/gold.png" className="info-medal" />
+                    {getMedalForPlayer(i)}
                   </div>
                 </div>
               </Link>
             );
           })
-        : 'There are no fighters in that weight class'}
+        : "There are no fighters in that weight class"}
     </div>
   );
 }

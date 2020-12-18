@@ -4,28 +4,9 @@ import { withRouter } from "react-router-dom";
 import Contracts from "./contracts";
 import Rating from "./rating";
 
-import { apiFetch } from "../../modules/api-fetch";
-
 import Button from "../../ui/button";
 
 import "./styles.css";
-
-function deletePlayer(playerId) {
-  apiFetch(`players/${localStorage.getItem("playerId")}`, "delete", {
-    playerId,
-  })
-    .then((json) => {
-      if (json.errors) {
-        // ??
-        return;
-      }
-      localStorage.removeItem("jwt");
-      window.location = "/";
-    })
-    .catch((error) => {
-      debugger;
-    });
-}
 
 function filterAcceptedOrCompletedMatches(contracts) {
   return contracts.filter(
@@ -49,6 +30,7 @@ function Profile({
   qualityRating,
   contracts,
 }) {
+  const showedContracts = filterAcceptedOrCompletedMatches(contracts);
   return (
     <div>
       <div className="flex flex-col items-center justify-center w-full">
@@ -57,7 +39,7 @@ function Profile({
           src={
             avatar
               ? avatar
-              : `${process.env.PUBLIC_URL}/assets/images/cover.jpg`
+              : `${process.env.PUBLIC_URL}/assets/images/default.png`
           }
           alt=""
         />
@@ -102,22 +84,15 @@ function Profile({
                 Update My Profile
               </Button>
             </li>
-            <li>
-              <Button
-                onClick={() => deletePlayer(localStorage.getItem("playerId"))}
-              >
-                Delete
-              </Button>
-            </li>
           </ul>
         )}
 
         <h3>Match history</h3>
-        {filterAcceptedOrCompletedMatches(contracts).length > 0 ? (
-          <Contracts contracts={contracts} />
+        {showedContracts.length > 0 ? (
+          <Contracts playerId={_id} contracts={showedContracts} />
         ) : (
-          "This fighter has not fought yet"
-        )}
+            "This fighter has not fought yet"
+          )}
       </div>
     </div>
   );

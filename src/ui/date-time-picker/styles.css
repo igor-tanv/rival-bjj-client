@@ -1,3 +1,8 @@
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+.react-datepicker-no-border {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}

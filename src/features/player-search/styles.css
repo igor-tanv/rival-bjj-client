@@ -45,6 +45,14 @@
   top: 10px;
 }
 
+.item-container .info-wrapper .info-no-medal {
+  width: 45px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-size: 30px;
+}
+
 .item-container .info-wrapper .info-rank .rank-type,
 .item-container .info-wrapper .info-school .school {
   margin-right: 10px;

@@ -13,6 +13,8 @@ import Register from "./features/register"
 import Chat from "./features/chat"
 import ConfirmEmail from "./features/confirm-email"
 import EditProfile from "./features/profile/edit"
+import Rules from "./features/rules"
+import FAQ from "./features/faq"
 
 import "./styles.css"
 
@@ -67,7 +69,13 @@ export default function App() {
             <IssueContract />
           </JwtRoute>
 
+          <Route exact path="/rules">
+            <Rules />
+          </Route>
 
+          <Route exact path="/faq">
+            <FAQ />
+          </Route>
 
         </Switch>
       </Theme>
