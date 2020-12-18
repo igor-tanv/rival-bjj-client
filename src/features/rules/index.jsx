@@ -62,10 +62,11 @@ export default function Rules({ }) {
       </ol>
     </p>
     <h3>STANDARD COMPETITION RULES</h3>
-    <p>The standard rules for all Gi and NoGi matches is: 1 round, 10 minutes, submission only, no tiebreaker</p>
+    <p>The standard rules for all Gi and NoGi matches are: 1 round, 10 minutes, no points,  submission only, all submissions allowed, no tiebreaker</p>
     <p>You are allowed to make changes to the standard rules. For  example: "No heel hooks", "Match will be held under
     IBJJ Rules", "Change match time to 8 minutes" and so on. You must put these changes under "Rule Exceptions"
-    when completing the Match Contract form. Your opponent then has the option to accept or reject the match.
+    when completing the Match Contract form. Rule Exceptions will override the standard rules.
+    Once you send the contract, your opponent then has the option to accept or reject the match.
     </p>
 
     <h3>Weight Classes- Gi and NoGi <h5>(Kilograms)</h5></h3>
