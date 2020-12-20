@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <div className="header">
-      <Link onClick={() => setShowMenu(true)}><img src="assets/images/category.png" className="menu-icon"></img></Link>
+      <Link onClick={() => setShowMenu(true)} className="menu-icon"><img src="assets/images/category.png" className="menu-icon"></img></Link>
       <div className="header-title">Rival</div>
       <img src="assets/rating-stars/100.png" className="logo"></img>
       {showMenu ? (
