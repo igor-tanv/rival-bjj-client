@@ -189,9 +189,7 @@ export default function Contracts() {
         <div id="contract-detail">
           {selectedContract && selectedContract.playerFirstName} vs.{" "}
           {selectedContract && selectedContract.opponentFirstName}
-          <p style={{ color: "red" }}>
-            Where: {selectedContract && selectedContract.location}
-          </p>
+          <p>Where: {selectedContract && selectedContract.location}</p>
           <p>When: {selectedContract && selectedContract.startsAt}</p>
           <p>Type: {selectedContract && selectedContract.type}</p>
           <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
