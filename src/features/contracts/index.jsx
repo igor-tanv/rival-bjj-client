@@ -1,156 +1,241 @@
-import React, { useState, useEffect } from "react"
-import { apiFetch } from "../../modules/api-fetch"
-import HoriztonalList from "../../ui/horizontal-list"
-import ContractTable from "../../ui/table"
-import Button from "../../ui/button"
-import "./styles.css"
+import React, { useState, useEffect } from "react";
+import { apiFetch } from "../../modules/api-fetch";
+import HoriztonalList from "../../ui/horizontal-list";
+import ContractTable from "../../ui/table";
+import Button from "../../ui/button";
+import "./styles.css";
+import jsPDF from "jspdf";
 
 export default function Contracts() {
-  const [contracts, setContracts] = useState([])
-  const filters = ["All", "Sent", "Received", "Declined", "Accepted", "Cancelled"]
-  const [filter, setFilter] = useState(filters[0])
-  const [openDetails, setOpenDetails] = useState(false)
-  const [selectedContract, setSelectedContract] = useState(null)
+  const [contracts, setContracts] = useState([]);
+  const filters = [
+    "All",
+    "Sent",
+    "Received",
+    "Declined",
+    "Accepted",
+    "Cancelled",
+  ];
+  const [filter, setFilter] = useState(filters[0]);
+  const [openDetails, setOpenDetails] = useState(false);
+  const [selectedContract, setSelectedContract] = useState(null);
 
   useEffect(() => {
-    apiFetch(`contracts?playerId=${localStorage.getItem("playerId")}`).then(json => {
-      setContracts(json.contracts)
-    })
-  }, [])
+    apiFetch(`contracts?playerId=${localStorage.getItem("playerId")}`).then(
+      (json) => {
+        setContracts(json.contracts);
+      }
+    );
+  }, []);
 
   // can we combine accept and decline into a single fucntion?
   function accept() {
-    apiFetch(`contracts/${selectedContract.id}/accept`, "post").then(json => {
-      updateContractStatus(json.contract.status)
-    })
+    apiFetch(`contracts/${selectedContract.id}/accept`, "post").then((json) => {
+      updateContractStatus(json.contract.status);
+    });
   }
 
   function decline() {
-    apiFetch(`contracts/${selectedContract.id}/decline`, "post").then(json => {
-      updateContractStatus(json.contract.status)
-    })
+    apiFetch(`contracts/${selectedContract.id}/decline`, "post").then(
+      (json) => {
+        updateContractStatus(json.contract.status);
+      }
+    );
   }
 
   // is this ok?
   function cancel() {
-    apiFetch(`contracts/${selectedContract.id}/cancel`, "post", { "playerId": localStorage.getItem("playerId") }).then(json => {
-      updateContractStatus(json.contract.status)
-    })
+    apiFetch(`contracts/${selectedContract.id}/cancel`, "post", {
+      playerId: localStorage.getItem("playerId"),
+    }).then((json) => {
+      updateContractStatus(json.contract.status);
+    });
   }
 
   function updateContractStatus(status) {
-    setContracts(prev =>
-      prev.map(contract => contract.id === selectedContract.id
-        ? ({
-          ...contract,
-          status: status
-        })
-        : contract
+    setContracts((prev) =>
+      prev.map((contract) =>
+        contract.id === selectedContract.id
+          ? {
+              ...contract,
+              status: status,
+            }
+          : contract
       )
-    )
-    setSelectedContract(null)
-    setOpenDetails(false)
+    );
+    setSelectedContract(null);
+    setOpenDetails(false);
   }
-
 
   function filterBy(contracts) {
-    if (filter === "All") return contracts
-    return contracts.filter(contract => {
-      if (filter === "Sent" && localStorage.getItem("playerId") === contract.playerId && contract.status === "sent")
-        return contract
-      if (filter === "Received" && localStorage.getItem("playerId") !== contract.playerId && contract.status === "sent")
-        return contract
+    if (filter === "All") return contracts;
+    return contracts.filter((contract) => {
+      if (
+        filter === "Sent" &&
+        localStorage.getItem("playerId") === contract.playerId &&
+        contract.status === "sent"
+      )
+        return contract;
+      if (
+        filter === "Received" &&
+        localStorage.getItem("playerId") !== contract.playerId &&
+        contract.status === "sent"
+      )
+        return contract;
       if (filter === "Declined" && contract.status === "declined")
-        return contract
+        return contract;
       if (filter === "Accepted" && contract.status === "accepted")
-        return contract
+        return contract;
       if (filter === "Cancelled" && contract.status === "cancelled")
-        return contract
-    })
+        return contract;
+    });
   }
 
-  return <div>
-    <h1>My contracts</h1>
+  const printContractDetail = () => {
+    const printableWindow = window.open("", "printableWindow");
+    const contractDetail = window.document.getElementById("contract-detail");
+    printableWindow.document.write(
+      "<html><head><title>Contract Detail</title></head>"
+    );
+    printableWindow.document.write('<body onafterprint="self.close()">');
+    printableWindow.document.write(contractDetail.outerHTML);
+    printableWindow.document.write("</body></html>");
+    printableWindow.print();
+  };
 
-    <HoriztonalList
-      items={filters}
-      renderItem={(item) => <span className={filter === item && "active"} onClick={() => setFilter(item)}>{item}</span>}
-    />
+  const saveAsPdf = () => {
+    const doc = new jsPDF();
+    const contractDetail = window.document.getElementById("contract-detail");
+    doc.html(contractDetail, {
+      callback: function (doc) {
+        doc.save("contract-detail");
+      },
+      html2canvas: {
+        scale: 0.3,
+      },
+      x: 10,
+      y: 10,
+    });
+  };
 
+  return (
+    <div>
+      <h1>My contracts</h1>
 
-    <ContractTable data={filterBy(contracts)} renderHead={() => {
-      return <tr>
-        <th>Result</th>
-        <th>Match type</th>
-        <th>Opponent</th>
-        <th>Method</th>
-        <th></th>
-      </tr>
-    }} renderItem={(contract) => {
-      return <tr>
-        <td>{contract.result}</td>
-        <td>{contract.type}</td>
-        <td>{contract.opponentFirstName} {contract.opponentLastName}</td>
-        <td>{contract.method}</td>
-        <td>{
-          (filter === "Received" || filter === "Accepted") && <a onClick={() => {
-            setSelectedContract(contract)
-            setOpenDetails(true)
-          }}>See details</a>
-        }</td>
-      </tr>
-    }} />
+      <HoriztonalList
+        items={filters}
+        renderItem={(item) => (
+          <span
+            className={filter === item && "active"}
+            onClick={() => setFilter(item)}
+          >
+            {item}
+          </span>
+        )}
+      />
 
-    <div style={{
-      position: "absolute",
-      top: "1rem",
-      width: "60%",
-      zIndex: 100,
-      borderRadius: "0.25rem",
-      backgroundColor: "white",
-      display: openDetails ? "block" : "none",
-      border: "1px solid black",
-      padding: "2rem",
-    }}>
+      <ContractTable
+        data={filterBy(contracts)}
+        renderHead={() => {
+          return (
+            <tr>
+              <th>Result</th>
+              <th>Match type</th>
+              <th>Opponent</th>
+              <th>Method</th>
+              <th></th>
+            </tr>
+          );
+        }}
+        renderItem={(contract) => {
+          return (
+            <tr>
+              <td>{contract.result}</td>
+              <td>{contract.type}</td>
+              <td>
+                {contract.opponentFirstName} {contract.opponentLastName}
+              </td>
+              <td>{contract.method}</td>
+              <td>
+                {(filter === "Received" || filter === "Accepted") && (
+                  <a
+                    onClick={() => {
+                      setSelectedContract(contract);
+                      setOpenDetails(true);
+                    }}
+                  >
+                    See details
+                  </a>
+                )}
+              </td>
+            </tr>
+          );
+        }}
+      />
 
+      <div
+        style={{
+          position: "absolute",
+          top: "1rem",
+          width: "60%",
+          zIndex: 100,
+          borderRadius: "0.25rem",
+          backgroundColor: "white",
+          display: openDetails ? "block" : "none",
+          border: "1px solid black",
+          padding: "2rem",
+        }}
+      >
+        <div id="contract-detail">
+          {selectedContract && selectedContract.playerFirstName} vs.{" "}
+          {selectedContract && selectedContract.opponentFirstName}
+          <p style={{ color: "red" }}>
+            Where: {selectedContract && selectedContract.location}
+          </p>
+          <p>When: {selectedContract && selectedContract.startsAt}</p>
+          <p>Type: {selectedContract && selectedContract.type}</p>
+          <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
+          <p>
+            Rule Exceptions:{" "}
+            {selectedContract && selectedContract.ruleExceptions}
+          </p>
+          <p>Referee: {selectedContract && selectedContract.refereeName}</p>
+        </div>
 
-      <div>{selectedContract && selectedContract.playerFirstName} vs. {selectedContract && selectedContract.opponentFirstName}
-        <p>Where: {selectedContract && selectedContract.location}</p>
-        <p>When: {selectedContract && selectedContract.startsAt}</p>
-        <p>Type: {selectedContract && selectedContract.type}</p>
-        <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
-        <p>Rule Exceptions: {selectedContract && selectedContract.ruleExceptions}</p>
-        <p>Referee: {selectedContract && selectedContract.refereeName}</p>
+        {filter === "Accepted" ? (
+          <div>
+            <Button type="primary" onClick={cancel}>
+              Cancel
+            </Button>
+            <button onClick={printContractDetail}>Print Contract</button>
+            <button onClick={saveAsPdf}>Save as PDF</button>
+            <a onClick={() => setOpenDetails(false)}>Close</a>
+          </div>
+        ) : (
+          <div>
+            <Button type="primary" onClick={accept}>
+              Accept
+            </Button>
+            <Button type="secondary" onClick={decline}>
+              Decline
+            </Button>
+            <a onClick={() => setOpenDetails(false)}>Close</a>
+          </div>
+        )}
       </div>
 
-
-
-
-      {filter === "Accepted" ?
-        <div>
-          <Button type="primary" onClick={cancel}>Cancel</Button>
-          <button>Print Contract</button>
-          <a onClick={() => setOpenDetails(false)}>Close</a>
-        </div> :
-        <div>
-          <Button type="primary" onClick={accept}>Accept</Button>
-          <Button type="secondary" onClick={decline}>Decline</Button>
-          <a onClick={() => setOpenDetails(false)}>Close</a>
-        </div>}
-
-
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          display: openDetails ? "block" : "none",
+          width: window.innerWidth,
+          height: window.innerHeight,
+          backgroundColor: "rgba(0,0,0,0.8)",
+          zIndex: 99,
+        }}
+      />
     </div>
-
-    <div style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      display: openDetails ? "block" : "none",
-      width: window.innerWidth,
-      height: window.innerHeight,
-      backgroundColor: "rgba(0,0,0,0.8)",
-      zIndex: 99
-    }} />
-
-  </div>
+  );
 }
