@@ -16,7 +16,7 @@ export default function Header() {
         <>
           {' '}
           <div className="screen-wrapper"></div>
-          <div className="menu-popup">
+          <div className="menu-popup" onClick={() => setShowMenu(false)}>
             <div className="close-wrapper">
               <Link onClick={() => setShowMenu(false)}><img src="assets/images/close.png" className="close-btn" /></Link>
             </div>
