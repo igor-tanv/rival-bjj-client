@@ -57,9 +57,9 @@ export default function Contracts() {
       prev.map((contract) =>
         contract.id === selectedContract.id
           ? {
-              ...contract,
-              status: status,
-            }
+            ...contract,
+            status: status,
+          }
           : contract
       )
     );
@@ -203,23 +203,22 @@ export default function Contracts() {
         {filter === "Accepted" ? (
           <div>
             <Button type="primary" onClick={cancel}>
-              Cancel
+              Cancel Match
             </Button>
-            <button onClick={printContractDetail}>Print Contract</button>
-            <button onClick={saveAsPdf}>Save as PDF</button>
-            <a onClick={() => setOpenDetails(false)}>Close</a>
+            <button onClick={saveAsPdf}>Print PDF</button>
+            <button onClick={() => setOpenDetails(false)}>Close</button>
           </div>
         ) : (
-          <div>
-            <Button type="primary" onClick={accept}>
-              Accept
+            <div>
+              <Button type="primary" onClick={accept}>
+                Accept
             </Button>
-            <Button type="secondary" onClick={decline}>
-              Decline
+              <Button type="secondary" onClick={decline}>
+                Decline
             </Button>
-            <a onClick={() => setOpenDetails(false)}>Close</a>
-          </div>
-        )}
+              <button onClick={() => setOpenDetails(false)}>Close</button>
+            </div>
+          )}
       </div>
 
       <div
