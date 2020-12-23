@@ -93,7 +93,6 @@
 
 .item-container .info-wrapper .record-type {
   display: flex;
-  width: 65px;
 }
 
 .item-container .info-wrapper .record-type .record-title {
@@ -101,7 +100,7 @@
   font-size: 16px;
   letter-spacing: -0.3px;
   color: #939393;
-  margin-right: 5px;
+  margin-right: 2px;
 }
 
 .item-container .info-wrapper .record-type .record-win,
@@ -137,4 +136,12 @@
 .item-container .info-wrapper .info-rank ,
 .item-container .info-wrapper .info-school {
   display: flex;
+}
+
+.empty-search {
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  margin-top: 20px;
+  text-transform: capitalize;
 }

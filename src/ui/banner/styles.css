@@ -1,5 +1,5 @@
 .banner-wrapper {
-  height: 550px;
+  height: 457px;
   width: 100%;
   background-image: url("/assets/images/banner.jpg");
   background-repeat: no-repeat;
@@ -8,7 +8,7 @@
 }
 
 .banner-wrapper .gap {
-  height: 100px;
+  height: 55px;
   width: 100%;
 }
 

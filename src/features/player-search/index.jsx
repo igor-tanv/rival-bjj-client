@@ -139,7 +139,7 @@ export default function PlayerSearch({ }) {
             </Link>
           );
         })
-        : 'There are no fighters in that weight class'}
+        : <div className="empty-search">There are no fighters in that weight class</div>}
     </div>
   );
 }
