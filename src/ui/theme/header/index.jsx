@@ -9,16 +9,16 @@ export default function Header() {
 
   return (
     <div className="header">
-      <Link onClick={() => setShowMenu(true)} className="menu-icon"><img src="assets/images/category.png" className="menu-icon"></img></Link>
+      <div onClick={() => setShowMenu(true)} className="menu-icon"><img src="/assets/images/category.png" className="menu-icon"></img></div>
       <div className="header-title">Rival</div>
-      <img src="assets/rating-stars/100.png" className="logo"></img>
+      <img src="/assets/rating-stars/100.png" className="logo"></img>
       {showMenu ? (
         <>
           {' '}
           <div className="screen-wrapper"></div>
           <div className="menu-popup" onClick={() => setShowMenu(false)}>
             <div className="close-wrapper">
-              <Link onClick={() => setShowMenu(false)}><img src="assets/images/close.png" className="close-btn" /></Link>
+              <Link onClick={() => setShowMenu(false)}><img src="/assets/images/close.png" className="close-btn" /></Link>
             </div>
             <div className="menu-wrapper">
               <Link to="/" className="menu-item">

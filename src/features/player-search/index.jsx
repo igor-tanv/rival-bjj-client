@@ -105,19 +105,8 @@ export default function PlayerSearch({ }) {
                   </div>
                   <div className="info-weight">{weightClass}</div>
                   <div className="info-record">
-                    <div className="record-type">
-                      <div className="record-title">Win:</div>
-                      <div className="record-win">{wins}</div>
+                      Win: {wins} Loss: {losses} Draw: {draws}
                     </div>
-                    <div className="record-type">
-                      <div className="record-title">Loss:</div>
-                      <div className="record-loss">{losses}</div>
-                    </div>
-                    <div className="record-type">
-                      <div className="record-title">Draw:</div>
-                      <div className="record-draw">{draws}</div>
-                    </div>
-                  </div>
                   {giNoGi === 'nogi' ? (
                     <div className="info-rank">
                       <div className="rank-type">Nogi Rank:</div>

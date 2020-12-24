@@ -55,17 +55,15 @@
 
 .item-container .info-wrapper .info-rank .rank-type,
 .item-container .info-wrapper .info-school .school {
-  margin-right: 10px;
   font-weight: 300;
   font-size: 14px;
   letter-spacing: -0.3px;
   color: #939393;
-  width: 75px;
 }
 
 .item-container .info-wrapper .info-rank .rank-score,
 .item-container .info-wrapper .info-school .school-name {
-  margin-right: 10px;
+  margin-left: 3px;
   font-size: 15px;
   letter-spacing: -0.3px;
   font-weight: 300;
@@ -90,7 +88,7 @@
   margin-top: 10px;
   margin-bottom: 5px;
 }
-
+/*
 .item-container .info-wrapper .record-type {
   display: flex;
 }
@@ -125,7 +123,7 @@
 
 .item-container .info-wrapper .record-type + .record-type {
   margin-left: 5px;
-}
+} */
 
 .dropdown-wrapper {
   display: grid;
