@@ -12,7 +12,7 @@
   display: flex;
   background: #ffffff;
   box-shadow: 0px 4px 20px 31px rgba(77, 77, 77, 0.05);
-  height: 172px;
+  height: 160px;
   position: relative;
 }
 
@@ -24,7 +24,7 @@
 .item-container .info-avatar {
   padding: 15px 10px 15px 20px;
   width: 160px;
-  height: 177px;
+  height: 160px;
 }
 
 .item-container .info-weight {
@@ -55,17 +55,16 @@
 
 .item-container .info-wrapper .info-rank .rank-type,
 .item-container .info-wrapper .info-school .school {
-  margin-right: 10px;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: -0.3px;
   color: #939393;
 }
 
 .item-container .info-wrapper .info-rank .rank-score,
 .item-container .info-wrapper .info-school .school-name {
-  margin-right: 10px;
-  font-size: 16px;
+  margin-left: 3px;
+  font-size: 15px;
   letter-spacing: -0.3px;
   font-weight: 300;
   color: #000000;
@@ -82,4 +81,65 @@
 .profile-link .arrow {
   width: 17px;
   margin-right: 8px;
+}
+
+.item-container .info-wrapper .info-record {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+/*
+.item-container .info-wrapper .record-type {
+  display: flex;
+}
+
+.item-container .info-wrapper .record-type .record-title {
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  color: #939393;
+  margin-right: 2px;
+}
+
+.item-container .info-wrapper .record-type .record-win,
+.item-container .info-wrapper .record-type .record-loss,
+.item-container .info-wrapper .record-type .record-draw {
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  font-size: 17px;
+}
+
+.item-container .info-wrapper .record-type .record-win {
+  color: #039A1B;
+}
+
+.item-container .info-wrapper .record-type .record-loss {
+  color: #D20A0B;;
+}
+
+.item-container .info-wrapper .record-type .record-draw {
+  color: #E8751A;;
+}
+
+.item-container .info-wrapper .record-type + .record-type {
+  margin-left: 5px;
+} */
+
+.dropdown-wrapper {
+  display: grid;
+  grid-gap: 6px;
+  grid-template-columns: 38vw 20vw 37vw;
+}
+
+.item-container .info-wrapper .info-rank ,
+.item-container .info-wrapper .info-school {
+  display: flex;
+}
+
+.empty-search {
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  margin-top: 20px;
+  text-transform: capitalize;
 }

@@ -1,0 +1,15 @@
+.rival__footer .rival__copy-right {
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  padding: 15px 0;
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.rival__footer .rival__copy-right span {
+  color: #0098E5;
+  margin-left: 5px;
+}
