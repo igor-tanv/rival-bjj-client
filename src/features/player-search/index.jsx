@@ -100,7 +100,7 @@ export default function PlayerSearch({ }) {
                   alt=""
                 />
                 <div className="info-wrapper">
-                  <div className="info-title">
+                  <div className="info-title text-truncation">
                     {firstName} {lastName}
                   </div>
                   <div className="info-weight">{weightClass}</div>

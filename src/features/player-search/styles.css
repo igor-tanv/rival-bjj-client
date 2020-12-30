@@ -6,6 +6,7 @@
   letter-spacing: -0.3px;
   text-transform: uppercase;
   color: #000000;
+  max-width: 60vw;
 }
 
 .item-container {
@@ -142,4 +143,17 @@
   font-weight: 500;
   margin-top: 20px;
   text-transform: capitalize;
+}
+
+.text-truncation {
+	padding-right: 4px;
+	white-space: nowrap;
+	overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 414px) {
+  .item-container .info-wrapper .info-title {
+    max-width: 45vw;
+  }
 }
