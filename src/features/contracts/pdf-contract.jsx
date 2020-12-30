@@ -24,7 +24,7 @@ export default function PDFContract({ selectedContract }) {
     <img src="./assets/images/contract-stamp.png" alt="logo" />
   );
   return (
-    <div style={{ display: "block" }}>
+    <div style={{ display: "none" }}>
       <div
         id="contract-jumbotron"
         style={{
