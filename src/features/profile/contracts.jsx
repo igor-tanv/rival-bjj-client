@@ -1,11 +1,11 @@
-import React from "react";
-import DateTimePicker from "../../ui/date-time-picker";
-import weightClasses from "../../data/weight-classes.json";
-import matchTypes from "../../data/match-types.json";
-import "./styles.css";
+import React from 'react';
+import DateTimePicker from '../../ui/date-time-picker';
+import weightClasses from '../../data/weight-classes.json';
+import matchTypes from '../../data/match-types.json';
+import './styles.css';
 
 const getWeightClass = (cls) => {
-  return weightClasses[cls].substr(0, weightClasses[cls].indexOf(":"));
+  return weightClasses[cls].substr(0, weightClasses[cls].indexOf(':'));
 };
 
 export default function Contracts({ playerId, contracts }) {
@@ -13,37 +13,107 @@ export default function Contracts({ playerId, contracts }) {
     <table className="table-match-history">
       <thead>
         <tr>
-          <td>Result:</td>
-          <td>Type:</td>
-          <td>Opponent Name:</td>
-          <td>Method:</td>
-          <td>Date:</td>
-          <td>Weight Class:</td>
+          <td>
+            <div className="col-head result-head">Result</div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="col-head">Opponent Name</div>
+              <div className="col-head">Method</div>
+            </div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="col-head">Date</div>
+              <div className="col-head">Type</div>
+            </div>
+          </td>
+          <td className="col-head">W. Class:</td>
         </tr>
       </thead>
       <tbody>
-        {contracts.map((contract, i) => (
-          <tr key={i}>
-            <td>{contract.result}</td>
-            <td>{matchTypes[contract.type]}</td>
-            <td>
-              {playerId === contract.playerId
-                ? `${contract.opponentFirstName} ${contract.opponentLastName}`
-                : `${contract.playerFirstName} ${contract.playerLastName}`}
-            </td>
-            <td>{contract.method}</td>
-            <td>
-              <DateTimePicker
-                className="react-datepicker-no-border"
-                dateFormat="MMMM d, yyyy"
-                selected={contract.startsAt}
-                readOnly
-              />
-            </td>
-            <td>{getWeightClass(contract.weightClass)}</td>
-          </tr>
-        ))}
+        <tr key="1">
+          <td>
+            <div className="result-win margin-auto">Win</div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row">Jacob T. Jones</div>
+              <div className="second-row">TKO (punches)</div>
+            </div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row">Oct 20, 2020</div>
+              <div className="second-row">Fighting</div>
+            </div>
+          </td>
+          <td>
+            <div className="first-row text-truncation">Heavy</div>
+          </td>
+        </tr>
+        <tr key="2">
+          <td>
+            <div className="result-loss margin-auto">loss</div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row text-truncation">Cameron Willson</div>
+              <div className="second-row text-truncation">Decision (split)</div>
+            </div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row text-truncation">Oct 20, 2020</div>
+              <div className="second-row text-truncation">Fighting</div>
+            </div>
+          </td>
+          <td>
+            <div className="first-row text-truncation">Heavy</div>
+          </td>
+        </tr>
+        <tr key="3">
+          <td>
+            <div className="result-draw margin-auto">draw</div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row text-truncation">Wade Warren</div>
+              <div className="second-row text-truncation">Decision (split)</div>
+            </div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row text-truncation">Oct 20, 2020</div>
+              <div className="second-row text-truncation">Fighting</div>
+            </div>
+          </td>
+          <td>
+            <div className="first-row text-truncation">Heavy</div>
+          </td>
+        </tr>
       </tbody>
     </table>
   );
 }
+// {contracts.map((contract, i) => (
+//   <tr key={i}>
+//     <td>{contract.result}</td>
+//     <td>{matchTypes[contract.type]}</td>
+//     <td>
+//       {playerId === contract.playerId
+//         ? `${contract.opponentFirstName} ${contract.opponentLastName}`
+//         : `${contract.playerFirstName} ${contract.playerLastName}`}
+//     </td>
+//     <td>{contract.method}</td>
+//     <td>
+//       <DateTimePicker
+//         className="react-datepicker-no-border"
+//         dateFormat="MMMM d, yyyy"
+//         selected={contract.startsAt}
+//         readOnly
+//       />
+//     </td>
+//     <td>{getWeightClass(contract.weightClass)}</td>
+//   </tr>
+// ))}
