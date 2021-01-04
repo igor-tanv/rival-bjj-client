@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { apiFetch } from "../../modules/api-fetch";
+import jsPDF from "jspdf";
+
+import Button from "../../ui/button";
+import DateTimePicker from "../../ui/date-time-picker";
 import HoriztonalList from "../../ui/horizontal-list";
 import ContractTable from "../../ui/table";
-import Button from "../../ui/button";
-import "./styles.css";
-import jsPDF from "jspdf";
-import DateTimePicker from "../../ui/date-time-picker";
+
+import { apiFetch } from "../../modules/api-fetch";
+
 import PDFContract from "./pdf-contract";
+
+import "./styles.css";
 
 export default function Contracts() {
   const [contracts, setContracts] = useState([]);
