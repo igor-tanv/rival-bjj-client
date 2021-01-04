@@ -127,13 +127,14 @@ export default function PDFContract({ selectedContract }) {
             <h3>
               2. Win Method (circle one): Submission / DQ / Forfeit / Injury
             </h3>
-            <h3>3. Comments:</h3>
-            <h3>4. Referee Name: {selectedContract.refereeName}</h3>
-            <h3>5. Referee Signature: </h3>
-            <h3>6. Date: </h3>
+            <h3>3. Submission Method (if applicable):</h3>
+            <h3>4. Comments:</h3>
+            <h3>5. Referee Name: {selectedContract.refereeName}</h3>
+            <h3>6. Referee Signature: </h3>
+            <h3>7. Date: </h3>
           </div>
           <div className="post-match">
-            <h3>Post Match Instructions: </h3>
+            <h3 style={{ textAlign: "center" }}>Post Match Instructions: </h3>
             <ol>
               <li>Rate your opponent (below).</li>
               <li>
@@ -147,7 +148,9 @@ export default function PDFContract({ selectedContract }) {
             </ol>
           </div>
           <div className="rate-opponent">
-            <h3>Rate your Opponent (circle one number): </h3>
+            <h3 style={{ textAlign: "center" }}>
+              Rate your Opponent (circle one number):{" "}
+            </h3>
             <ul style={{ listStyle: "none" }}>
               <li>
                 5 : Fulfilled all contract obligations and was professional,
@@ -176,7 +179,6 @@ export default function PDFContract({ selectedContract }) {
         </div>
 
         <div style={{ position: "relative" }}>
-          {contractStamp}
           <h1>Competition Rules</h1>
           <p>
             Read these rules before you send or accept any matches. They apply
