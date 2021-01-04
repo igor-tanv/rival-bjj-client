@@ -5,8 +5,6 @@ import { apiFetch } from "../../modules/api-fetch"
 import Button from "../../ui/button"
 import './styles.css';
 
-console.log(process.env.REACT_APP_WEBSOCKET_HOST, process.env.REACT_APP_HOST)
-
 function Chat({ match }) {
   const {
     socket,
