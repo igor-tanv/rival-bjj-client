@@ -5,6 +5,8 @@ import ContractTable from "../../ui/table";
 import Button from "../../ui/button";
 import "./styles.css";
 import jsPDF from "jspdf";
+import DateTimePicker from "../../ui/date-time-picker";
+import PDFContract from "./pdf-contract";
 
 export default function Contracts() {
   const [contracts, setContracts] = useState([]);
@@ -57,9 +59,9 @@ export default function Contracts() {
       prev.map((contract) =>
         contract.id === selectedContract.id
           ? {
-            ...contract,
-            status: status,
-          }
+              ...contract,
+              status: status,
+            }
           : contract
       )
     );
@@ -105,13 +107,13 @@ export default function Contracts() {
 
   const saveAsPdf = () => {
     const doc = new jsPDF();
-    const contractDetail = window.document.getElementById("contract-detail");
+    const contractDetail = window.document.getElementById("contract-jumbotron");
     doc.html(contractDetail, {
       callback: function (doc) {
         doc.save("contract-detail");
       },
       html2canvas: {
-        scale: 0.3,
+        scale: 0.19,
       },
       x: 10,
       y: 10,
@@ -190,7 +192,19 @@ export default function Contracts() {
           {selectedContract && selectedContract.playerFirstName} vs.{" "}
           {selectedContract && selectedContract.opponentFirstName}
           <p>Where: {selectedContract && selectedContract.location}</p>
-          <p>When: {selectedContract && selectedContract.startsAt}</p>
+          <p style={{ display: "flex" }}>
+            When:{" "}
+            <span>
+              {selectedContract && selectedContract.startsAt ? (
+                <DateTimePicker
+                  className="date-picker"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  selected={selectedContract.startsAt}
+                  readOnly
+                />
+              ) : null}
+            </span>
+          </p>
           <p>Type: {selectedContract && selectedContract.type}</p>
           <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
           <p>
@@ -209,16 +223,16 @@ export default function Contracts() {
             <button onClick={() => setOpenDetails(false)}>Close</button>
           </div>
         ) : (
-            <div>
-              <Button type="primary" onClick={accept}>
-                Accept
+          <div>
+            <Button type="primary" onClick={accept}>
+              Accept
             </Button>
-              <Button type="secondary" onClick={decline}>
-                Decline
+            <Button type="secondary" onClick={decline}>
+              Decline
             </Button>
-              <button onClick={() => setOpenDetails(false)}>Close</button>
-            </div>
-          )}
+            <button onClick={() => setOpenDetails(false)}>Close</button>
+          </div>
+        )}
       </div>
 
       <div
@@ -233,6 +247,9 @@ export default function Contracts() {
           zIndex: 99,
         }}
       />
+      {selectedContract ? (
+        <PDFContract selectedContract={selectedContract} />
+      ) : null}
     </div>
   );
 }
