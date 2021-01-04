@@ -111,6 +111,10 @@ export default function Contracts() {
     });
   };
 
+  function fullName(firstName, lastName) {
+    return firstName + ' ' + lastName
+  }
+
   return (
     <div>
       <h1>My contracts</h1>
@@ -146,7 +150,7 @@ export default function Contracts() {
               <td>{contract.result}</td>
               <td>{contract.type}</td>
               <td>
-                {contract.opponentFirstName} {contract.opponentLastName}
+                {localStorage.getItem("playerId") === contract.playerId ? fullName(contract.opponentFirstName, contract.opponentLastName) : (fullName(contract.playerFirstName, contract.playerLastName))}
               </td>
               <td>{contract.method}</td>
               <td>
