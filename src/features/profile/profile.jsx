@@ -87,6 +87,27 @@ function Profile({
         <div className="history-title">Match history</div>
         <Contracts playerId={_id} contracts={showedContracts} />
       </div>
+      <div className="action-wrapper">
+        {localStorage.getItem('playerId') !== _id && (
+          <>
+            <Button className="action" onClick={() => history.push(`/chat/${_id}`)} isSecondary={true}>Chat</Button>
+            <Button className="action" onClick={() => history.push(`/contracts/new/${_id}`)}>
+              Issue Challenge
+            </Button>
+          </>
+        )}
+        {localStorage.getItem('playerId') === _id && (
+          <>
+            <Button className="action" onClick={() => history.push(`/contracts`)} isSecondary={true}>
+              My Contracts
+            </Button>
+
+            <Button className="action" onClick={() => history.push(`/profile/edit`)}>
+              Update My Profile
+            </Button>
+          </>
+        )}
+      </div>
     </>
   );
 }
@@ -127,32 +148,6 @@ export default withRouter(Profile);
 //     <div>Weight: {weightClass}</div>
 
 //     <div>
-//       {localStorage.getItem("playerId") !== _id && (
-//         <ul className="horizontal-list">
-//           <li>
-//             <Button onClick={() => history.push(`/contracts/new/${_id}`)}>
-//               Issue Challenge
-//             </Button>
-//           </li>
-//           <li>
-//             <Button onClick={() => history.push(`/chat/${_id}`)}>Chat</Button>
-//           </li>
-//         </ul>
-//       )}
-//       {localStorage.getItem("playerId") === _id && (
-//         <ul className="horizontal-list">
-//           <li>
-//             <Button onClick={() => history.push(`/contracts`)}>
-//               My Contracts
-//             </Button>
-//           </li>
-//           <li>
-//             <Button onClick={() => history.push(`/profile/edit`)}>
-//               Update My Profile
-//             </Button>
-//           </li>
-//         </ul>
-//       )}
 
 //       <h3>Match history</h3>
 //       {showedContracts.length > 0 ? (

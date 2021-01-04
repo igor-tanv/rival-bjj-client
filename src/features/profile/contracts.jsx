@@ -38,8 +38,8 @@ export default function Contracts({ playerId, contracts }) {
           </td>
           <td>
             <div className="row-container">
-              <div className="first-row">Jacob T. Jones</div>
-              <div className="second-row">TKO (punches)</div>
+              <div className="first-row long-info-row text-truncation">Jacob T. Jones</div>
+              <div className="second-row long-info-row text-truncation">TKO (punches)</div>
             </div>
           </td>
           <td>
@@ -49,47 +49,7 @@ export default function Contracts({ playerId, contracts }) {
             </div>
           </td>
           <td>
-            <div className="first-row text-truncation">Heavy</div>
-          </td>
-        </tr>
-        <tr key="2">
-          <td>
-            <div className="result-loss margin-auto">loss</div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row text-truncation">Cameron Willson</div>
-              <div className="second-row text-truncation">Decision (split)</div>
-            </div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row text-truncation">Oct 20, 2020</div>
-              <div className="second-row text-truncation">Fighting</div>
-            </div>
-          </td>
-          <td>
-            <div className="first-row text-truncation">Heavy</div>
-          </td>
-        </tr>
-        <tr key="3">
-          <td>
-            <div className="result-draw margin-auto">draw</div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row text-truncation">Wade Warren</div>
-              <div className="second-row text-truncation">Decision (split)</div>
-            </div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row text-truncation">Oct 20, 2020</div>
-              <div className="second-row text-truncation">Fighting</div>
-            </div>
-          </td>
-          <td>
-            <div className="first-row text-truncation">Heavy</div>
+            <div className="first-row text-truncation-second-line weight-info-row">Heavy</div>
           </td>
         </tr>
       </tbody>
@@ -117,3 +77,44 @@ export default function Contracts({ playerId, contracts }) {
 //     <td>{getWeightClass(contract.weightClass)}</td>
 //   </tr>
 // ))}
+
+// <tr key="2">
+//           <td>
+//             <div className="result-loss margin-auto">loss</div>
+//           </td>
+//           <td>
+//             <div className="row-container">
+//               <div className="first-row text-truncation">Cameron Willson</div>
+//               <div className="second-row text-truncation">Decision (split)</div>
+//             </div>
+//           </td>
+//           <td>
+//             <div className="row-container">
+//               <div className="first-row text-truncation">Oct 20, 2020</div>
+//               <div className="second-row text-truncation">Fighting</div>
+//             </div>
+//           </td>
+//           <td>
+//             <div className="first-row text-truncation">Heavy</div>
+//           </td>
+//         </tr>
+//         <tr key="3">
+//           <td>
+//             <div className="result-draw margin-auto">draw</div>
+//           </td>
+//           <td>
+//             <div className="row-container">
+//               <div className="first-row text-truncation long-info-row">Wade Warren</div>
+//               <div className="second-row text-truncation long-info-row">Decision (split)</div>
+//             </div>
+//           </td>
+//           <td>
+//             <div className="row-container">
+//               <div className="first-row text-truncation">Oct 20, 2020</div>
+//               <div className="second-row text-truncation">Fighting</div>
+//             </div>
+//           </td>
+//           <td>
+//             <div className="first-row text-truncation-second-line">Heavy</div>
+//           </td>
+//         </tr>
