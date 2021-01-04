@@ -45,7 +45,6 @@ export default function Contracts() {
     );
   }
 
-  // is this ok?
   function cancel() {
     apiFetch(`contracts/${selectedContract.id}/cancel`, "post", {
       playerId: localStorage.getItem("playerId"),
@@ -59,9 +58,9 @@ export default function Contracts() {
       prev.map((contract) =>
         contract.id === selectedContract.id
           ? {
-              ...contract,
-              status: status,
-            }
+            ...contract,
+            status: status,
+          }
           : contract
       )
     );
@@ -92,18 +91,6 @@ export default function Contracts() {
         return contract;
     });
   }
-
-  const printContractDetail = () => {
-    const printableWindow = window.open("", "printableWindow");
-    const contractDetail = window.document.getElementById("contract-detail");
-    printableWindow.document.write(
-      "<html><head><title>Contract Detail</title></head>"
-    );
-    printableWindow.document.write('<body onafterprint="self.close()">');
-    printableWindow.document.write(contractDetail.outerHTML);
-    printableWindow.document.write("</body></html>");
-    printableWindow.print();
-  };
 
   const saveAsPdf = () => {
     const doc = new jsPDF();
@@ -223,16 +210,16 @@ export default function Contracts() {
             <button onClick={() => setOpenDetails(false)}>Close</button>
           </div>
         ) : (
-          <div>
-            <Button type="primary" onClick={accept}>
-              Accept
+            <div>
+              <Button type="primary" onClick={accept}>
+                Accept
             </Button>
-            <Button type="secondary" onClick={decline}>
-              Decline
+              <Button type="secondary" onClick={decline}>
+                Decline
             </Button>
-            <button onClick={() => setOpenDetails(false)}>Close</button>
-          </div>
-        )}
+              <button onClick={() => setOpenDetails(false)}>Close</button>
+            </div>
+          )}
       </div>
 
       <div
