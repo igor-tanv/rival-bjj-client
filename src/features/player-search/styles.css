@@ -141,16 +141,18 @@
   text-overflow: ellipsis;
 }
 
-@media (max-width: 414px) {
-  .item-container .info-wrapper .info-title {
+@media (max-width: 450px) {
+  .item-container .info-wrapper .info-title,
+  .item-container .info-wrapper .info-school .school-name
+  {
     max-width: 45vw;
   }
-  .item-container .info-wrapper .info-school .school-name {
-    max-width: 45vw;
+  .item-container .info-weight span {
+    max-width: 35vw;
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .item-container .info-wrapper .info-title {
     max-width: 140px;
   }
