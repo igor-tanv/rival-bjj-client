@@ -44,7 +44,7 @@
   width: 100%;
   padding: 0 0 50px;
   display: block;
-  background: url('/assets/images/profile-cover.png');
+  background: url('/assets/images/option-2.jpeg');
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -121,6 +121,7 @@
   height: 142px;
   border: #d20a0b 1px solid;
   margin-top: -18px;
+  background-color: #ffffff;
 }
 
 .rating-stars {

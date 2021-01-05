@@ -8,6 +8,19 @@ const getWeightClass = (cls) => {
   return weightClasses[cls].substr(0, weightClasses[cls].indexOf(':'));
 };
 
+const renderResultClass = (result) => {
+  switch(result) {
+    case 'win':
+      return 'result-win';
+    case 'loss':
+      return 'result-loss';
+    case 'draw':
+      return 'result-draw';
+    default:
+      return '';
+  }
+}
+
 export default function Contracts({ playerId, contracts }) {
   return (
     <table className="table-match-history">
@@ -32,51 +45,45 @@ export default function Contracts({ playerId, contracts }) {
         </tr>
       </thead>
       <tbody>
-        <tr key="1">
-          <td>
-            <div className="result-win margin-auto">Win</div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row long-info-row text-truncation">Jacob T. Jones</div>
-              <div className="second-row long-info-row text-truncation">TKO (punches)</div>
-            </div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row">Oct 20, 2020</div>
-              <div className="second-row">Fighting</div>
-            </div>
-          </td>
-          <td>
-            <div className="first-row text-truncation-second-line weight-info-row">Heavy</div>
-          </td>
-        </tr>
+        {contracts.map((contract, i) => (
+          <tr key={i}>
+            <td>
+              {
+                <div className={`result-win margin-auto ${renderResultClass(contract.result)}`}>{contract.result}</div>}
+            </td>
+            <td>
+              <div className="row-container">
+                <div className="first-row long-info-row text-truncation">
+                  {playerId === contract.playerId
+                    ? `${contract.opponentFirstName} ${contract.opponentLastName}`
+                    : `${contract.playerFirstName} ${contract.playerLastName}`}
+                </div>
+                <div className="second-row long-info-row text-truncation">
+                  {matchTypes[contract.type]})
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className="row-container">
+                <div className="first-row">
+                  <DateTimePicker
+                    className="react-datepicker-no-border"
+                    dateFormat="MMMM d, yyyy"
+                    selected={contract.startsAt}
+                    readOnly
+                  />
+                </div>
+                <div className="second-row">{contract.method}</div>
+              </div>
+            </td>
+            <td>{getWeightClass(contract.weightClass)}</td>
+          </tr>
+        ))}
+
       </tbody>
     </table>
   );
 }
-// {contracts.map((contract, i) => (
-//   <tr key={i}>
-//     <td>{contract.result}</td>
-//     <td>{matchTypes[contract.type]}</td>
-//     <td>
-//       {playerId === contract.playerId
-//         ? `${contract.opponentFirstName} ${contract.opponentLastName}`
-//         : `${contract.playerFirstName} ${contract.playerLastName}`}
-//     </td>
-//     <td>{contract.method}</td>
-//     <td>
-//       <DateTimePicker
-//         className="react-datepicker-no-border"
-//         dateFormat="MMMM d, yyyy"
-//         selected={contract.startsAt}
-//         readOnly
-//       />
-//     </td>
-//     <td>{getWeightClass(contract.weightClass)}</td>
-//   </tr>
-// ))}
 
 // <tr key="2">
 //           <td>
@@ -118,3 +125,29 @@ export default function Contracts({ playerId, contracts }) {
 //             <div className="first-row text-truncation-second-line">Heavy</div>
 //           </td>
 //         </tr>
+// <tr key="1">
+// <td>
+//   <div className="result-win margin-auto">Win</div>
+// </td>
+// <td>
+//   <div className="row-container">
+//     <div className="first-row long-info-row text-truncation">
+//       Jacob T. Jones
+//     </div>
+//     <div className="second-row long-info-row text-truncation">
+//       TKO (punches)
+//     </div>
+//   </div>
+// </td>
+// <td>
+//   <div className="row-container">
+//     <div className="first-row">Oct 20, 2020</div>
+//     <div className="second-row">Fighting</div>
+//   </div>
+// </td>
+// <td>
+//   <div className="first-row text-truncation-second-line weight-info-row">
+//     Heavy
+//   </div>
+// </td>
+// </tr>
