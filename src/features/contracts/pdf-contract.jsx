@@ -217,7 +217,7 @@ export default function PDFContract({ selectedContract }) {
               </li>
               <li>
                 Competitors will be allowed to continue grappling anywhere on
-                the matted area, provided they don’t interfere with another
+                the matted area, provided they don't interfere with another
                 match. If the competitors near the edge of the mat, they will be
                 restarted from the same position, unless the referee is unable
                 to duplicate the position for anyreason. In case the referee is
