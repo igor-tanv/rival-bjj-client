@@ -10,10 +10,10 @@ li span.active {
 div#contract-jumbotron img {
   position: absolute;
   z-index: -1;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 650px;
 }
 
 div#contract-jumbotron h5 {
@@ -130,6 +130,7 @@ div.lower-match-details-left {
 div.lower-match-details-middle {
   float: left;
   margin-right: 50px;
+  max-width: 39%;
 }
 
 div.lower-match-details-right {
