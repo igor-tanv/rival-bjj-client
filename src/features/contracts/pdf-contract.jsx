@@ -119,7 +119,7 @@ export default function PDFContract({ selectedContract }) {
             </h1>
             <h5>
               <center>
-                (Referee completes 1-6: make sure each competitor has paid the
+                (Referee completes 1-7: make sure each competitor has paid the
                 Match Fee)
               </center>
             </h5>
@@ -140,7 +140,7 @@ export default function PDFContract({ selectedContract }) {
               <li>
                 After the referee completes and returns this contract to you,
                 take a photo of only this page and email it to{" "}
-                <u>admin@rival-bjj.com</u>. The cut-off time for sending this
+                admin@rival-bjj.com. The cut-off time for sending this
                 contract is 24 hours from the Match Date. If nothing is received
                 from either competitor the match will be recorded as Cancelled.
               </li>
@@ -185,7 +185,7 @@ export default function PDFContract({ selectedContract }) {
             to Gi and NoGi.
           </p>
           <h3>General Rules</h3>
-          Note: Competitors, coaches and referees should all be present least 15
+          Note: Competitors, coaches and referees should all be present at least 15
           minutes before the match starts in order to weigh-in, warm up and
           discuss the rules below to make sure everyone is in agreement.
           <p>
@@ -230,7 +230,7 @@ export default function PDFContract({ selectedContract }) {
                 he or she will be automatically disqualified.
               </li>
               <li>
-                <u>All matches are allowed to be recorded on video</u> just like
+                All matches are allowed to be recorded on video just like
                 any other tournament. Anyone who interferes with this rule will
                 receive a disqualification (DQ).
               </li>
@@ -245,7 +245,7 @@ export default function PDFContract({ selectedContract }) {
               <li>
                 It is the responsibility of the hosting competitor to discuss
                 these rules with his or her instructor
-                <u>before sending or accepting the match contract</u>.
+                before sending or accepting the match contract.
               </li>
               <li>
                 Both competitors must weigh-in before the match starts. It is
@@ -268,7 +268,7 @@ export default function PDFContract({ selectedContract }) {
               </li>
               <li>
                 IF EITHER THE COMPETITOR OR THEIR INSTRUCTOR ATTEMPT TO CHANGE
-                OR FAIL TO HONOR ANY RULES MENTIONED HERE THAT COMPETITOR WILL
+                OR FAIL TO HONOR ANY GENRERAL RULES THAT COMPETITOR WILL
                 RECEIVE A DQ.
               </li>
             </ol>
@@ -281,11 +281,11 @@ export default function PDFContract({ selectedContract }) {
           </p>
           <p>
             You are allowed to make changes to the standard rules. For example:
-            "No heel hooks", "Match will be held under IBJJ Rules", "Change
+            "No heel hooks", "Match will be held under IBJJF Rules", "Change
             match time to 8 minutes" and so on. You must put these changes under
             "Rule Exceptions" when completing the Match Contract form. Rule
-            Exceptions will override the standard rules. Once you send the
-            contract, your opponent then has the option to accept or reject the
+            Exceptions will override the Standard Competition Rules. Once you send the
+            contract, your opponent can accept or reject the
             match.
           </p>
           <h3>
