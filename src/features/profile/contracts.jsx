@@ -9,7 +9,8 @@ const getWeightClass = (cls) => {
 };
 
 const renderResultClass = (result) => {
-  switch(result) {
+  switch (result) {
+    case 'pending':
     case 'win':
       return 'result-win';
     case 'loss':
@@ -19,7 +20,7 @@ const renderResultClass = (result) => {
     default:
       return '';
   }
-}
+};
 
 export default function Contracts({ playerId, contracts }) {
   return (
@@ -30,10 +31,7 @@ export default function Contracts({ playerId, contracts }) {
             <div className="col-head result-head">Result</div>
           </td>
           <td>
-            <div className="row-container">
-              <div className="col-head">Opponent Name</div>
-              <div className="col-head">Method</div>
-            </div>
+            <div className="col-head">Opponent Name</div>
           </td>
           <td>
             <div className="row-container">
@@ -41,7 +39,8 @@ export default function Contracts({ playerId, contracts }) {
               <div className="col-head">Type</div>
             </div>
           </td>
-          <td className="col-head">W. Class:</td>
+          <td className="col-head method ">Method</td>
+          <td className="col-head">W. Class</td>
         </tr>
       </thead>
       <tbody>
@@ -49,23 +48,27 @@ export default function Contracts({ playerId, contracts }) {
           <tr key={i}>
             <td>
               {
-                <div className={`result-win margin-auto ${renderResultClass(contract.result)}`}>{contract.result}</div>}
+                <div
+                  className={`result-win margin-auto ${renderResultClass(
+                    contract.result
+                  )}`}
+                >
+                  {contract.result}
+                </div>
+              }
             </td>
             <td>
               <div className="row-container">
-                <div className="first-row long-info-row text-truncation">
+                <div className="first-row text-truncation-second-line">
                   {playerId === contract.playerId
                     ? `${contract.opponentFirstName} ${contract.opponentLastName}`
                     : `${contract.playerFirstName} ${contract.playerLastName}`}
-                </div>
-                <div className="second-row long-info-row text-truncation">
-                  {matchTypes[contract.type]})
                 </div>
               </div>
             </td>
             <td>
               <div className="row-container">
-                <div className="first-row">
+                <div className="first-row text-truncation">
                   <DateTimePicker
                     className="react-datepicker-no-border"
                     dateFormat="MMMM d, yyyy"
@@ -73,81 +76,47 @@ export default function Contracts({ playerId, contracts }) {
                     readOnly
                   />
                 </div>
-                <div className="second-row">{contract.method}</div>
+                <div className="second-row text-truncation">
+                  {contract.method}
+                </div>
               </div>
             </td>
-            <td>{getWeightClass(contract.weightClass)}</td>
+            <td>
+              <div className="single-row text-truncation-second-line">
+                {matchTypes[contract.type]}
+              </div>
+            </td>
+            <td className="single-row text-truncation-second-line">{getWeightClass(contract.weightClass)}</td>
           </tr>
         ))}
-
       </tbody>
     </table>
   );
 }
 
-// <tr key="2">
-//           <td>
-//             <div className="result-loss margin-auto">loss</div>
-//           </td>
-//           <td>
-//             <div className="row-container">
-//               <div className="first-row text-truncation">Cameron Willson</div>
-//               <div className="second-row text-truncation">Decision (split)</div>
-//             </div>
-//           </td>
-//           <td>
-//             <div className="row-container">
-//               <div className="first-row text-truncation">Oct 20, 2020</div>
-//               <div className="second-row text-truncation">Fighting</div>
-//             </div>
-//           </td>
-//           <td>
-//             <div className="first-row text-truncation">Heavy</div>
-//           </td>
-//         </tr>
-//         <tr key="3">
-//           <td>
-//             <div className="result-draw margin-auto">draw</div>
-//           </td>
-//           <td>
-//             <div className="row-container">
-//               <div className="first-row text-truncation long-info-row">Wade Warren</div>
-//               <div className="second-row text-truncation long-info-row">Decision (split)</div>
-//             </div>
-//           </td>
-//           <td>
-//             <div className="row-container">
-//               <div className="first-row text-truncation">Oct 20, 2020</div>
-//               <div className="second-row text-truncation">Fighting</div>
-//             </div>
-//           </td>
-//           <td>
-//             <div className="first-row text-truncation-second-line">Heavy</div>
-//           </td>
-//         </tr>
+
+
 // <tr key="1">
-// <td>
-//   <div className="result-win margin-auto">Win</div>
-// </td>
-// <td>
-//   <div className="row-container">
-//     <div className="first-row long-info-row text-truncation">
-//       Jacob T. Jones
-//     </div>
-//     <div className="second-row long-info-row text-truncation">
-//       TKO (punches)
-//     </div>
-//   </div>
-// </td>
-// <td>
-//   <div className="row-container">
-//     <div className="first-row">Oct 20, 2020</div>
-//     <div className="second-row">Fighting</div>
-//   </div>
-// </td>
-// <td>
-//   <div className="first-row text-truncation-second-line weight-info-row">
-//     Heavy
-//   </div>
-// </td>
-// </tr>
+//           <td>
+//             <div className="result-win margin-auto">pending</div>
+//           </td>
+//           <td>
+//             <div className="row-container">
+//               <div className="first-row text-truncation-second-line">
+//                 Jacob T. Jones
+//               </div>
+//             </div>
+//           </td>
+//           <td>
+//             <div className="row-container">
+//               <div className="first-row  text-truncation">Oct 20, 2020</div>
+//               <div className="second-row  text-truncation">Fighting</div>
+//             </div>
+//           </td>
+//           <td>
+//             <div className="single-row text-truncation-second-line">No gi</div>
+//           </td>
+//           <td>
+//             <div className="single-row text-truncation-second-line">Heavy</div>
+//           </td>
+//         </tr>

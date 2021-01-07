@@ -44,7 +44,7 @@
   width: 100%;
   padding: 0 0 50px;
   display: block;
-  background: url('/assets/images/option-2.jpeg');
+  background: url('/assets/images/option-1.jpg');
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -77,17 +77,19 @@
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-sizing: border-box;
   display: flex;
+  background-color: rgba(0,0,0,0.7);
+
 }
 .record-info .section-info .type {
   letter-spacing: -0.3px;
-  color: #bcbcbc;
+  color: #0098E5;
   font-size: 16px;
   font-weight: 300;
   line-height: 28px;
 }
 .record-info .section-info .value {
   letter-spacing: -0.3px;
-  color: #ffffff;
+  color: #0098E5;
   font-size: 18px;
   font-weight: 500;
 }
@@ -213,7 +215,7 @@
   color: #039a1b;
   text-align: center;
   text-transform: capitalize;
-  max-width: 50px;
+  max-width: 18vw;
 }
 .table-match-history .result-loss {
   color: #d20a0b;
@@ -252,10 +254,15 @@
   width: 50vw;
 }
 
-.long-info-row {
-  max-width: 25vw;
+.table-match-history .col-head.method {
+  background-color: rgba(0,0,0,0.7);
 }
 
-.weight-info-row {
-  max-width: 22vw;
+.table-match-history .row-container .first-row,
+.table-match-history .row-container .second-row {
+  max-width: 20vw;
+}
+
+.table-match-history .single-row {
+  max-width: 15vw;
 }
