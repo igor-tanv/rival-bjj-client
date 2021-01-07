@@ -85,24 +85,44 @@ function Profile({
       </div>
       <div className="history-wrapper">
         <div className="history-title">Match history</div>
-        <Contracts playerId={_id} contracts={showedContracts} />
+        {showedContracts.length > 0 ? (
+          <Contracts playerId={_id} contracts={showedContracts} />
+        ) : (
+          <div className="no-info">This fighter has not fought yet</div>
+        )}
       </div>
       <div className="action-wrapper">
         {localStorage.getItem('playerId') !== _id && (
           <>
-            <Button className="action" onClick={() => history.push(`/chat/${_id}`)} isSecondary={true}>Chat</Button>
-            <Button className="action" onClick={() => history.push(`/contracts/new/${_id}`)}>
+            <Button
+              className="action"
+              onClick={() => history.push(`/chat/${_id}`)}
+              isSecondary={true}
+            >
+              Chat
+            </Button>
+            <Button
+              className="action"
+              onClick={() => history.push(`/contracts/new/${_id}`)}
+            >
               Issue Challenge
             </Button>
           </>
         )}
         {localStorage.getItem('playerId') === _id && (
           <>
-            <Button className="action" onClick={() => history.push(`/contracts`)} isSecondary={true}>
+            <Button
+              className="action"
+              onClick={() => history.push(`/contracts`)}
+              isSecondary={true}
+            >
               My Contracts
             </Button>
 
-            <Button className="action" onClick={() => history.push(`/profile/edit`)}>
+            <Button
+              className="action"
+              onClick={() => history.push(`/profile/edit`)}
+            >
               Update My Profile
             </Button>
           </>

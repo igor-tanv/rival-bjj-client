@@ -42,7 +42,7 @@
 
 .profile-wrapper {
   width: 100%;
-  padding: 0 0 50px;
+  padding: 0 0 30px;
   display: block;
   background: url('/assets/images/option-1.jpg');
   background-position: 50% 100%;
@@ -178,7 +178,7 @@
   font-weight: 500;
   font-size: 20px;
   text-align: center;
-  padding: 20px;
+  padding: 5px;
 }
 
 .table-match-history .row-container {
@@ -265,4 +265,8 @@
 
 .table-match-history .single-row {
   max-width: 15vw;
+}
+
+.history-wrapper .no-info {
+  text-align: center;
 }
