@@ -15,6 +15,7 @@ import ConfirmEmail from "./features/confirm-email"
 import EditProfile from "./features/profile/edit"
 import Rules from "./features/rules"
 import FAQ from "./features/faq"
+import Admin from "./features/adminpage"
 
 import "./styles.css"
 
@@ -55,6 +56,10 @@ export default function App() {
 
           <JwtRoute exact path="/profile/edit">
             <EditProfile />
+          </JwtRoute>
+
+          <JwtRoute exact path="/admin">
+            <Admin />
           </JwtRoute>
 
           <JwtRoute exact path="/contracts">

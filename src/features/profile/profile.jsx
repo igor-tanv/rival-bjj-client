@@ -29,6 +29,7 @@ function Profile({
   weightClass,
   qualityRating,
   contracts,
+  isAdmin
 }) {
   const showedContracts = filterAcceptedOrCompletedMatches(contracts);
   return (
@@ -74,6 +75,9 @@ function Profile({
         )}
         {localStorage.getItem("playerId") === _id && (
           <ul className="horizontal-list">
+            {isAdmin ? <li>
+              <Button onClick={() => history.push(`/admin`)}>Admin</Button>
+            </li> : null}
             <li>
               <Button onClick={() => history.push(`/contracts`)}>
                 My Contracts
