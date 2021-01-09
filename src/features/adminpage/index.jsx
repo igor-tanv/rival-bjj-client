@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { withRouter } from "react-router-dom"
 import { apiFetch } from "../../modules/api-fetch"
 import { Redirect } from "react-router-dom"
+import ContractUpdate from './contract-update'
 
 function Admin() {
 
@@ -25,7 +26,7 @@ function Admin() {
   }
 
   return <div>
-    <pre>{JSON.stringify(admin, null, 4)}</pre>
+    <ContractUpdate />
   </div>
 }
 
