@@ -14,7 +14,7 @@ import genders from "../../data/genders.json"
 import communities from "../../data/communities.json"
 
 import { toValueLabel } from "../../modules/object"
-import { isRequired, isValidAge, isPassword, didAgree } from "../../modules/validations";
+import { isRequired, isValidAge, didAgree } from "../../modules/validations";
 import { apiFetch } from "../../modules/api-fetch"
 
 import "./styles.css"
@@ -47,8 +47,8 @@ const validations = {
   gi: [isRequired],
   nogi: [isRequired],
   birthYear: [isValidAge],
-  email: [isPassword],
-  password: [isPassword],
+  email: [isRequired],
+  password: [isRequired],
   school: [isRequired],
   acceptsTos: [didAgree],
 }

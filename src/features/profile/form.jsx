@@ -12,7 +12,7 @@ import communities from "../../data/communities.json";
 
 import { apiFetch } from "../../modules/api-fetch";
 import { toValueLabel } from "../../modules/object";
-import { isRequired, isValidAge, isPassword } from "../../modules/validations";
+import { isRequired, isValidAge } from "../../modules/validations";
 
 import "./styles.css";
 
