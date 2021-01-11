@@ -93,7 +93,7 @@ export default function PDFContract({ selectedContract }) {
                 Date:
                 <DateTimePicker
                   className="date-picker"
-                  dateFormat="MMMM d, yyyy h:mm aa"
+                  dateFormat="MMMM d, yyyy"
                   selected={selectedContract.startsAt}
                   readOnly
                 />

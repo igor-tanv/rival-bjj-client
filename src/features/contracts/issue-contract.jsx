@@ -7,6 +7,8 @@ import Form from "./form";
 import weightClasses from "../../data/weight-classes.json";
 import matchTypes from "../../data/match-types.json";
 
+import convertDateToUnix from "../../hooks/convert-date-to-unix"
+
 function isRequired(v) {
   return v && v.length > 0 ? null : "is required";
 }
@@ -79,7 +81,7 @@ function IssueContract({ match }) {
     e.preventDefault();
     apiFetch(`contracts`, "post", {
       ...values,
-      startsAt: values.startsAt.valueOf(),
+      startsAt: convertDateToUnix(values.startsAt),
     })
       .then((json) => {
         setSubmitted(true);
@@ -105,19 +107,19 @@ function IssueContract({ match }) {
           <h4>When they accept or reject you will be notified via email</h4>
         </>
       ) : (
-        <Form
-          handleSubmit={handleSubmit}
-          opponent={opponent}
-          values={values}
-          setValues={setValues}
-          matchTypes={matchTypes}
-          weightClasses={weightClasses}
-          valid={valid}
-          errors={errors}
-          validate={validate}
-          validations={validations}
-        />
-      )}
+          <Form
+            handleSubmit={handleSubmit}
+            opponent={opponent}
+            values={values}
+            setValues={setValues}
+            matchTypes={matchTypes}
+            weightClasses={weightClasses}
+            valid={valid}
+            errors={errors}
+            validate={validate}
+            validations={validations}
+          />
+        )}
     </div>
   );
 }

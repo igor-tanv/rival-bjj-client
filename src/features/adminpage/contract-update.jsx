@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 
 import { apiFetch } from "../../modules/api-fetch"
 
+import convertDateToUnix from "../../hooks/convert-date-to-unix"
+
 import DateTimePicker from "../../ui/date-time-picker"
 import Button from "../../ui/button";
 
@@ -21,8 +23,6 @@ export default function ContractUpdate() {
       });
   }
 
-
-
   //need to see selected date value, see form.jsx in contracts for reference 
   return <form onSubmit={handleSubmit}>
     <div>
@@ -32,7 +32,7 @@ export default function ContractUpdate() {
         showTimeSelect
         dateFormat="MMMM d, yyyy h:mm aa"
         onChange={val => {
-          setDate(val)
+          setDate(convertDateToUnix(val))
         }}
       />
     </div>
