@@ -14,7 +14,7 @@ export default function ContractUpdate() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    apiFetch(`contracts/${convertDateToUnix(date)}`)
+    apiFetch(`admin/contracts/${convertDateToUnix(date)}`)
       .then((json) => {
         console.log(17, json)
       })
