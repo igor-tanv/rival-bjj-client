@@ -194,7 +194,7 @@ export default function Contracts() {
                 <DateTimePicker
                   className="date-picker"
                   dateFormat="MMMM d, yyyy h:mm aa"
-                  selected={selectedContract.startsAt}
+                  selected={selectedContract.startsAt * 1000}
                   readOnly
                 />
               ) : null}

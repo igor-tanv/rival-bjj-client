@@ -3,6 +3,7 @@ import matchTypes from "../../data/match-types.json";
 import weightClasses from "../../data/weight-classes.json";
 import DateTimePicker from "../../ui/date-time-picker";
 
+
 export default function PDFContract({ selectedContract }) {
   const getWeightLimit = (weightClass) => {
     switch (weightClass) {
@@ -82,25 +83,25 @@ export default function PDFContract({ selectedContract }) {
           </div>
           <div className="lower-match-details">
             <div className="lower-match-details-left">
-              <h3>Match Weight Class: {selectedContract.weightClass}</h3>
+              <h3>Weight Class: {selectedContract.weightClass}</h3>
               <h3>
                 Weight Limit: {getWeightLimit(selectedContract.weightClass)}
               </h3>
             </div>
             <div className="lower-match-details-middle">
-              <h3>Location: {selectedContract.location} </h3>
+              <h3>Where: {selectedContract.location} </h3>
               <h3 style={{ display: "inline-flex" }}>
-                Date:
+                When:
                 <DateTimePicker
                   className="date-picker"
-                  dateFormat="MMMM d, yyyy"
-                  selected={selectedContract.startsAt}
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  selected={selectedContract.startsAt * 1000}
                   readOnly
                 />
               </h3>
             </div>
             <div className="lower-match-details-right">
-              <h3>Type: {matchTypes[selectedContract.type]}</h3>
+              <h3>Match Type: {matchTypes[selectedContract.type]}</h3>
               <h3>Match Length: 10 minutes</h3>
             </div>
           </div>

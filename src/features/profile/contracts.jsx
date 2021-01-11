@@ -1,7 +1,10 @@
 import React from "react";
+
 import DateTimePicker from "../../ui/date-time-picker";
+
 import weightClasses from "../../data/weight-classes.json";
 import matchTypes from "../../data/match-types.json";
+
 import "./styles.css";
 
 const getWeightClass = (cls) => {
@@ -36,7 +39,7 @@ export default function Contracts({ playerId, contracts }) {
               <DateTimePicker
                 className="react-datepicker-no-border"
                 dateFormat="MMMM d, yyyy"
-                selected={contract.startsAt}
+                selected={contract.startsAt * 1000}
                 readOnly
               />
             </td>

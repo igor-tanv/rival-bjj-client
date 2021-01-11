@@ -10,11 +10,11 @@ import Button from "../../ui/button";
 
 export default function ContractUpdate() {
 
-  const [date, setDate] = useState({})
+  const [date, setDate] = useState(new Date())
 
   function handleSubmit(e) {
     e.preventDefault();
-    apiFetch(`contracts/${date}`)
+    apiFetch(`contracts/${convertDateToUnix(date)}`)
       .then((json) => {
         console.log(17, json)
       })
@@ -30,10 +30,9 @@ export default function ContractUpdate() {
       <DateTimePicker
         className="__rival_text-field-component"
         showTimeSelect
+        selected={date}
         dateFormat="MMMM d, yyyy h:mm aa"
-        onChange={val => {
-          setDate(convertDateToUnix(val))
-        }}
+        onChange={val => setDate(val)}
       />
     </div>
     <Button type="submit">Search</Button>
