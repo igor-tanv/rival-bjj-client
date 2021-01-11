@@ -254,10 +254,6 @@
   width: 50vw;
 }
 
-.table-match-history .col-head.method {
-  background-color: rgba(0,0,0,0.7);
-}
-
 .table-match-history .row-container .first-row,
 .table-match-history .row-container .second-row {
   max-width: 20vw;

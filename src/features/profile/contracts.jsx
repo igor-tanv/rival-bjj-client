@@ -39,7 +39,7 @@ export default function Contracts({ playerId, contracts }) {
               <div className="col-head">Type</div>
             </div>
           </td>
-          <td className="col-head method ">Method</td>
+          <td className="col-head">Method</td>
           <td className="col-head">W. Class</td>
         </tr>
       </thead>
