@@ -1,4 +1,5 @@
 import React from "react";
+import './styles.css';
 
 function getStars(value) {
   const stars = [];
@@ -15,8 +16,8 @@ export default function Rating({ value }) {
     <div>
       {getStars(value).map((value, i) => (
         <img
+          className="rating-stars"
           key={i}
-          className="inline-block h-8"
           src={`${process.env.PUBLIC_URL}/assets/rating-stars/${value}.png`}
           alt=""
         />
