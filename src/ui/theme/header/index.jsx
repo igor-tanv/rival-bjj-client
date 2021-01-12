@@ -11,7 +11,8 @@ export default function Header() {
     <div className="header">
       <div onClick={() => setShowMenu(true)} className="menu-icon"><img src="/assets/images/category.png" className="menu-icon"></img></div>
       <div className="header-title">Rival</div>
-      <img src="/assets/rating-stars/100.png" className="logo"></img>
+      <div className="logo"><Link to="/"><img src="/assets/rating-stars/100.png" className="logo"></img></Link></div>
+
       {showMenu ? (
         <>
           {' '}

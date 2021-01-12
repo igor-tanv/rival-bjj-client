@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { apiFetch } from "../../modules/api-fetch";
+import jsPDF from "jspdf";
+
+import Button from "../../ui/button";
+import DateTimePicker from "../../ui/date-time-picker";
 import HoriztonalList from "../../ui/horizontal-list";
 import ContractTable from "../../ui/table";
-import Button from "../../ui/button";
+
+import { apiFetch } from "../../modules/api-fetch";
+
+import PDFContract from "./pdf-contract";
+
 import "./styles.css";
-import jsPDF from "jspdf";
 
 export default function Contracts() {
   const [contracts, setContracts] = useState([]);
@@ -43,7 +49,6 @@ export default function Contracts() {
     );
   }
 
-  // is this ok?
   function cancel() {
     apiFetch(`contracts/${selectedContract.id}/cancel`, "post", {
       playerId: localStorage.getItem("playerId"),
@@ -91,32 +96,24 @@ export default function Contracts() {
     });
   }
 
-  const printContractDetail = () => {
-    const printableWindow = window.open("", "printableWindow");
-    const contractDetail = window.document.getElementById("contract-detail");
-    printableWindow.document.write(
-      "<html><head><title>Contract Detail</title></head>"
-    );
-    printableWindow.document.write('<body onafterprint="self.close()">');
-    printableWindow.document.write(contractDetail.outerHTML);
-    printableWindow.document.write("</body></html>");
-    printableWindow.print();
-  };
-
   const saveAsPdf = () => {
     const doc = new jsPDF();
-    const contractDetail = window.document.getElementById("contract-detail");
+    const contractDetail = window.document.getElementById("contract-jumbotron");
     doc.html(contractDetail, {
       callback: function (doc) {
         doc.save("contract-detail");
       },
       html2canvas: {
-        scale: 0.3,
+        scale: 0.19,
       },
       x: 10,
       y: 10,
     });
   };
+
+  function fullName(firstName, lastName) {
+    return firstName + ' ' + lastName
+  }
 
   return (
     <div>
@@ -153,7 +150,7 @@ export default function Contracts() {
               <td>{contract.result}</td>
               <td>{contract.type}</td>
               <td>
-                {contract.opponentFirstName} {contract.opponentLastName}
+                {localStorage.getItem("playerId") === contract.playerId ? fullName(contract.opponentFirstName, contract.opponentLastName) : (fullName(contract.playerFirstName, contract.playerLastName))}
               </td>
               <td>{contract.method}</td>
               <td>
@@ -190,7 +187,19 @@ export default function Contracts() {
           {selectedContract && selectedContract.playerFirstName} vs.{" "}
           {selectedContract && selectedContract.opponentFirstName}
           <p>Where: {selectedContract && selectedContract.location}</p>
-          <p>When: {selectedContract && selectedContract.startsAt}</p>
+          <p style={{ display: "flex" }}>
+            When:{" "}
+            <span>
+              {selectedContract && selectedContract.startsAt ? (
+                <DateTimePicker
+                  className="date-picker"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  selected={selectedContract.startsAt}
+                  readOnly
+                />
+              ) : null}
+            </span>
+          </p>
           <p>Type: {selectedContract && selectedContract.type}</p>
           <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
           <p>
@@ -233,6 +242,9 @@ export default function Contracts() {
           zIndex: 99,
         }}
       />
+      {selectedContract ? (
+        <PDFContract selectedContract={selectedContract} />
+      ) : null}
     </div>
   );
 }

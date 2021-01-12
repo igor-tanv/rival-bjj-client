@@ -6,6 +6,7 @@
   letter-spacing: -0.3px;
   text-transform: uppercase;
   color: #000000;
+  max-width: 60vw;
 }
 
 .item-container {
@@ -27,17 +28,6 @@
   height: 160px;
 }
 
-.item-container .info-weight {
-  transform: skew(-20deg);
-  background: #000000;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 25px;
-  text-align: center;
-  letter-spacing: -0.3px;
-  color: #ffffff;
-  max-width: 150px;
-}
 .item-container .info-wrapper .info-medal {
   width: 45px;
   position: absolute;
@@ -145,8 +135,52 @@
 }
 
 .text-truncation {
-	padding: 0 4px;
+	padding-right: 4px;
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 450px) {
+  .item-container .info-wrapper .info-title,
+  .item-container .info-wrapper .info-school .school-name
+  {
+    max-width: 45vw;
+  }
+  .item-container .info-weight span {
+    max-width: 35vw;
+  }
+}
+
+@media (max-width: 375px) {
+  .item-container .info-wrapper .info-title {
+    max-width: 140px;
+  }
+  .item-container .info-weight span {
+    max-width: 100px;
+  }
+  .item-container .info-wrapper .info-school .school-name {
+    max-width: 135px;
+  }
+}
+
+.item-container .info-weight {
+  transform: skew(-20deg);
+  background: #000000;
+  text-align: center;
+  padding: 0 15px;
+  width: max-content;
+}
+
+.item-container .info-weight span {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  display: block;
+}
+
+.item-container .info-weight > * {
+  transform: skew(20deg);
 }

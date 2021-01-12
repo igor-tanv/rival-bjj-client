@@ -100,10 +100,10 @@ export default function PlayerSearch({ }) {
                   alt=""
                 />
                 <div className="info-wrapper">
-                  <div className="info-title">
+                  <div className="info-title text-truncation">
                     {firstName} {lastName}
                   </div>
-                  <div className="info-weight">{weightClass}</div>
+                  <div className="info-weight"><span className="text-truncation">{weightClass}</span></div>
                   <div className="info-record">
                       Win: {wins} Loss: {losses} Draw: {draws}
                     </div>
@@ -120,7 +120,7 @@ export default function PlayerSearch({ }) {
                     )}
                   <div className="info-school">
                     <div className="school">School:</div>
-                    <div className="school-name">{school}</div>
+                    <div className="school-name text-truncation">{school}</div>
                   </div>
                   {getMedalForPlayer(i)}
                 </div>
