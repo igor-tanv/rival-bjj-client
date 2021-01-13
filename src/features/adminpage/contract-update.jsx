@@ -1,40 +1,108 @@
-import React, { useEffect, useState } from "react"
-
+import React, { useState } from "react"
 
 import { apiFetch } from "../../modules/api-fetch"
 
-import convertDateToUnix from "../../hooks/convert-date-to-unix"
-
-import DateTimePicker from "../../ui/date-time-picker"
 import Button from "../../ui/button";
+import ContractTable from '../../ui/table'
+import Dropdown from "../../ui/dropdown"
+import TextField from "../../ui/text-field"
 
-export default function ContractUpdate() {
+export default function ContractUpdate(contractObj) {
 
-  const [date, setDate] = useState(new Date())
+  const { contracts } = contractObj
 
+  const [contractId, setContractId] = useState('')
+  const [winner, setWinner] = useState('')
+  const [method, setMethod] = useState('')
+  const [redRating, setRedRating] = useState('na')
+  const [blueRating, setBlueRating] = useState('na')
+  const [refereeComments, setrefereeComments] = ('')
+
+  const winnerOptions = ["red", "blue", "draw", "cancelled"]
+  const winMethod = ["Sub", "Points", "DQ", "Forfeit", "Injury", "Advantage"]
+  const qualityRating = ["1", "2", "3", "4", "5", "na"]
+
+  // post 
   function handleSubmit(e) {
     e.preventDefault();
-    apiFetch(`admin/contracts/${convertDateToUnix(date)}`)
+    apiFetch(`admin/contracts/update/${contractId}`, "POST",
+      {
+        contractId, winner, method, redRating, blueRating, refereeComments
+      })
       .then((json) => {
-        console.log(17, json)
+        console.log(29, json)
       })
       .catch((error) => {
         console.log(20, error);
       });
   }
 
-  //need to see selected date value, see form.jsx in contracts for reference 
-  return <form onSubmit={handleSubmit}>
-    <div>
-      <label>Match Date and Starting Time</label>
-      <DateTimePicker
-        className="__rival_text-field-component"
-        showTimeSelect
-        selected={date}
-        dateFormat="MMMM d, yyyy h:mm aa"
-        onChange={val => setDate(val)}
-      />
-    </div>
-    <Button type="submit">Search</Button>
-  </form>
+  return <>
+    <ContractTable
+      data={contracts}
+      renderHead={() => {
+        return (
+          <tr>
+            <th>Winner</th>
+            <th>Method</th>
+            <th>Location</th>
+            <th>Match type</th>
+            <th>Red Corner</th>
+            <th>Red QR</th>
+            <th>Blue Corner</th>
+            <th>Blue QR</th>
+            <th>Referee Comments</th>
+            <th></th>
+          </tr>
+        );
+      }}
+      renderItem={(contract) => {
+        return (
+          <form onSubmit={handleSubmit}>
+            <td>
+              <Dropdown
+                options={winnerOptions}
+                onChange={setWinner}
+                value={winner}
+              />
+            </td>
+            <td>
+              <Dropdown
+                options={winMethod}
+                onChange={setMethod}
+                value={method}
+              />
+            </td>
+            <td>{contract.location}</td>
+            <td>{contract.type}</td>
+            <td>{contract.playerFirstName} {contract.playerLastName}</td>
+            <td>
+              <Dropdown
+                options={qualityRating}
+                onChange={setRedRating}
+                value={redRating}
+              />
+            </td>
+            <td>{contract.opponentFirstName} {contract.opponentLastName}</td>
+            <td>
+              <Dropdown
+                options={qualityRating}
+                onChange={setBlueRating}
+                value={blueRating}
+              />
+            </td>
+            <td>
+              <TextField
+                value={refereeComments}
+                onChange={setrefereeComments}
+              />
+            </td>
+
+            <Button type="submit" onClick={() => setContractId(contract.id)}>Submit Result</Button>
+          </form>
+        );
+      }}
+    />
+  </>
+
 }

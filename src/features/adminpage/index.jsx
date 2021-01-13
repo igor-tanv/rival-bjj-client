@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { withRouter } from "react-router-dom"
 import { apiFetch } from "../../modules/api-fetch"
 import { Redirect } from "react-router-dom"
-import ContractUpdate from './contract-update'
+import ContractSearch from './contract-search'
 
 function Admin() {
 
@@ -26,7 +26,7 @@ function Admin() {
   }
 
   return <div>
-    <ContractUpdate />
+    <ContractSearch />
   </div>
 }
 
