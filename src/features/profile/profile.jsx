@@ -1,16 +1,16 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-import Contracts from "./contracts";
-import Rating from "./rating";
+import Contracts from './contracts';
+import Rating from './rating';
 
-import Button from "../../ui/button";
+import Button from '../../ui/button';
 
-import "./styles.css";
+import './styles.css';
 
 function filterAcceptedOrCompletedMatches(contracts) {
   return contracts.filter(
-    (c) => c.status === "accepted" || c.status === "completed"
+    (c) => c.status === 'accepted' || c.status === 'completed'
   );
 }
 
@@ -33,72 +33,109 @@ function Profile({
 }) {
   const showedContracts = filterAcceptedOrCompletedMatches(contracts);
   return (
-    <div>
-      <div className="flex flex-col items-center justify-center w-full">
-        <img
-          className="item-avatar"
-          src={
-            avatar
-              ? avatar
-              : `${process.env.PUBLIC_URL}/assets/images/default.png`
-          }
-          alt=""
-        />
-        <div>
-          quality rating <Rating value={qualityRating} />
+    <>
+      <div className="profile-wrapper">
+        <div className="main-info">
+          <div className="detail-info">
+            <div className="profile-title">{`${firstName} ${lastName}`}</div>
+            <div className="info-weight">
+              <span>{weightClass}</span>
+            </div>
+          </div>
+        </div>
+        <div className="record-wrapper">
+          <div className="record-info">
+            <div className="section-info">
+              <div className="type">Win:</div>
+              <div className="value">{wins}</div>
+            </div>
+            <div className="section-info">
+              <div className="type">Loss:</div>
+              <div className="value">{losses}</div>
+            </div>
+            <div className="section-info">
+              <div className="type">Draw:</div>
+              <div className="value">{draws}</div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div>
-        Name: {firstName} {lastName}
+      <div className="evaluate-wrapper">
+        <img
+          src={avatar ? avatar : '/assets/images/default.png'}
+          alt="..."
+          className="profile-avatar"
+        />
+        <div className="evaluate-info">
+          <Rating value={qualityRating} className="evaluate-stars" />
+          <div className="evaluate-detail">
+            <div className="info-school">
+              <div className="school">School:</div>
+              <div className="school-name text-truncation">{school}</div>
+            </div>
+            <div className="info-rank">
+              <div className="rank-type">Nogi Rank:</div>
+              <div className="rank-score">{nogi}</div>
+            </div>
+            <div className="info-rank">
+              <div className="rank-type">Gi Rank:</div>
+              <div className="rank-score">{gi}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        Fight Record (W/L/D): {wins}/{losses}/{draws}
-      </div>
-      <div>School: {school}</div>
-      <div>Gi Rank: {gi}</div>
-      <div>No Gi Rank: {nogi}</div>
-      <div>Weight: {weightClass}</div>
-
-      <div>
-        {localStorage.getItem("playerId") !== _id && (
-          <ul className="horizontal-list">
-            <li>
-              <Button onClick={() => history.push(`/contracts/new/${_id}`)}>
-                Issue Challenge
-              </Button>
-            </li>
-            <li>
-              <Button onClick={() => history.push(`/chat/${_id}`)}>Chat</Button>
-            </li>
-          </ul>
-        )}
-        {localStorage.getItem("playerId") === _id && (
-          <ul className="horizontal-list">
-            {isAdmin ? <li>
-              <Button onClick={() => history.push(`/admin`)}>Admin</Button>
-            </li> : null}
-            <li>
-              <Button onClick={() => history.push(`/contracts`)}>
-                My Contracts
-              </Button>
-            </li>
-            <li>
-              <Button onClick={() => history.push(`/profile/edit`)}>
-                Update My Profile
-              </Button>
-            </li>
-          </ul>
-        )}
-
-        <h3>Match history</h3>
+      <div className="history-wrapper">
+        <div className="history-title">Match history</div>
         {showedContracts.length > 0 ? (
           <Contracts playerId={_id} contracts={showedContracts} />
         ) : (
-            "This fighter has not fought yet"
+            <div className="no-info">This fighter has not fought yet</div>
           )}
       </div>
-    </div>
+      <div className="action-wrapper">
+        {localStorage.getItem('playerId') !== _id && (
+          <>
+            <Button
+              className="action"
+              onClick={() => history.push(`/chat/${_id}`)}
+              isSecondary={true}
+            >
+              Chat
+            </Button>
+            <Button
+              className="action"
+              onClick={() => history.push(`/contracts/new/${_id}`)}
+            >
+              Issue Challenge
+            </Button>
+          </>
+        )}
+        {localStorage.getItem('playerId') === _id && (
+          <>
+            {isAdmin ?
+              <Button
+                className="action"
+                onClick={() => history.push(`/admin`)}
+                isSecondary={true}
+              >Admin
+            </Button> : null}
+            <Button
+              className="action"
+              onClick={() => history.push(`/contracts`)}
+              isSecondary={true}
+            >
+              My Contracts
+            </Button>
+            <Button
+              className="action"
+              onClick={() => history.push(`/profile/edit`)}
+            >
+              Update My Profile
+            </Button>
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
