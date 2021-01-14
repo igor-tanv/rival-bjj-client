@@ -3,7 +3,6 @@ import React, { useState } from "react"
 import { apiFetch } from "../../modules/api-fetch"
 
 import Button from "../../ui/button";
-import ContractTable from '../../ui/table'
 import Dropdown from "../../ui/dropdown"
 import TextField from "../../ui/text-field"
 
@@ -29,7 +28,7 @@ export default function ContractUpdate(contractObj) {
     e.preventDefault();
     apiFetch(`admin/contracts/update/${contractId}`, "POST",
       {
-        contractId, winner, method, redRating, blueRating, refereeComments
+        winner, method, redRating, blueRating, refereeComments
       })
       .then((json) => {
         console.log(29, json)
