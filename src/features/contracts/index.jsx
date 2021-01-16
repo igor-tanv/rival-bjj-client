@@ -15,7 +15,6 @@ import "./styles.css";
 export default function Contracts() {
   const [contracts, setContracts] = useState([]);
   const filters = [
-    "All",
     "Sent",
     "Received",
     "Declined",
@@ -34,7 +33,6 @@ export default function Contracts() {
     );
   }, []);
 
-  // can we combine accept and decline into a single fucntion?
   function accept() {
     apiFetch(`contracts/${selectedContract.id}/accept`, "post").then((json) => {
       updateContractStatus(json.contract.status);
@@ -73,7 +71,6 @@ export default function Contracts() {
   }
 
   function filterBy(contracts) {
-    if (filter === "All") return contracts;
     return contracts.filter((contract) => {
       if (
         filter === "Sent" &&
@@ -136,10 +133,9 @@ export default function Contracts() {
         renderHead={() => {
           return (
             <tr>
-              <th>Result</th>
+              <th>Status</th>
               <th>Match type</th>
               <th>Opponent</th>
-              <th>Method</th>
               <th></th>
             </tr>
           );
@@ -152,7 +148,6 @@ export default function Contracts() {
               <td>
                 {localStorage.getItem("playerId") === contract.playerId ? fullName(contract.opponentFirstName, contract.opponentLastName) : (fullName(contract.playerFirstName, contract.playerLastName))}
               </td>
-              <td>{contract.method}</td>
               <td>
                 {(filter === "Received" || filter === "Accepted") && (
                   <a

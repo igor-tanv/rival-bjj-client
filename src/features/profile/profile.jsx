@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Contracts from './contracts';
+import Contracts from './match-history';
 import Rating from './rating';
 
 import Button from '../../ui/button';

@@ -8,19 +8,18 @@ const getWeightClass = (cls) => {
   return weightClasses[cls].substr(0, weightClasses[cls].indexOf(':'));
 };
 
-const renderResultClass = (result) => {
-  switch (result) {
-    case 'pending':
-    case 'win':
-      return 'result-win';
-    case 'loss':
-      return 'result-loss';
-    case 'draw':
-      return 'result-draw';
-    default:
-      return '';
-  }
+const renderResultClass = (contract, playerId) => {
+  if (contract.result === 'draw') return 'result-draw'
+  if ((contract.result === 'win') && (contract.playerId === playerId)) return 'result-win'
+  return 'result-loss'
 };
+
+const renderResult = (contract, playerId) => {
+  if (contract.result === 'draw') return 'Draw'
+  if (contract.result === 'pending') return 'Pending'
+  if ((contract.result === 'win') && (contract.playerId === playerId)) return 'Win'
+  return 'Loss'
+}
 
 export default function Contracts({ playerId, contracts }) {
   return (
@@ -50,10 +49,10 @@ export default function Contracts({ playerId, contracts }) {
               {
                 <div
                   className={`result-win margin-auto ${renderResultClass(
-                    contract.result
+                    contract, playerId
                   )}`}
                 >
-                  {contract.result}
+                  {renderResult(contract, playerId)}
                 </div>
               }
             </td>
