@@ -1,29 +1,30 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from "react-router-dom"
-import Theme from "./ui/theme"
-import JwtRoute from "./jwt-route"
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Theme from "./ui/theme";
+import JwtRoute from "./jwt-route";
 
-import Homepage from "./features/homepage"
-import Login from "./features/login"
-import PasswordReset from "./features/login/reset"
-import Profile from "./features/profile"
-import Contracts from "./features/contracts"
-import IssueContract from "./features/contracts/issue-contract"
-import Register from "./features/register"
-import Chat from "./features/chat"
-import ConfirmEmail from "./features/confirm-email"
-import EditProfile from "./features/profile/edit"
-import Rules from "./features/rules"
-import FAQ from "./features/faq"
+import Homepage from "./features/homepage";
+import Login from "./features/login";
+import PasswordReset from "./features/login/reset";
+import Profile from "./features/profile";
+import Contracts from "./features/contracts";
+import IssueContract from "./features/contracts/issue-contract";
+import Register from "./features/register";
+import Chat from "./features/chat";
+import ConfirmEmail from "./features/confirm-email";
+import EditProfile from "./features/profile/edit";
+import Rules from "./features/rules";
+import FAQ from "./features/faq";
+import ScrollToTop from "./ui/scroll-to-top";
 
-import "./styles.css"
+import "./styles.css";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Theme>
         <Switch>
-
           <Route exact path="/">
             <Homepage />
           </Route>
@@ -44,8 +45,7 @@ export default function App() {
             <ConfirmEmail />
           </Route>
 
-
-          <JwtRoute path='/chat/:recipient'>
+          <JwtRoute path="/chat/:recipient">
             <Chat />
           </JwtRoute>
 
@@ -76,10 +76,8 @@ export default function App() {
           <Route exact path="/faq">
             <FAQ />
           </Route>
-
         </Switch>
       </Theme>
     </BrowserRouter>
-
-  )
+  );
 }
