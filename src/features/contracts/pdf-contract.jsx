@@ -125,7 +125,7 @@ export default function PDFContract({ selectedContract }) {
             </h5>
             <h3>1. Winner (circle one): RED / BLUE / DRAW</h3>
             <h3>
-              2. Win Method (circle one): Submission / DQ / Forfeit / Injury
+              2. Win Method (circle one): Submission / DQ / Forfeit / Injury / Points / Advantage
             </h3>
             <h3>3. Submission Method (if applicable):</h3>
             <h3>4. Comments:</h3>

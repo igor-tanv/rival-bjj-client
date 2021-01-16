@@ -15,7 +15,7 @@ import Banner from "../../ui/banner";
 
 import "./styles.css";
 
-export default function PlayerSearch({}) {
+export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([]);
   const [giNoGi, setGiNoGi] = useState(Object.keys(matchTypes)[0]);
   const [weightClass, setWeightClass] = useState(Object.keys(weightClasses)[0]);
@@ -61,8 +61,8 @@ export default function PlayerSearch({}) {
           className="info-medal"
         />
       ) : (
-        <div className="info-no-medal">{index + 1}</div>
-      );
+          <div className="info-no-medal">{index + 1}</div>
+        );
     }
     return null;
   };
@@ -134,13 +134,13 @@ export default function PlayerSearch({}) {
                       <div className="rank-score">{nogi}</div>
                     </div>
                   ) : (
-                    <div className="info-rank">
-                      <div className="rank-type">Gi Rank:</div>
-                      <div className="rank-score">{gi}</div>
-                    </div>
-                  )}
+                      <div className="info-rank">
+                        <div className="rank-type">Gi Rank:</div>
+                        <div className="rank-score">{gi}</div>
+                      </div>
+                    )}
                   <div className="info-school">
-                    <div className="school">School:</div>
+                    <div className="school">Team:</div>
                     <div className="school-name text-truncation">{school}</div>
                   </div>
                   {getMedalForPlayer(player, ranksWithMedal)}
@@ -150,10 +150,10 @@ export default function PlayerSearch({}) {
           );
         })
       ) : (
-        <div className="empty-search">
-          There are no fighters in that weight class
-        </div>
-      )}
+          <div className="empty-search">
+            There are no fighters in that weight class
+          </div>
+        )}
     </div>
   );
 }

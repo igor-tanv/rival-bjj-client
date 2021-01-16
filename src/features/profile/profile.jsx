@@ -69,7 +69,7 @@ function Profile({
           <Rating value={qualityRating} className="evaluate-stars" />
           <div className="evaluate-detail">
             <div className="info-school">
-              <div className="school">School:</div>
+              <div className="school">Team:</div>
               <div className="school-name text-truncation">{school}</div>
             </div>
             <div className="info-rank">
@@ -87,12 +87,12 @@ function Profile({
         <div className="history-title">Match history</div>
         <Contracts playerId={_id} contracts={showedContracts} />
         {
-        //   showedContracts.length > 0 ? (
-        //   <Contracts playerId={_id} contracts={showedContracts} />
-        // ) : (
-        //   <div className="no-info">This fighter has not fought yet</div>
-        // )
-      }
+          //   showedContracts.length > 0 ? (
+          //   <Contracts playerId={_id} contracts={showedContracts} />
+          // ) : (
+          //   <div className="no-info">This fighter has not fought yet</div>
+          // )
+        }
       </div>
       <div className="action-wrapper">
         {localStorage.getItem('playerId') !== _id && (
