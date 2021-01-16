@@ -77,19 +77,18 @@
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-sizing: border-box;
   display: flex;
-  background-color: rgba(0,0,0,0.7);
-
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .record-info .section-info .type {
   letter-spacing: -0.3px;
-  color: #0098E5;
+  color: #0098e5;
   font-size: 16px;
   font-weight: 300;
   line-height: 28px;
 }
 .record-info .section-info .value {
   letter-spacing: -0.3px;
-  color: #0098E5;
+  color: #0098e5;
   font-size: 18px;
   font-weight: 500;
 }
@@ -181,67 +180,7 @@
   padding: 5px;
 }
 
-.table-match-history .row-container {
-  display: flex;
-  flex-direction: column;
-}
-.table-match-history .col-head {
-  letter-spacing: -0.3px;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-}
-.table-match-history .row-container .first-row {
-  letter-spacing: -0.3px;
-  color: #000000;
-  font-weight: 400;
-  font-size: 16px;
-}
-.table-match-history .row-container .second-row {
-  letter-spacing: -0.3px;
-  color: #939393;
-  font-weight: 400;
-  font-size: 16px;
-}
-
-.table-match-history tr td {
-  padding: 0 5px;
-}
-.table-match-history .result-win {
-  background: rgba(3, 154, 27, 0.2);
-  border: 1px solid #039a1b;
-  box-sizing: border-box;
-  color: #039a1b;
-  text-align: center;
-  text-transform: capitalize;
-  max-width: 18vw;
-}
-.table-match-history .result-loss {
-  color: #d20a0b;
-  background: rgba(210, 10, 11, 0.2);
-  border: 1px solid #d20a0b;
-  box-sizing: border-box;
-  text-align: center;
-  text-transform: capitalize;
-  max-width: 50px;
-}
-.table-match-history .result-draw {
-  color: #e8751a;
-  background: rgba(232, 117, 26, 0.2);
-  border: 1px solid #e8751a;
-  box-sizing: border-box;
-  text-align: center;
-  text-transform: capitalize;
-  max-width: 50px;
-}
-
 .margin-auto {
-  margin: 0 auto;
-}
-
-.table-match-history .col-head.result-head {
-  max-width: 50px;
   margin: 0 auto;
 }
 
@@ -254,15 +193,28 @@
   width: 50vw;
 }
 
-.table-match-history .row-container .first-row,
-.table-match-history .row-container .second-row {
-  max-width: 20vw;
+.update-profile-wrapper {
+  padding: 15px;
 }
 
-.table-match-history .single-row {
-  max-width: 15vw;
+.update-profile-wrapper h1 {
+  text-align: center;
 }
 
-.history-wrapper .no-info {
+.update-profile-wrapper .Dropdown-root.rival__dropdown,
+.register-wrapper .Dropdown-root.rival__dropdown {
+  margin-bottom: 15px;
+}
+
+.avatar-wrapper {
+  background-color: #ffffff;
+  padding: 10px 0;
+}
+
+.avatar-wrapper .img-zone {
+  text-align: center;
+}
+
+.avatar-wrapper h5 {
   text-align: center;
 }

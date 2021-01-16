@@ -2,8 +2,8 @@ import React from "react"
 import "./styles.css"
 
 export default function HorizontalList({ items, renderItem, active = null }) {
-  return <ul className="horizontal">
+  return <div className="horizontal">
 
-    {items.map(item => <li>{renderItem(item)}</li>)}
-  </ul>
+    {items.map(item => <>{renderItem(item)}</>)}
+  </div>
 }

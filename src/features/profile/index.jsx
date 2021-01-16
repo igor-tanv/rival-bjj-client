@@ -13,7 +13,8 @@ function Profile({ match }) {
     apiFetch(`players/${match.params.id || localStorage.getItem("playerId")}`).then(json => {
       setPlayer(json.player)
       setLoaded(true)
-    })
+    });
+    window.scrollTo(0, 0);
   }, [])
 
   return <div>

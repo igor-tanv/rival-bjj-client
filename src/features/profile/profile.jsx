@@ -85,11 +85,14 @@ function Profile({
       </div>
       <div className="history-wrapper">
         <div className="history-title">Match history</div>
-        {showedContracts.length > 0 ? (
-          <Contracts playerId={_id} contracts={showedContracts} />
-        ) : (
-          <div className="no-info">This fighter has not fought yet</div>
-        )}
+        <Contracts playerId={_id} contracts={showedContracts} />
+        {
+        //   showedContracts.length > 0 ? (
+        //   <Contracts playerId={_id} contracts={showedContracts} />
+        // ) : (
+        //   <div className="no-info">This fighter has not fought yet</div>
+        // )
+      }
       </div>
       <div className="action-wrapper">
         {localStorage.getItem('playerId') !== _id && (

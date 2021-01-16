@@ -1,24 +1,24 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 
-import useForm from "../../hooks/use-form";
+import useForm from '../../hooks/use-form';
 
-import Dropdown from "../../ui/dropdown";
-import TextField from "../../ui/text-field";
-import Button from "../../ui/button";
+import Dropdown from '../../ui/dropdown';
+import TextField from '../../ui/text-field';
+import Button from '../../ui/button';
 
-import weightClasses from "../../data/weight-classes.json";
-import genders from "../../data/genders.json";
-import communities from "../../data/communities.json";
+import weightClasses from '../../data/weight-classes.json';
+import genders from '../../data/genders.json';
+import communities from '../../data/communities.json';
 
-import { apiFetch } from "../../modules/api-fetch";
-import { toValueLabel } from "../../modules/object";
-import { isRequired, isValidAge } from "../../modules/validations";
+import { apiFetch } from '../../modules/api-fetch';
+import { toValueLabel } from '../../modules/object';
+import { isRequired, isValidAge } from '../../modules/validations';
 
-import "./styles.css";
+import './styles.css';
 
 // filter out open weight class
 const filteredWeightClasses = toValueLabel(weightClasses).filter(
-  (obj) => obj.value !== "OpenWeight"
+  (obj) => obj.value !== 'OpenWeight'
 );
 
 const validations = {
@@ -51,7 +51,7 @@ export default function EditProfileForm({ player }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    apiFetch(`players/${localStorage.getItem("playerId")}`, 'patch', values)
+    apiFetch(`players/${localStorage.getItem('playerId')}`, 'patch', values)
       .then((json) => {
         if (json.errors) {
           const errors = Object.keys(json.errors).reduce((acc, key) => {
@@ -62,9 +62,9 @@ export default function EditProfileForm({ player }) {
             ...prev,
             ...errors,
           }));
-          return
+          return;
         }
-        window.location = `/profiles/${localStorage.getItem("playerId")}`
+        window.location = `/profiles/${localStorage.getItem('playerId')}`;
       })
       .catch((error) => {
         debugger;
@@ -72,7 +72,7 @@ export default function EditProfileForm({ player }) {
   }
 
   function deletePlayer(playerId) {
-    apiFetch(`players/${localStorage.getItem("playerId")}`, "delete", {
+    apiFetch(`players/${localStorage.getItem('playerId')}`, 'delete', {
       playerId,
     })
       .then((json) => {
@@ -80,8 +80,8 @@ export default function EditProfileForm({ player }) {
           // ??
           return;
         }
-        localStorage.removeItem("jwt");
-        window.location = "/";
+        localStorage.removeItem('jwt');
+        window.location = '/';
       })
       .catch((error) => {
         debugger;
@@ -90,120 +90,131 @@ export default function EditProfileForm({ player }) {
 
   return (
     <>
-      <h1>Update my profile</h1>
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <TextField
-          label="First Name"
-          value={values.firstName}
-          validate={() => validate("firstName", validations["firstName"])}
-          errors={errors.firstName}
-          onChange={(val) => {
-            const firstName = val;
-            setValues((prev) => ({
-              ...prev,
-              firstName,
-            }));
-          }}
-        />
+      <div className="update-profile-wrapper">
+        <h1>Update my profile</h1>
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <TextField
+            label="First Name"
+            value={values.firstName}
+            validate={() => validate('firstName', validations['firstName'])}
+            errors={errors.firstName}
+            onChange={(val) => {
+              const firstName = val;
+              setValues((prev) => ({
+                ...prev,
+                firstName,
+              }));
+            }}
+          />
 
-        <TextField
-          label="Last Name"
-          value={values.lastName}
-          validate={() => validate("lastName", validations["lastName"])}
-          errors={errors.lastName}
-          onChange={(val) => {
-            const lastName = val;
-            setValues((prev) => ({
-              ...prev,
-              lastName,
-            }));
-          }}
-        />
+          <TextField
+            label="Last Name"
+            value={values.lastName}
+            validate={() => validate('lastName', validations['lastName'])}
+            errors={errors.lastName}
+            onChange={(val) => {
+              const lastName = val;
+              setValues((prev) => ({
+                ...prev,
+                lastName,
+              }));
+            }}
+          />
 
-        <TextField
-          label="Year of Birth"
-          value={values.birthYear}
-          validate={() => validate("birthYear", validations["birthYear"])}
-          errors={errors.birthYear}
-          onChange={(birthYear) =>
-            setValues((prev) => ({
-              ...prev,
-              birthYear,
-            }))
-          }
-        />
+          <TextField
+            label="Year of Birth"
+            value={values.birthYear}
+            validate={() => validate('birthYear', validations['birthYear'])}
+            errors={errors.birthYear}
+            onChange={(birthYear) =>
+              setValues((prev) => ({
+                ...prev,
+                birthYear,
+              }))
+            }
+          />
 
-        <div>
-          <label>Avatar</label>
-          <div>
-            <input type="file" ref={fileRef} onChange={imageChanged} />
-          </div>
-          {values.avatar ? (
-            <div>
-              <img src={values.avatar} alt="" width={100} />{" "}
-            </div>
-          ) : (
-              ""
+          <TextField
+            label="Update Your School Name"
+            value={values.school}
+            validate={() => validate('school', validations['school'])}
+            errors={errors.school}
+            onChange={(val) => {
+              const school = val;
+              setValues((prev) => ({
+                ...prev,
+                school,
+              }));
+            }}
+          />
+
+          <Dropdown
+            options={toValueLabel(communities)}
+            onChange={(val) => {
+              const community = val;
+              setValues((prev) => ({
+                ...prev,
+                community,
+              }));
+            }}
+            value={values.community}
+          />
+
+          <Dropdown
+            options={filteredWeightClasses}
+            onChange={(val) => {
+              const weightClass = val;
+              setValues((prev) => ({
+                ...prev,
+                weightClass,
+              }));
+            }}
+            value={values.weightClass}
+          />
+
+          <Dropdown
+            options={toValueLabel(genders)}
+            onChange={(val) => {
+              const gender = val;
+              setValues((prev) => ({
+                ...prev,
+                gender,
+              }));
+            }}
+            value={values.gender}
+          />
+
+          <div className="avatar-wrapper">
+            <h5>Avatar</h5>
+            {values.avatar ? (
+              <div className="img-zone">
+                <img src={values.avatar} alt="" width={100} />{' '}
+              </div>
+            ) : (
+              ''
             )}
-        </div>
-
-        <Dropdown
-          options={toValueLabel(communities)}
-          onChange={(val) => {
-            const community = val;
-            setValues((prev) => ({
-              ...prev,
-              community,
-            }));
-          }}
-          value={values.community}
-        />
-
-        <Dropdown
-          options={filteredWeightClasses}
-          onChange={(val) => {
-            const weightClass = val;
-            setValues((prev) => ({
-              ...prev,
-              weightClass,
-            }));
-          }}
-          value={values.weightClass}
-        />
-
-        <Dropdown
-          options={toValueLabel(genders)}
-          onChange={(val) => {
-            const gender = val;
-            setValues((prev) => ({
-              ...prev,
-              gender,
-            }));
-          }}
-          value={values.gender}
-        />
-
-        <TextField
-          label="Update Your School Name"
-          value={values.school}
-          validate={() => validate("school", validations["school"])}
-          errors={errors.school}
-          onChange={(val) => {
-            const school = val;
-            setValues((prev) => ({
-              ...prev,
-              school,
-            }));
-          }}
-        />
-
+            <div>
+              <input type="file" ref={fileRef} onChange={imageChanged} />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="action-wrapper">
         <Button
-          onClick={() => deletePlayer(localStorage.getItem("playerId"))}
+          className="action"
+          onClick={() => deletePlayer(localStorage.getItem('playerId'))}
         >
           Delete
-              </Button>
-        <Button type="submit" disabled={!valid()}>Update Profile</Button>
-      </form>
+        </Button>
+        <Button
+          className="action"
+          isSecondary={true}
+          type="submit"
+          disabled={!valid()}
+        >
+          Update Profile
+        </Button>
+      </div>
     </>
   );
 }

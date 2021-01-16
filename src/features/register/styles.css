@@ -1,0 +1,36 @@
+.register-wrapper {
+  padding: 15px;
+}
+
+.register-wrapper h1 {
+  text-align: center;
+}
+
+.register-wrapper .two-col {
+  display: grid;
+  grid-template-columns: 45vw 45vw;
+  grid-gap: 10px;
+}
+
+.register-wrapper h6 span {
+  color: #d20a0b;
+}
+
+.register-wrapper h6 {
+  text-align: center;
+}
+
+.avatar-wrapper .accept-rule {
+  margin: 20px 0;
+}
+
+.avatar-wrapper .accept-rule input {
+  width: 20px;
+  height: 20px;
+}
+.avatar-wrapper .accept-rule span {
+  position: relative;
+  top: -3px;
+  margin-left: 10px;
+  font-weight: 500;
+}
