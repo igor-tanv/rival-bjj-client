@@ -7,7 +7,7 @@ export default function Table({ data, renderHead, renderItem }) {
       {renderHead()}
     </thead>
     <tbody>
-      {renderItem()}
+      {data.map(row => renderItem(row))}
     </tbody>
   </table >
 }

@@ -175,3 +175,9 @@ div.post-match h3 {
   background-color: rgba(0, 0, 0, 0);
   width: 250px;
 }
+.my-contract-container {
+  padding: 15px;
+}
+.my-contract-container h1 {
+  text-align: center;
+}

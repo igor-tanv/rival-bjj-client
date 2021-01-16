@@ -63,9 +63,9 @@ export default function Contracts() {
       prev.map((contract) =>
         contract.id === selectedContract.id
           ? {
-              ...contract,
-              status: status,
-            }
+            ...contract,
+            status: status,
+          }
           : contract
       )
     );
@@ -131,7 +131,7 @@ export default function Contracts() {
   };
 
   return (
-    <div>
+    <div className="my-contract-container">
       <h1>My contracts</h1>
 
       <HoriztonalList
@@ -167,116 +167,60 @@ export default function Contracts() {
             </tr>
           );
         }}
-        renderItem={() => {
+        renderItem={(contract) => {
           return (
-              // <tr>
-              //   <td>
-              //     {
-              //       <div
-              //         className={`result-win margin-auto ${renderResultClass(
-              //           contract.result
-              //         )}`}
-              //       >
-              //         {contract.result}
-              //       </div>
-              //     }
-              //   </td>
-              //   <td>
-              //     <div className="single-row text-truncation-second-line">
-              //       {matchTypes[contract.type]}
-              //     </div>
-              //   </td>
-              //   <td>
-              //     <div className="row-container">
-              //       <div className="first-row text-truncation-second-line">
-              //         {localStorage.getItem('playerId') === contract.playerId
-              //           ? fullName(
-              //               contract.opponentFirstName,
-              //               contract.opponentLastName
-              //             )
-              //           : fullName(
-              //               contract.playerFirstName,
-              //               contract.playerLastName
-              //             )}
-              //       </div>
-              //     </div>
-              //   </td>
-              //   <td>
-              //     <div className="single-row text-truncation-second-line">
-              //       {contract.method}
-              //     </div>
-              //   </td>
-              //   <td>
-              //     <div className="single-row text-truncation-second-line">
-              //       {(filter === 'Received' || filter === 'Accepted') && (
-              //         <a
-              //           onClick={() => {
-              //             setSelectedContract(contract);
-              //             setOpenDetails(true);
-              //           }}
-              //         >
-              //           See details
-              //         </a>
-              //       )}
-              //     </div>
-              //   </td>
-              // </tr>
-              <>
-              <tr key="1">
-                <td>
-                  <div className="result-win margin-auto">pending</div>
-                </td>
-                <td>
-                  <div className="row-container">
-                    <div className="first-row  text-truncation">Fighting</div>
+            <tr>
+              <td>
+                {
+                  <div
+                    className={`result-win margin-auto ${renderResultClass(
+                      contract.result
+                    )}`}
+                  >
+                    {contract.result}
                   </div>
-                </td>
-                <td>
-                  <div className="row-container">
-                    <div className="first-row text-truncation-second-line">
-                      Jacob T. Jones
-                    </div>
+                }
+              </td>
+              <td>
+                <div className="single-row text-truncation-second-line">
+                  {matchTypes[contract.type]}
+                </div>
+              </td>
+              <td>
+                <div className="row-container">
+                  <div className="first-row text-truncation-second-line">
+                    {localStorage.getItem('playerId') === contract.playerId
+                      ? fullName(
+                        contract.opponentFirstName,
+                        contract.opponentLastName
+                      )
+                      : fullName(
+                        contract.playerFirstName,
+                        contract.playerLastName
+                      )}
                   </div>
-                </td>
-                <td>
-                  <div className="single-row text-truncation-second-line">
-                    No gi
-                  </div>
-                </td>
-                <td>
-                <div className="single-row text-truncation">
-                    Accepted
-                  </div>
-                </td>
-              </tr>
-              <tr key="2">
-                <td>
-                  <div className="result-win margin-auto">pending</div>
-                </td>
-                <td>
-                  <div className="row-container">
-                    <div className="first-row  text-truncation">Fighting</div>
-                  </div>
-                </td>
-                <td>
-                  <div className="row-container">
-                    <div className="first-row text-truncation-second-line">
-                      Jacob T. Jones
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className="single-row text-truncation-second-line">
-                    No gi
-                  </div>
-                </td>
-                <td>
-                <div className="single-row text-truncation">
-                    Declined
-                  </div>
-                </td>
-              </tr>
-              </>
+                </div>
+              </td>
+              <td>
+                <div className="single-row text-truncation-second-line">
+                  {contract.method}
+                </div>
+              </td>
+              <td>
+                <div className="single-row text-truncation-second-line">
+                  {(filter === 'Received' || filter === 'Accepted') && (
+                    <a
+                      onClick={() => {
+                        setSelectedContract(contract);
+                        setOpenDetails(true);
+                      }}
+                    >
+                      See details
+                    </a>
+                  )}
+                </div>
+              </td>
+            </tr>
           );
         }}
       />
@@ -329,16 +273,16 @@ export default function Contracts() {
             <button onClick={() => setOpenDetails(false)}>Close</button>
           </div>
         ) : (
-          <div>
-            <Button type="primary" onClick={accept}>
-              Accept
+            <div>
+              <Button type="primary" onClick={accept}>
+                Accept
             </Button>
-            <Button type="secondary" onClick={decline}>
-              Decline
+              <Button type="secondary" onClick={decline}>
+                Decline
             </Button>
-            <button onClick={() => setOpenDetails(false)}>Close</button>
-          </div>
-        )}
+              <button onClick={() => setOpenDetails(false)}>Close</button>
+            </div>
+          )}
       </div>
 
       <div
