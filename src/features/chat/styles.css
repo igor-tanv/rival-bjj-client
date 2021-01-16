@@ -1,18 +1,7 @@
 * {
   box-sizing: border-box;
 }
-.chat {
-  position: relative;
-  height: 400px;
-  width: 220px;
-  border: 1px solid rgb(109, 185, 247);
-}
-.chat .inner {
-  width: 100%;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0px;
-}
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -39,4 +28,31 @@ select:focus {
 
 .chat .inner .message:nth-child(odd) {
   background-color: rgb(237, 247, 255);
+}
+
+.chat-container {
+  padding: 15px;
+}
+
+.chat-container .chat {
+  position: relative;
+  height: 85vh;
+  width: 100%;
+  border: 1px solid rgb(109, 185, 247);
+}
+
+.chat-container .chat .inner {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  max-height: 80vh;
+}
+
+.chat-container .chat .inner .message-wrapper {
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.chat-container h1 {
+  text-align: center;
 }
