@@ -181,3 +181,59 @@ div.post-match h3 {
 .my-contract-container h1 {
   text-align: center;
 }
+
+@media (max-width: 600px) {
+  .single-row .__rival_button {
+    padding: 0;
+    font-size: 14px;
+  }
+}
+
+.issue-challenge-popup {
+  position: absolute;
+  top: 24vh;
+  width: 90vw;
+  z-index: 100;
+  border-radius: 0.25rem;
+  background-color: white;
+  display: block;
+  border: 1px solid black;
+  padding: 2rem;
+}
+
+.issue-challenge-popup .close-wrapper{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.issue-challenge-popup .close-wrapper img {
+  height: 18px;
+}
+
+.issue-challenge-popup .contract-action {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 10px;
+}
+
+.issue-challenge-popup #contract-detail h3{
+  text-align: center;
+}
+
+.issue-challenge-popup #contract-detail .info-rank .rank-type,
+.item-container .info-wrapper .info-school .school {
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: -0.3px;
+  color: #939393;
+}
+
+.item-container .info-wrapper .info-rank .rank-score,
+.item-container .info-wrapper .info-school .school-name {
+  margin-left: 3px;
+  font-size: 15px;
+  letter-spacing: -0.3px;
+  font-weight: 300;
+  color: #000000;
+}

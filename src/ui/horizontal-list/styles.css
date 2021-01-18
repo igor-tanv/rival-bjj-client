@@ -1,7 +1,7 @@
 div.horizontal {
   margin: 0;
   padding: 0;
-  grid-template-columns: 16vw 16vw 16vw 16vw 16vw 16vw;
+  grid-template-columns: repeat(6, 1fr);
   column-gap: 5px;
   display: grid;
 }
@@ -12,12 +12,12 @@ div.horizontal span.active {
 }
 div.horizontal span {
   padding: 5px 6px;
-  margin-right: 3px;
   text-align: center;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 375px) {
   div.horizontal {
-    grid-template-columns: 34px 39px 66px 62px 64px 66px;
+    grid-template-columns: 28px 36px 61px 59px 62px 64px;
+    column-gap:0;
   }
 }

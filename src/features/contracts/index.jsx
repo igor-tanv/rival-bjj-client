@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
+import { Link } from 'react-router-dom';
 
 import Button from '../../ui/button';
 import DateTimePicker from '../../ui/date-time-picker';
@@ -63,9 +64,9 @@ export default function Contracts() {
       prev.map((contract) =>
         contract.id === selectedContract.id
           ? {
-            ...contract,
-            status: status,
-          }
+              ...contract,
+              status: status,
+            }
           : contract
       )
     );
@@ -116,20 +117,6 @@ export default function Contracts() {
     return firstName + ' ' + lastName;
   }
 
-  const renderResultClass = (result) => {
-    switch (result) {
-      case 'pending':
-      case 'win':
-        return 'result-win';
-      case 'loss':
-        return 'result-loss';
-      case 'draw':
-        return 'result-draw';
-      default:
-        return '';
-    }
-  };
-
   return (
     <div className="my-contract-container">
       <h1>My contracts</h1>
@@ -138,7 +125,8 @@ export default function Contracts() {
         items={filters}
         renderItem={(item) => (
           <span
-            className={filter === item && 'active'}
+            key={item}
+            className={filter === item ? 'active' : ''}
             onClick={() => setFilter(item)}
           >
             {item}
@@ -152,34 +140,42 @@ export default function Contracts() {
           return (
             <tr>
               <td>
-                <div className="col-head result-head">Result</div>
+                <div className="col-head">Opponent</div>
               </td>
               <td>
                 <div className="col-head">Match type</div>
               </td>
               <td>
-                <div className="col-head">Opponent</div>
+                <div className="col-head">Date</div>
               </td>
               <td>
-                <div className="col-head">Method</div>
+                <div className="col-head">Location</div>
               </td>
-              <td></td>
+              {filter === 'Received' || filter === 'Accepted' ? (
+                <td className="col-head"></td>
+              ) : null}
             </tr>
           );
         }}
         renderItem={(contract) => {
+          console.log(contract);
+
           return (
-            <tr>
+            <tr key={contract.id}>
               <td>
-                {
-                  <div
-                    className={`result-win margin-auto ${renderResultClass(
-                      contract.result
-                    )}`}
-                  >
-                    {contract.result}
+                <div className="row-container">
+                  <div className="first-row text-truncation-second-line">
+                    {localStorage.getItem('playerId') === contract.playerId
+                      ? fullName(
+                          contract.opponentFirstName,
+                          contract.opponentLastName
+                        )
+                      : fullName(
+                          contract.playerFirstName,
+                          contract.playerLastName
+                        )}
                   </div>
-                }
+                </div>
               </td>
               <td>
                 <div className="single-row text-truncation-second-line">
@@ -189,37 +185,36 @@ export default function Contracts() {
               <td>
                 <div className="row-container">
                   <div className="first-row text-truncation-second-line">
-                    {localStorage.getItem('playerId') === contract.playerId
-                      ? fullName(
-                        contract.opponentFirstName,
-                        contract.opponentLastName
-                      )
-                      : fullName(
-                        contract.playerFirstName,
-                        contract.playerLastName
-                      )}
+                    <DateTimePicker
+                      className="react-datepicker-no-border"
+                      dateFormat="MMMM d, yyyy"
+                      selected={contract.startsAt}
+                      readOnly
+                    />
                   </div>
                 </div>
               </td>
               <td>
                 <div className="single-row text-truncation-second-line">
-                  {contract.method}
+                  {contract.location}
                 </div>
               </td>
-              <td>
-                <div className="single-row text-truncation-second-line">
-                  {(filter === 'Received' || filter === 'Accepted') && (
-                    <a
-                      onClick={() => {
-                        setSelectedContract(contract);
-                        setOpenDetails(true);
-                      }}
-                    >
-                      See details
-                    </a>
-                  )}
-                </div>
-              </td>
+              {filter === 'Received' || filter === 'Accepted' ? (
+                <td>
+                  <div className="single-row text-truncation-second-line">
+                    {
+                      <Button
+                        onClick={() => {
+                          setSelectedContract(contract);
+                          setOpenDetails(true);
+                        }}
+                      >
+                        See details
+                      </Button>
+                    }
+                  </div>
+                </td>
+              ) : null}
             </tr>
           );
         }}
@@ -227,20 +222,16 @@ export default function Contracts() {
 
       <div
         style={{
-          position: 'absolute',
-          top: '1rem',
-          width: '60%',
-          zIndex: 100,
-          borderRadius: '0.25rem',
-          backgroundColor: 'white',
           display: openDetails ? 'block' : 'none',
-          border: '1px solid black',
-          padding: '2rem',
         }}
+        className="issue-challenge-popup"
       >
         <div id="contract-detail">
-          {selectedContract && selectedContract.playerFirstName} vs.{' '}
-          {selectedContract && selectedContract.opponentFirstName}
+          <h3>
+            {selectedContract && selectedContract.playerFirstName} vs.{' '}
+            {selectedContract && selectedContract.opponentFirstName}
+          </h3>
+
           <p>Where: {selectedContract && selectedContract.location}</p>
           <p style={{ display: 'flex' }}>
             When:{' '}
@@ -262,27 +253,29 @@ export default function Contracts() {
             {selectedContract && selectedContract.ruleExceptions}
           </p>
           <p>Referee: {selectedContract && selectedContract.refereeName}</p>
+
+          <div className="close-wrapper">
+            <Link onClick={() => setOpenDetails(false)}>
+              <img src="/assets/images/close.png" className="close-btn" />
+            </Link>
+          </div>
         </div>
 
         {filter === 'Accepted' ? (
-          <div>
-            <Button type="primary" onClick={cancel}>
+          <div className="contract-action">
+            <Button isSecondary onClick={cancel}>
               Cancel Match
             </Button>
-            <button onClick={saveAsPdf}>Print PDF</button>
-            <button onClick={() => setOpenDetails(false)}>Close</button>
+            <Button onClick={saveAsPdf}>Print PDF</Button>
           </div>
         ) : (
-            <div>
-              <Button type="primary" onClick={accept}>
-                Accept
+          <div className="contract-action">
+            <Button onClick={accept}>Accept</Button>
+            <Button isSecondary onClick={decline}>
+              Decline
             </Button>
-              <Button type="secondary" onClick={decline}>
-                Decline
-            </Button>
-              <button onClick={() => setOpenDetails(false)}>Close</button>
-            </div>
-          )}
+          </div>
+        )}
       </div>
 
       <div
