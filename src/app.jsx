@@ -15,14 +15,12 @@ import ConfirmEmail from "./features/confirm-email";
 import EditProfile from "./features/profile/edit";
 import Rules from "./features/rules";
 import FAQ from "./features/faq";
-import ScrollToTop from "./ui/scroll-to-top";
 
 import "./styles.css";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <Theme>
         <Switch>
           <Route exact path="/">

@@ -61,6 +61,10 @@ function IssueContract({ match }) {
     );
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [submitted]);
+
   function valid() {
     return Object.keys(validations)
       .flatMap((key) => validations[key].map((v) => v(values[key])))
