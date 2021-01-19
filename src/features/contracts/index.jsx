@@ -232,10 +232,15 @@ export default function Contracts() {
             {selectedContract && selectedContract.opponentFirstName}
           </h3>
 
-          <p>Where: {selectedContract && selectedContract.location}</p>
-          <p style={{ display: 'flex' }}>
+          <p className="title">
+            Where:{' '}
+            <span className="info text-truncation-second-line">
+              {selectedContract && selectedContract.location}
+            </span>
+          </p>
+          <p className="title">
             When:{' '}
-            <span>
+            <span className="info">
               {selectedContract && selectedContract.startsAt ? (
                 <DateTimePicker
                   className="date-picker"
@@ -246,13 +251,30 @@ export default function Contracts() {
               ) : null}
             </span>
           </p>
-          <p>Type: {selectedContract && selectedContract.type}</p>
-          <p>Weightclass: {selectedContract && selectedContract.weightClass}</p>
-          <p>
-            Rule Exceptions:{' '}
-            {selectedContract && selectedContract.ruleExceptions}
+          <p className="title">
+            Type:{' '}
+            <span className="info text-truncation-second-line">
+              {selectedContract && selectedContract.type}
+            </span>
           </p>
-          <p>Referee: {selectedContract && selectedContract.refereeName}</p>
+          <p className="title">
+            Weightclass:{' '}
+            <span className="info text-truncation-second-line">
+              {selectedContract && selectedContract.weightClass}
+            </span>
+          </p>
+          <p className="title">
+            Rule Exceptions:{' '}
+            <span className="info text-truncation-second-line">
+              {selectedContract && selectedContract.ruleExceptions}
+            </span>
+          </p>
+          <p className="title">
+            Referee:{' '}
+            <span className="info text-truncation-second-line">
+              {selectedContract && selectedContract.refereeName}
+            </span>
+          </p>
 
           <div className="close-wrapper">
             <Link onClick={() => setOpenDetails(false)}>
@@ -263,7 +285,7 @@ export default function Contracts() {
 
         {filter === 'Accepted' ? (
           <div className="contract-action">
-            <Button isSecondary onClick={cancel}>
+            <Button isSecondary onClick={cancel} className="pad-10">
               Cancel Match
             </Button>
             <Button onClick={saveAsPdf}>Print PDF</Button>
@@ -280,12 +302,12 @@ export default function Contracts() {
 
       <div
         style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           left: 0,
           display: openDetails ? 'block' : 'none',
-          width: window.innerWidth,
-          height: window.innerHeight,
+          width: '100%',
+          height: '100%',
           backgroundColor: 'rgba(0,0,0,0.8)',
           zIndex: 99,
         }}

@@ -93,17 +93,17 @@ function IssueContract({ match }) {
     return <Redirect to="/profile"></Redirect>;
 
   return (
-    <div>
+    <div className="issue-contract-container">
       <h1>Challenge Contract</h1>
 
       {submitted ? (
-        <>
+        <div className="issue-notice">
           <h3>
-            You have challenged {opponent.firstName} {opponent.lastName} to a
+            You have challenged <br/> <span>{opponent.firstName} {opponent.lastName}</span> to a
             match!
           </h3>
           <h4>When they accept or reject you will be notified via email</h4>
-        </>
+        </div>
       ) : (
         <Form
           handleSubmit={handleSubmit}

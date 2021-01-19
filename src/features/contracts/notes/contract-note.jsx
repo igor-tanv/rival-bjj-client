@@ -2,8 +2,8 @@ import React from "react"
 
 export default function ContractNote() {
 
-  return <div>
-    <h5>NOTE: If you plan to host this match at your school it's your responsibility to provide:</h5>
+  return <div style={{backgroundColor: "#ffffff"}}>
+    <h5><span>NOTE:</span> If you plan to host this match at your school it's your responsibility to provide:</h5>
     <ul>
       <li>Match Referee (usually your instructor). Make sure they read the Rules page.</li>
       <li>Match Timekeeper </li>

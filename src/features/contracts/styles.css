@@ -191,7 +191,8 @@ div.post-match h3 {
 
 .issue-challenge-popup {
   position: absolute;
-  top: 24vh;
+  top: 30%;
+  right: 5%;
   width: 90vw;
   z-index: 100;
   border-radius: 0.25rem;
@@ -219,21 +220,94 @@ div.post-match h3 {
 
 .issue-challenge-popup #contract-detail h3{
   text-align: center;
+  margin-bottom: 30px;
 }
 
-.issue-challenge-popup #contract-detail .info-rank .rank-type,
-.item-container .info-wrapper .info-school .school {
-  font-weight: 300;
-  font-size: 14px;
+.issue-challenge-popup #contract-detail .title{
+  font-weight: 400;
+  font-size: 18px;
   letter-spacing: -0.3px;
+  color: #939393;
+  display: flex;
+}
+
+.issue-challenge-popup #contract-detail .info,
+.issue-challenge-popup #contract-detail .info .react-datepicker-wrapper .react-datepicker__input-container input
+{
+  margin-left: 3px;
+  font-size: 19px;
+  letter-spacing: -0.3px;
+  font-weight: 500;
+  color: #000000;
+  position: relative;
+  text-transform: capitalize;
+  top: -3px;
+}
+
+.issue-challenge-popup #contract-detail .info .react-datepicker-wrapper {
+  position: relative;
+  top: 3px;
+}
+
+
+@media (max-width: 375px) {
+  .issue-challenge-popup {
+    top:20%
+  }
+}
+
+.issue-contract-container {
+  padding: 15px;
+}
+
+.issue-contract-container h1 {
+  text-align: center;
+}
+
+.issue-contract-container h3 span,
+.issue-contract-container h5 span,
+.issue-contract-container div.fee-note span
+ {
+  color: #D20A0B;
+}
+
+.issue-contract-container h3 {
+  text-align: center;
+}
+
+.issue-form {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px 31px rgba(77, 77, 77, 0.05);
+  padding: 10px;
+  display: grid;
+  grid-row-gap: 25px;
+}
+
+.issue-form .__rival_text-field-component {
+  width: 100%;
+  border: 1px solid #E2E2E2;
+  height: 40px;
+}
+
+.issue-form label {
   color: #939393;
 }
 
-.item-container .info-wrapper .info-rank .rank-score,
-.item-container .info-wrapper .info-school .school-name {
-  margin-left: 3px;
-  font-size: 15px;
-  letter-spacing: -0.3px;
-  font-weight: 300;
-  color: #000000;
+.issue-contract-container div.fee-note {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px 31px rgba(77, 77, 77, 0.05);
+  padding: 10px;
+}
+
+.issue-form .accept-rule {
+  margin: 0;
+}
+
+.issue-contract-container .issue-notice h4 {
+  color: #939393;
+  font-weight: 400;
+}
+
+.issue-contract-container .issue-notice h3 {
+  line-height: 40px;
 }

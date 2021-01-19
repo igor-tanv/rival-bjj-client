@@ -20,15 +20,15 @@
   text-align: center;
 }
 
-.avatar-wrapper .accept-rule {
+.accept-rule {
   margin: 20px 0;
 }
 
-.avatar-wrapper .accept-rule input {
+.accept-rule input {
   width: 20px;
   height: 20px;
 }
-.avatar-wrapper .accept-rule span {
+.accept-rule span {
   position: relative;
   top: -3px;
   margin-left: 10px;
