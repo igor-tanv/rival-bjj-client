@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import Dropdown from '../../ui/dropdown';
+import Dropdown from "../../ui/dropdown";
 
-import { apiFetch } from '../../modules/api-fetch';
-import { toValueLabel } from '../../modules/object';
+import { apiFetch } from "../../modules/api-fetch";
+import { toValueLabel } from "../../modules/object";
 
-import weightClasses from '../../data/weight-classes.json';
-import matchTypes from '../../data/match-types.json';
-import communities from '../../data/communities.json';
+import weightClasses from "../../data/weight-classes.json";
+import matchTypes from "../../data/match-types.json";
+import communities from "../../data/communities.json";
 
-import Button from '../../ui/button';
-import Banner from '../../ui/banner';
+import Button from "../../ui/button";
+import Banner from "../../ui/banner";
 
-import './styles.css';
+import "./styles.css";
 
 export default function PlayerSearch({ }) {
   const [players, setPlayers] = useState([]);
@@ -22,7 +22,7 @@ export default function PlayerSearch({ }) {
   const [community, setCommunity] = useState(Object.keys(communities)[0]);
 
   useEffect(() => {
-    apiFetch('players').then((json) => setPlayers(json.players));
+    apiFetch("players").then((json) => setPlayers(json.players));
   }, []);
 
   function search(players) {
@@ -34,32 +34,51 @@ export default function PlayerSearch({ }) {
   }
 
   function sortByGiNoGi(playersSortedByGiNoGi) {
-    return playersSortedByGiNoGi.sort((a, b) => b[giNoGi] - a[giNoGi]);
+    return playersSortedByGiNoGi.sort((a, b) => {
+      const aTotalMatches = a.wins + a.draws + a.losses;
+      const bTotalMatches = b.wins + b.draws + b.losses;
+      if (aTotalMatches === 0 && bTotalMatches > 0) return 1;
+      if (aTotalMatches > 0 && bTotalMatches === 0) return -1;
+      return b[giNoGi] - a[giNoGi];
+    });
   }
 
   function sortByWeightClass(communityPlayersSortedByGiNoGi) {
-    if (weightClass === 'OpenWeight') return communityPlayersSortedByGiNoGi;
+    if (weightClass === "OpenWeight") return communityPlayersSortedByGiNoGi;
     return communityPlayersSortedByGiNoGi.filter(
       (player) => player.weightClass === weightClass
     );
   }
 
-  const getMedalForPlayer = (index) => {
-    const imageNames = ['gold.png', 'silver.png', 'bronze.png'];
-    return imageNames[index] ? (
-      <img src={`assets/images/${imageNames[index]}`} className="info-medal" />
-    ) : (
-        <div className="info-no-medal">{index + 1}</div>
-      );
+  const getMedalForPlayer = (player, ranksWithMedal) => {
+    const imageNames = ["gold.png", "silver.png", "bronze.png"];
+    const totalMatch = player.wins + player.draws + player.losses;
+    if (totalMatch) {
+      const index = ranksWithMedal.indexOf(player[giNoGi]);
+      return index <= 2 ? (
+        <img
+          src={`assets/images/${imageNames[index]}`}
+          className="info-medal"
+        />
+      ) : (
+          <div className="info-no-medal">{index + 1}</div>
+        );
+    }
+    return null;
   };
 
   const found = search(players);
+  const ranksWithMedal = [
+    ...new Set(
+      found
+        .filter((player) => player.wins + player.draws + player.losses)
+        .map((player) => player[giNoGi])
+    ),
+  ].sort((a, b) => b - a);
   return (
     <div>
       <Banner />
-      <div
-        className="dropdown-wrapper"
-      >
+      <div className="dropdown-wrapper">
         <Dropdown
           options={toValueLabel(communities)}
           onChange={setCommunity}
@@ -76,8 +95,8 @@ export default function PlayerSearch({ }) {
           value={weightClass}
         />
       </div>
-      {found.length > 0
-        ? found.map((player, i) => {
+      {found.length > 0 ? (
+        found.map((player, i) => {
           const {
             _id,
             firstName,
@@ -103,11 +122,13 @@ export default function PlayerSearch({ }) {
                   <div className="info-title text-truncation">
                     {firstName} {lastName}
                   </div>
-                  <div className="info-weight"><span className="text-truncation">{weightClass}</span></div>
+                  <div className="info-weight">
+                    <span className="text-truncation">{weightClass}</span>
+                  </div>
                   <div className="info-record">
-                      Win: {wins} Loss: {losses} Draw: {draws}
-                    </div>
-                  {giNoGi === 'nogi' ? (
+                    Win: {wins} Loss: {losses} Draw: {draws}
+                  </div>
+                  {giNoGi === "nogi" ? (
                     <div className="info-rank">
                       <div className="rank-type">Nogi Rank:</div>
                       <div className="rank-score">{nogi}</div>
@@ -119,16 +140,20 @@ export default function PlayerSearch({ }) {
                       </div>
                     )}
                   <div className="info-school">
-                    <div className="school">School:</div>
+                    <div className="school">Team:</div>
                     <div className="school-name text-truncation">{school}</div>
                   </div>
-                  {getMedalForPlayer(i)}
+                  {getMedalForPlayer(player, ranksWithMedal)}
                 </div>
               </div>
             </Link>
           );
         })
-        : <div className="empty-search">There are no fighters in that weight class</div>}
+      ) : (
+          <div className="empty-search">
+            There are no fighters in that weight class
+          </div>
+        )}
     </div>
   );
 }

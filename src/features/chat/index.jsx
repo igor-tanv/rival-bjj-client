@@ -71,27 +71,34 @@ function Chat({ match }) {
   return reconnecting ? (
     <div>reconnecting!</div>
   ) : (
-      <form onSubmit={sendMessage}>
-        <div className='chat'>
-          <div className='inner'>
-            {messages
-              .filter((m) => m.type === 'say')
-              .map((m, i) => (
-                <div key={i} className='message'>
-                  {m.sender === playerId ? 'You' : recipient.firstName}:{' '}
-                  {m.text}
-                </div>
-              ))}
-            <input
-              type='text'
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-            <Button type='submit' disabled={validMessage(message)}>Send</Button>
+      <div class="chat-container">
+        {recipient && <h1>Chatting with {recipient.firstName}</h1>}
+
+        <form onSubmit={sendMessage}>
+          <div className='chat'>
+            <div className='inner'>
+              <div className="message-wrapper">
+                {messages
+                  .filter((m) => m.type === 'say')
+                  .map((m, i) => (
+                    <div key={i} className='message'>
+                      {m.sender === playerId ? 'You' : recipient.firstName}:{' '}
+                      {m.text}
+                    </div>
+                  ))}
+              </div>
+
+              <input
+                type='text'
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <Button type='submit' disabled={validMessage(message)}>Send</Button>
+            </div>
           </div>
-        </div>
-        {recipient && <div>Chatting with {recipient.firstName}</div>}
-      </form>
+        </form>
+      </div>
+
     );
 }
 

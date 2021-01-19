@@ -88,6 +88,30 @@ export default function Contracts({ playerId, contracts }) {
             <td className="single-row text-truncation-second-line">{getWeightClass(contract.weightClass)}</td>
           </tr>
         ))}
+        <tr key="1">
+          <td>
+            <div className="result-win margin-auto">pending</div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row text-truncation-second-line">
+                Jacob T. Jones
+              </div>
+            </div>
+          </td>
+          <td>
+            <div className="row-container">
+              <div className="first-row  text-truncation">Oct 20, 2020</div>
+              <div className="second-row  text-truncation">Fighting</div>
+            </div>
+          </td>
+          <td>
+            <div className="single-row text-truncation-second-line">No gi</div>
+          </td>
+          <td>
+            <div className="single-row text-truncation-second-line">Heavy</div>
+          </td>
+        </tr>
       </tbody>
     </table>
   );

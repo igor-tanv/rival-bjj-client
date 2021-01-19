@@ -70,7 +70,7 @@ function Profile({
           <Rating value={qualityRating} className="evaluate-stars" />
           <div className="evaluate-detail">
             <div className="info-school">
-              <div className="school">School:</div>
+              <div className="school">Team:</div>
               <div className="school-name text-truncation">{school}</div>
             </div>
             <div className="info-rank">
