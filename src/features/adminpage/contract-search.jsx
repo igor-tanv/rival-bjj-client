@@ -39,7 +39,7 @@ export default function ContractSearch() {
       </div>
       <Button type="submit">Search</Button>
     </form>
-    {contracts.length ? <ContractUpdate contracts={contracts} /> : null}
+    {contracts.length ? <ContractUpdate contracts={contracts} /> : 'not found'}
   </div>
 
 }
