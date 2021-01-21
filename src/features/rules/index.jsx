@@ -1,7 +1,7 @@
 import React from "react"
 export default function Rules({ }) {
 
-  return <div>
+  return <div className="common-container">
     <h1>Competition Rules</h1>
     <p>Read these rules before you send or accept any matches. They apply to Gi and NoGi.</p>
 

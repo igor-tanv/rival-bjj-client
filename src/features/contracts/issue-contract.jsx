@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { apiFetch } from "../../modules/api-fetch";
 import Form from "./form";
+import Button from "../../ui/button";
 
 import weightClasses from "../../data/weight-classes.json";
 import matchTypes from "../../data/match-types.json";
@@ -93,17 +95,20 @@ function IssueContract({ match }) {
     return <Redirect to="/profile"></Redirect>;
 
   return (
-    <div>
+    <div className="issue-contract-container">
       <h1>Challenge Contract</h1>
 
       {submitted ? (
-        <>
+        <div className="issue-notice">
           <h3>
-            You have challenged {opponent.firstName} {opponent.lastName} to a
+            You have challenged <br/> <span>{opponent.firstName} {opponent.lastName}</span> to a
             match!
           </h3>
           <h4>When they accept or reject you will be notified via email</h4>
-        </>
+          <Link to="/">
+          <Button>Home</Button>
+        </Link>
+        </div>
       ) : (
         <Form
           handleSubmit={handleSubmit}
