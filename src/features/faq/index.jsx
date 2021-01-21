@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FAQ({}) {
+export default function FAQ({ }) {
   return (
     <div className="common-container">
       <h1>FAQ</h1>
@@ -74,7 +74,7 @@ export default function FAQ({}) {
       </div>
       <div>
         <h5>
-          3.) I cancelled or declined a contract by accident, can I reverse
+          9.) I cancelled or declined a contract by accident, can I reverse
           this?
         </h5>
         No. Once the match has been cancelled or declined you have to issue a
