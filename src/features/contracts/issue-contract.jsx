@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { apiFetch } from "../../modules/api-fetch";
 import Form from "./form";
+import Button from "../../ui/button";
 
 import weightClasses from "../../data/weight-classes.json";
 import matchTypes from "../../data/match-types.json";
@@ -103,6 +105,9 @@ function IssueContract({ match }) {
             match!
           </h3>
           <h4>When they accept or reject you will be notified via email</h4>
+          <Link to="/">
+          <Button>Home</Button>
+        </Link>
         </div>
       ) : (
         <Form

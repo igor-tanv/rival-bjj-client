@@ -197,24 +197,25 @@ export default function EditProfileForm({ player }) {
               <input type="file" ref={fileRef} onChange={imageChanged} />
             </div>
           </div>
+          <div className="action-wrapper">
+            <Button
+              className="action"
+              onClick={() => deletePlayer(localStorage.getItem('playerId'))}
+            >
+              Delete
+            </Button>
+            <Button
+              className="action"
+              isSecondary={true}
+              type="submit"
+              disabled={!valid()}
+            >
+              Update Profile
+            </Button>
+          </div>
         </form>
       </div>
-      <div className="action-wrapper">
-        <Button
-          className="action"
-          onClick={() => deletePlayer(localStorage.getItem('playerId'))}
-        >
-          Delete
-        </Button>
-        <Button
-          className="action"
-          isSecondary={true}
-          type="submit"
-          disabled={!valid()}
-        >
-          Update Profile
-        </Button>
-      </div>
+
     </>
   );
 }

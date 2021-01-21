@@ -109,3 +109,25 @@ body {
 .pad-10 {
   padding: 10px !important;
 }
+
+.common-container {
+  padding: 15px;
+  display: grid;
+  grid-row-gap: 15px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.common-container h1{
+  text-align: center;
+}
+
+.common-container img {
+  width: 100%;
+}
+.login-container h3{
+  text-align: center;
+}
+
+.login-container h3 span {
+  color: #D20A0B;
+}

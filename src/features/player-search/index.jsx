@@ -158,10 +158,3 @@ export default function PlayerSearch({ }) {
   );
 }
 
-// <Link to={`/profiles/${_id}`} className="profile-link">
-//                       <img
-//                         src="assets/images/profile-link-arrow.png"
-//                         className="arrow"
-//                       />
-//                       Visit Profile
-//                     </Link>

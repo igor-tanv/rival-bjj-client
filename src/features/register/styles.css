@@ -34,3 +34,23 @@
   margin-left: 10px;
   font-weight: 500;
 }
+.register-notice {
+  padding: 15px;
+}
+
+.register-notice h1 {
+  text-align: center;
+}
+
+.register-notice p {
+  font-size: 19px;
+  letter-spacing: -0.3px;
+  font-weight: 500;
+  color: #939393;
+  position: relative;
+  margin-top: 20px;
+}
+
+.register-notice p span{
+  color: #D20A0B;
+}

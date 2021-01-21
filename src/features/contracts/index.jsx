@@ -158,7 +158,6 @@ export default function Contracts() {
           );
         }}
         renderItem={(contract) => {
-          console.log(contract);
 
           return (
             <tr key={contract.id}>
@@ -184,7 +183,7 @@ export default function Contracts() {
               </td>
               <td>
                 <div className="row-container">
-                  <div className="first-row text-truncation-second-line">
+                  <div className="first-row text-truncation">
                     <DateTimePicker
                       className="react-datepicker-no-border"
                       dateFormat="MMMM d, yyyy"
@@ -195,8 +194,10 @@ export default function Contracts() {
                 </div>
               </td>
               <td>
-                <div className="single-row text-truncation-second-line">
-                  {contract.location}
+              <div className="row-container">
+                  <div className="first-row text-truncation">
+                    {contract.location}
+                  </div>
                 </div>
               </td>
               {filter === 'Received' || filter === 'Accepted' ? (
