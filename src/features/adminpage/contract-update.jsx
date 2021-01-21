@@ -21,7 +21,7 @@ export default function ContractUpdate(contractObj) {
 
   const winnerOptions = ["red", "blue", "draw", "cancelled"]
   const winMethod = ["Sub", "Points", "DQ", "Forfeit", "Injury", "Advantage"]
-  const qualityRating = ["1", "2", "3", "4", "5", "na"]
+  const qualityRating = ["1", "2", "3", "4", "5"]
 
   // post 
   function handleSubmit(e) {
