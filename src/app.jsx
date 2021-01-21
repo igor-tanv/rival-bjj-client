@@ -1,7 +1,12 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import ScrollToTop from "./ui/scroll-to-top";
 import Theme from "./ui/theme";
+
 import JwtRoute from "./jwt-route";
+
+import Admin from "./features/adminpage"
 
 import Homepage from "./features/homepage";
 import Login from "./features/login";
@@ -15,7 +20,6 @@ import ConfirmEmail from "./features/confirm-email";
 import EditProfile from "./features/profile/edit";
 import Rules from "./features/rules";
 import FAQ from "./features/faq";
-import ScrollToTop from "./ui/scroll-to-top";
 
 import "./styles.css";
 
@@ -55,6 +59,10 @@ export default function App() {
 
           <JwtRoute exact path="/profile/edit">
             <EditProfile />
+          </JwtRoute>
+
+          <JwtRoute exact path="/admin">
+            <Admin />
           </JwtRoute>
 
           <JwtRoute exact path="/contracts">

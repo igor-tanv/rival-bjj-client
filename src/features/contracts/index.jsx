@@ -17,12 +17,11 @@ import './styles.css';
 export default function Contracts() {
   const [contracts, setContracts] = useState([]);
   const filters = [
-    'All',
-    'Sent',
-    'Received',
-    'Declined',
-    'Accepted',
-    'Cancelled',
+    "Sent",
+    "Received",
+    "Declined",
+    "Accepted",
+    "Cancelled",
   ];
   const [filter, setFilter] = useState(filters[0]);
   const [openDetails, setOpenDetails] = useState(false);
@@ -36,7 +35,6 @@ export default function Contracts() {
     );
   }, []);
 
-  // can we combine accept and decline into a single fucntion?
   function accept() {
     apiFetch(`contracts/${selectedContract.id}/accept`, 'post').then((json) => {
       updateContractStatus(json.contract.status);
@@ -75,7 +73,6 @@ export default function Contracts() {
   }
 
   function filterBy(contracts) {
-    if (filter === 'All') return contracts;
     return contracts.filter((contract) => {
       if (
         filter === 'Sent' &&
@@ -246,7 +243,7 @@ export default function Contracts() {
                 <DateTimePicker
                   className="date-picker"
                   dateFormat="MMMM d, yyyy h:mm aa"
-                  selected={selectedContract.startsAt}
+                  selected={selectedContract.startsAt * 1000}
                   readOnly
                 />
               ) : null}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Contracts from './contracts';
+import Contracts from './match-history';
 import Rating from './rating';
 
 import Button from '../../ui/button';
@@ -29,6 +29,7 @@ function Profile({
   weightClass,
   qualityRating,
   contracts,
+  isAdmin
 }) {
   const showedContracts = filterAcceptedOrCompletedMatches(contracts);
   return (
@@ -113,6 +114,13 @@ function Profile({
         )}
         {localStorage.getItem('playerId') === _id && (
           <>
+            {isAdmin ?
+              <Button
+                className="action"
+                onClick={() => history.push(`/admin`)}
+                isSecondary={true}
+              >Admin
+            </Button> : null}
             <Button
               className="action"
               onClick={() => history.push(`/contracts`)}
@@ -120,7 +128,6 @@ function Profile({
             >
               My Contracts
             </Button>
-
             <Button
               className="action"
               onClick={() => history.push(`/profile/edit`)}

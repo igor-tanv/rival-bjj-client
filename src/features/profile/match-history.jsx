@@ -5,22 +5,22 @@ import matchTypes from '../../data/match-types.json';
 import './styles.css';
 
 const getWeightClass = (cls) => {
+  if (cls === 'OpenWeight') return 'Open Weight'
   return weightClasses[cls].substr(0, weightClasses[cls].indexOf(':'));
 };
 
-const renderResultClass = (result) => {
-  switch (result) {
-    case 'pending':
-    case 'win':
-      return 'result-win';
-    case 'loss':
-      return 'result-loss';
-    case 'draw':
-      return 'result-draw';
-    default:
-      return '';
-  }
+const renderResultClass = (contract, playerId) => {
+  if (contract.result === 'draw') return 'result-draw'
+  if (((contract.result === 'win') && (contract.playerId === playerId)) || ((contract.result === 'loss') && (contract.opponentId === playerId))) return 'result-win'
+  return 'result-loss'
 };
+
+const renderResult = (contract, playerId) => {
+  if (contract.result === 'draw') return 'Draw'
+  if (contract.result === 'pending') return 'Pending'
+  if (((contract.result === 'win') && (contract.playerId === playerId)) || ((contract.result === 'loss') && (contract.opponentId === playerId))) return 'Win'
+  return 'Loss'
+}
 
 export default function Contracts({ playerId, contracts }) {
   return (
@@ -50,10 +50,10 @@ export default function Contracts({ playerId, contracts }) {
               {
                 <div
                   className={`result-win margin-auto ${renderResultClass(
-                    contract.result
+                    contract, playerId
                   )}`}
                 >
-                  {contract.result}
+                  {renderResult(contract, playerId)}
                 </div>
               }
             </td>
@@ -72,7 +72,7 @@ export default function Contracts({ playerId, contracts }) {
                   <DateTimePicker
                     className="react-datepicker-no-border"
                     dateFormat="MMMM d, yyyy"
-                    selected={contract.startsAt}
+                    selected={contract.startsAt * 1000}
                     readOnly
                   />
                 </div>
@@ -93,6 +93,3 @@ export default function Contracts({ playerId, contracts }) {
     </table>
   );
 }
-
-
-
