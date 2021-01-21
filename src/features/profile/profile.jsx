@@ -86,11 +86,11 @@ function Profile({
       <div className="history-wrapper">
         <div className="history-title">Match history</div>
         {
-            showedContracts.length > 0 ? (
+          showedContracts.length > 0 ? (
             <Contracts playerId={_id} contracts={showedContracts} />
           ) : (
-            <div className="no-info">This fighter has not fought yet</div>
-          )
+              <div className="no-info">This fighter has not fought yet</div>
+            )
         }
       </div>
       <div className="action-wrapper">
@@ -135,48 +135,3 @@ function Profile({
 }
 
 export default withRouter(Profile);
-// {showedContracts.length > 0 ? (
-//   <Contracts playerId={_id} contracts={showedContracts} />
-// ) : (
-//   'This fighter has not fought yet'
-// )}
-// <img src="/assets/images/test-avatar.png" alt="..." className="profile-avatar"/>
-// (
-//   <div>
-//     <div className="flex flex-col items-center justify-center w-full">
-//       <img
-//         className="item-avatar"
-//         src={
-//           avatar
-//             ? avatar
-//             : `${process.env.PUBLIC_URL}/assets/images/default.png`
-//         }
-//         alt=""
-//       />
-//       <div>
-//         quality rating <Rating value={qualityRating} />
-//       </div>
-//     </div>
-
-//     <div>
-//       Name: {firstName} {lastName}
-//     </div>
-//     <div>
-//       Fight Record (W/L/D): {wins}/{losses}/{draws}
-//     </div>
-//     <div>School: {school}</div>
-//     <div>Gi Rank: {gi}</div>
-//     <div>No Gi Rank: {nogi}</div>
-//     <div>Weight: {weightClass}</div>
-
-//     <div>
-
-//       <h3>Match history</h3>
-//       {showedContracts.length > 0 ? (
-//         <Contracts playerId={_id} contracts={showedContracts} />
-//       ) : (
-//           "This fighter has not fought yet"
-//         )}
-//     </div>
-//   </div>
-// )
