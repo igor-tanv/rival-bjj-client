@@ -5,6 +5,7 @@
   padding: 11px 1.5rem;
   /* border-radius: 3px; */
   border: none;
+  cursor: pointer;
 }
 
 .__rival_button_secondary {
@@ -12,6 +13,7 @@
   background-color: #FFFFFF;
   border: 1px solid  #D20A0B;
   padding: 10px 1.5rem;
+  cursor: pointer;
 }
 
 .__rival_button:disabled, .__rival_button_secondary:disabled {
