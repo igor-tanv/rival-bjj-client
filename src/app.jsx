@@ -1,12 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import ScrollToTop from "./ui/scroll-to-top";
 import Theme from "./ui/theme";
 
 import JwtRoute from "./jwt-route";
 
-import Admin from "./features/adminpage"
+import Admin from "./features/adminpage";
 
 import Homepage from "./features/homepage";
 import Login from "./features/login";
