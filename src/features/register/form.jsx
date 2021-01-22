@@ -275,8 +275,8 @@ export default function RegisterForm({ setComplete }) {
               <img src={values.avatar} alt="" width={100} />{' '}
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
           <div>
             <input type="file" ref={fileRef} onChange={imageChanged} />
           </div>
@@ -292,12 +292,12 @@ export default function RegisterForm({ setComplete }) {
               }}
               value={values.acceptsTos}
             />
-            <span>I have read and agree to follow these <a href=""> rules</a></span>
+            <span>I have read and agree to follow these <a href="/rules"> rules</a></span>
           </div>
-          <Button type="submit" disabled={!valid()}>
+        </div>
+        <Button type="submit" disabled={!valid()}>
           Register Your Profile
         </Button>
-        </div>
       </form>
     </div>
   );

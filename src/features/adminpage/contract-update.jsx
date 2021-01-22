@@ -90,7 +90,6 @@ export default function ContractUpdate(contractObj) {
           onChange={(val) => setrefereeComments(val)}
         />
       </td>
-
       <Button type="submit" onClick={() => setContractId(contract.id)}>Submit Result</Button>
     </form>
   }
