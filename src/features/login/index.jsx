@@ -39,7 +39,7 @@ export default function Login({ }) {
   return (
     <div className='login-container'>
       <form onSubmit={onSubmit}>
-        <p>Sign in to your Rival account</p>
+        <h3>Sign in<br/> to your <span>Rival</span> account</h3>
         {error && <span className="error">{error}</span>}
         <TextField
           type='text'

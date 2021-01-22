@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import useWebsocket from './use-websocket';
 import { apiFetch } from "../../modules/api-fetch"
@@ -93,7 +94,14 @@ function Chat({ match }) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <Button type='submit' disabled={validMessage(message)}>Send</Button>
+              <div>
+                <Button type='submit' disabled={validMessage(message)}>Send</Button>
+                <Link to={`/profiles/${recipientId}`}>
+                  <Button className="action"
+                    isSecondary={true}
+                  >Close</Button>
+                </Link>
+              </div>
             </div>
           </div>
         </form>

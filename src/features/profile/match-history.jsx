@@ -5,22 +5,22 @@ import matchTypes from '../../data/match-types.json';
 import './styles.css';
 
 const getWeightClass = (cls) => {
+  if (cls === 'OpenWeight') return 'Open Weight'
   return weightClasses[cls].substr(0, weightClasses[cls].indexOf(':'));
 };
 
-const renderResultClass = (result) => {
-  switch (result) {
-    case 'pending':
-    case 'win':
-      return 'result-win';
-    case 'loss':
-      return 'result-loss';
-    case 'draw':
-      return 'result-draw';
-    default:
-      return '';
-  }
+const renderResultClass = (contract, playerId) => {
+  if (contract.result === 'draw') return 'result-draw'
+  if (((contract.result === 'win') && (contract.playerId === playerId)) || ((contract.result === 'loss') && (contract.opponentId === playerId))) return 'result-win'
+  return 'result-loss'
 };
+
+const renderResult = (contract, playerId) => {
+  if (contract.result === 'draw') return 'Draw'
+  if (contract.result === 'pending') return 'Pending'
+  if (((contract.result === 'win') && (contract.playerId === playerId)) || ((contract.result === 'loss') && (contract.opponentId === playerId))) return 'Win'
+  return 'Loss'
+}
 
 export default function Contracts({ playerId, contracts }) {
   return (
@@ -44,16 +44,16 @@ export default function Contracts({ playerId, contracts }) {
         </tr>
       </thead>
       <tbody>
-        {contracts.map((contract, i) => (
-          <tr key={i}>
+        {contracts.map((contract) => (
+          <tr key={contract.id}>
             <td>
               {
                 <div
                   className={`result-win margin-auto ${renderResultClass(
-                    contract.result
+                    contract, playerId
                   )}`}
                 >
-                  {contract.result}
+                  {renderResult(contract, playerId)}
                 </div>
               }
             </td>
@@ -72,7 +72,7 @@ export default function Contracts({ playerId, contracts }) {
                   <DateTimePicker
                     className="react-datepicker-no-border"
                     dateFormat="MMMM d, yyyy"
-                    selected={contract.startsAt}
+                    selected={contract.startsAt * 1000}
                     readOnly
                   />
                 </div>
@@ -89,34 +89,7 @@ export default function Contracts({ playerId, contracts }) {
             <td className="single-row text-truncation-second-line">{getWeightClass(contract.weightClass)}</td>
           </tr>
         ))}
-        <tr key="1">
-          <td>
-            <div className="result-win margin-auto">pending</div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row text-truncation-second-line">
-                Jacob T. Jones
-              </div>
-            </div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="first-row  text-truncation">Oct 20, 2020</div>
-              <div className="second-row  text-truncation">Fighting</div>
-            </div>
-          </td>
-          <td>
-            <div className="single-row text-truncation-second-line">No gi</div>
-          </td>
-          <td>
-            <div className="single-row text-truncation-second-line">Heavy</div>
-          </td>
-        </tr>
       </tbody>
     </table>
   );
 }
-
-
-
