@@ -62,6 +62,7 @@ export default function RegisterForm({ setComplete }) {
     values,
   });
   const fileRef = useRef();
+  const [issue, setIssue] = useState(false);
 
   function imageChanged() {
     const file = fileRef.current && fileRef.current.files[0];
@@ -95,7 +96,7 @@ export default function RegisterForm({ setComplete }) {
         setComplete(true);
       })
       .catch((error) => {
-        debugger;
+        setIssue(true);
       });
   }
 
@@ -295,6 +296,7 @@ export default function RegisterForm({ setComplete }) {
             <span>I have read and agree to follow these <a href="/rules"> rules</a></span>
           </div>
         </div>
+        {issue ? <div>sever error</div> : <></>}
         <Button type="submit" disabled={!valid()}>
           Register Your Profile
         </Button>
