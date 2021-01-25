@@ -39,7 +39,7 @@ export default function Login({ }) {
   return (
     <div className='login-container'>
       <form onSubmit={onSubmit}>
-        <h3>Sign in<br/> to your <span>Rival</span> account</h3>
+        <h3>Sign in<br /> to your <span>Rival</span> account</h3>
         {error && <span className="error">{error}</span>}
         <TextField
           type='text'
@@ -55,7 +55,6 @@ export default function Login({ }) {
           onChange={(val) => setPassword(val)}
         />
         <Button type='submit'>Log in</Button>
-        <Link to="/login/reset">Forgot password?</Link>
       </form>
     </div>
   )
