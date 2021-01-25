@@ -18,13 +18,40 @@ export default function FAQ({ }) {
         <h5>2.) How do I challenge someone to a match?</h5>
         <ol>
           <li>Register and confirm your profile.</li>
-          <li>Find an opponent you'd like to challenge and go to their profile.</li>
-          <li>Chat with your opponent first. It's up to you and the opponent to determine when, where, what weight and what rules the match will be held under.</li>
-          <li>Once you agree on these details, click "Issue Challenge" and fill in the Match Contract details.</li>
-          <li>Once you click "Send" the match contract will be sent to your opponent who will either accept or decline the match.</li>
-          <li>On the day of the match print your match contract and bring it with you to the match. Give the contract and pay the match fee (listed in the contract) to the referee before the match begins.</li>
-          <li>After the match, the referee will sign and return the contract to you. If you are the winner it is your responsibility to take a photo of the contract (make sure the photo is readable) and send it to the Admin (admin contact is listed on the contract). The Admin will update your results in 48 hours.</li>
-          <li>Regardless of the match outcome both competitors can review the quality of their opponent in the "Rate Your Opponent" section of the match contract. Submit your rating by following the directions in the contract.</li>
+          <li>
+            Find an opponent you'd like to challenge and go to their profile.
+          </li>
+          <li>
+            Chat with your opponent first. It's up to you and the opponent to
+            determine when, where, what weight and what rules the match will be
+            held under.
+          </li>
+          <li>
+            Once you agree on these details, click "Issue Challenge" and fill in
+            the Match Contract details.
+          </li>
+          <li>
+            Once you click "Send" the match contract will be sent to your
+            opponent who will either accept or decline the match.
+          </li>
+          <li>
+            On the day of the match print your match contract and bring it with
+            you to the match. Give the contract and pay the match fee (listed in
+            the contract) to the referee before the match begins.
+          </li>
+          <li>
+            After the match, the referee will sign and return the contract to
+            you. If you are the winner it is your responsibility to take a photo
+            of the contract (make sure the photo is readable) and send it to the
+            Admin (admin contact is listed on the contract). The Admin will
+            update your results in 48 hours.
+          </li>
+          <li>
+            Regardless of the match outcome both competitors can review the
+            quality of their opponent in the "Rate Your Opponent" section of the
+            match contract. Submit your rating by following the directions in
+            the contract.
+          </li>
         </ol>
       </div>
       <div>
@@ -63,14 +90,17 @@ export default function FAQ({ }) {
       </div>
       <div>
         <h5>8.)What do the different tabs in my contract mean?</h5>
-        All: All contracts that have your name on it Sent: Contracts you sent
-        that have not been accepted or declined by the opponent Received:
-        Contracts you received that have not been accepted or declined by you
-        Declined: Contracts declined by you or the opponent Accepted: Upcoming
-        contracts that have been accepted by you and opponent. This is where
-        your print off your contract by clicking on See Details. Cancelled:
-        Contracts that were accepted but then cancelled by either you or the
+        <span style={{ color: '#D20A0B' }}>Sent:</span>{' '}
+        Contracts you sent that have not been accepted or declined by the
         opponent.
+        <br /> <span style={{color: "#D20A0B"}}>Received:</span> Contracts you received that have not been
+        accepted or declined by you. <br />
+        <span style={{color: "#D20A0B"}}>Declined:</span> Contracts declined by you or the opponent.
+        <br /> <span style={{color: "#D20A0B"}}>Accepted:</span> Upcoming contracts that have been accepted
+        by you and opponent. This is where your print off your contract by
+        clicking on See Details. <br />
+        <span style={{color: "#D20A0B"}}>Cancelled:</span> Contracts that were accepted but then cancelled
+        by either you or the opponent.
       </div>
       <div>
         <h5>
