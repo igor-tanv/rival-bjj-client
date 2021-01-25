@@ -16,6 +16,7 @@
   height: 160px;
   position: relative;
   margin: 12px;
+  max-width: 600px;
 }
 
 .item-container .info-wrapper {
@@ -184,4 +185,14 @@
 
 .item-container .info-weight > * {
   transform: skew(20deg);
+}
+
+.container-wrapper a {
+  text-align: center;
+  text-align: -webkit-center;
+}
+
+.container-wrapper {
+  display: flex;
+  flex-direction: column;
 }

@@ -86,17 +86,17 @@ body {
 }
 
 .table-match-history .col-head.result-head {
-  max-width: 50px;
+  max-width: max-content;
   margin: 0 auto;
 }
 
 .table-match-history .row-container .first-row,
 .table-match-history .row-container .second-row {
-  max-width: 20vw;
+  width: max-content;
 }
 
 .table-match-history .single-row {
-  max-width: 15vw;
+  width: max-content;
 }
 
 .history-wrapper .no-info {
@@ -131,4 +131,12 @@ body {
 
 .login-container h3 span {
   color: #D20A0B;
+}
+
+.max-content {
+  width: max-content !important;
+}
+
+.table-container {
+  overflow: auto;
 }

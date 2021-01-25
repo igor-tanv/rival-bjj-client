@@ -1,7 +1,7 @@
 div.horizontal {
   margin: 0;
   padding: 0;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 5px;
   display: grid;
 }
@@ -17,7 +17,7 @@ div.horizontal span {
 
 @media (max-width: 375px) {
   div.horizontal {
-    grid-template-columns: 28px 36px 61px 59px 62px 64px;
+    /* grid-template-columns: 28px 36px 61px 59px 62px 64px; */
     column-gap:0;
   }
 }
