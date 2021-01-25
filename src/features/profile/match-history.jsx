@@ -5,40 +5,41 @@ import matchTypes from '../../data/match-types.json';
 import './styles.css';
 
 const getWeightClass = (cls) => {
-  if (cls === 'OpenWeight') return 'Open Weight'
+  if (cls === 'OpenWeight') return 'Open Weight';
   return weightClasses[cls].substr(0, weightClasses[cls].indexOf(':'));
 };
 
 const renderResultClass = (contract, playerId) => {
-  if (contract.result === 'draw') return 'result-draw'
-  if (((contract.result === 'win') && (contract.playerId === playerId)) || ((contract.result === 'loss') && (contract.opponentId === playerId))) return 'result-win'
-  return 'result-loss'
+  if (contract.result === 'draw' || contract.result === 'pending')
+    return 'result-draw';
+  if (
+    (contract.result === 'win' && contract.playerId === playerId) ||
+    (contract.result === 'loss' && contract.opponentId === playerId)
+  )
+    return 'result-win';
+  return 'result-loss';
 };
 
 const renderResult = (contract, playerId) => {
-  if (contract.result === 'draw') return 'Draw'
-  if (contract.result === 'pending') return 'Pending'
-  if (((contract.result === 'win') && (contract.playerId === playerId)) || ((contract.result === 'loss') && (contract.opponentId === playerId))) return 'Win'
-  return 'Loss'
-}
+  if (contract.result === 'draw') return 'Draw';
+  if (contract.result === 'pending') return 'Pending';
+  if (
+    (contract.result === 'win' && contract.playerId === playerId) ||
+    (contract.result === 'loss' && contract.opponentId === playerId)
+  )
+    return 'Win';
+  return 'Loss';
+};
 
 export default function Contracts({ playerId, contracts }) {
   return (
     <table className="table-match-history">
       <thead>
         <tr>
-          <td>
-            <div className="col-head result-head">Result</div>
-          </td>
-          <td>
-            <div className="col-head">Opponent Name</div>
-          </td>
-          <td>
-            <div className="row-container">
-              <div className="col-head">Date</div>
-              <div className="col-head">Type</div>
-            </div>
-          </td>
+          <td className="col-head result-head">Result</td>
+          <td className="col-head">Type</td>
+          <td className="col-head">Opponent Name</td>
+          <td className="col-head">Date</td>
           <td className="col-head">Method</td>
           <td className="col-head">W. Class</td>
         </tr>
@@ -50,12 +51,18 @@ export default function Contracts({ playerId, contracts }) {
               {
                 <div
                   className={`result-win margin-auto ${renderResultClass(
-                    contract, playerId
+                    contract,
+                    playerId
                   )}`}
                 >
                   {renderResult(contract, playerId)}
                 </div>
               }
+            </td>
+            <td>
+              <div className="single-row text-truncation-second-line">
+                {matchTypes[contract.type]}
+              </div>
             </td>
             <td>
               <div className="row-container">
@@ -67,26 +74,24 @@ export default function Contracts({ playerId, contracts }) {
               </div>
             </td>
             <td>
-              <div className="row-container">
-                <div className="first-row text-truncation">
-                  <DateTimePicker
-                    className="react-datepicker-no-border"
-                    dateFormat="MMMM d, yyyy"
-                    selected={contract.startsAt * 1000}
-                    readOnly
-                  />
-                </div>
-                <div className="second-row text-truncation">
-                  {contract.method}
-                </div>
+              <div className="single-row text-truncation-second-line">
+                <DateTimePicker
+                  className="react-datepicker-no-border"
+                  dateFormat="MMMM d, yyyy"
+                  selected={contract.startsAt * 1000}
+                  readOnly
+                />
               </div>
             </td>
             <td>
               <div className="single-row text-truncation-second-line">
-                {matchTypes[contract.type]}
+                {contract.method}
               </div>
             </td>
-            <td className="single-row text-truncation-second-line">{getWeightClass(contract.weightClass)}</td>
+
+            <td className="single-row text-truncation-second-line">
+              {getWeightClass(contract.weightClass)}
+            </td>
           </tr>
         ))}
       </tbody>

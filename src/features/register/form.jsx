@@ -62,6 +62,7 @@ export default function RegisterForm({ setComplete }) {
     values,
   });
   const fileRef = useRef();
+  const [serverError, setServerError] = useState(false);
 
   function imageChanged() {
     const file = fileRef.current && fileRef.current.files[0];
@@ -95,7 +96,7 @@ export default function RegisterForm({ setComplete }) {
         setComplete(true);
       })
       .catch((error) => {
-        debugger;
+        setServerError(true);
       });
   }
 
@@ -275,8 +276,8 @@ export default function RegisterForm({ setComplete }) {
               <img src={values.avatar} alt="" width={100} />{' '}
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
           <div>
             <input type="file" ref={fileRef} onChange={imageChanged} />
           </div>
@@ -292,12 +293,13 @@ export default function RegisterForm({ setComplete }) {
               }}
               value={values.acceptsTos}
             />
-            <span>I have read and agree to follow these <a href=""> rules</a></span>
+            <span>I have read and agree to follow these <a href="/rules"> rules</a></span>
           </div>
-          <Button type="submit" disabled={!valid()}>
+        </div>
+        {serverError ? <div>Server Error</div> : <></>}
+        <Button type="submit" disabled={!valid()}>
           Register Your Profile
         </Button>
-        </div>
       </form>
     </div>
   );

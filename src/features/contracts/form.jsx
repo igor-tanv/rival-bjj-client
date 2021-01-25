@@ -148,7 +148,7 @@ export default function Form({
               value={values.acceptsTos}
             />
             <span>
-              I have <a href="">read and accept the match rules</a>
+              I have read and accept the match<a href="/rules"> rules</a>
             </span>
           </label>
         </div>

@@ -25,7 +25,8 @@ body {
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
 }
 
 
@@ -63,7 +64,7 @@ body {
   color: #039a1b;
   text-align: center;
   text-transform: capitalize;
-  max-width: 18vw;
+  max-width: 50px;
 }
 .table-match-history .result-loss {
   color: #d20a0b;
