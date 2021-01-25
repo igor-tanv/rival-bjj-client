@@ -130,6 +130,9 @@ export default function Contracts() {
         renderHead={() => {
           return (
             <tr>
+            {filter === 'Received' || filter === 'Accepted' ? (
+              <td className="col-head"></td>
+            ) : null}
               <td>
                 <div className="col-head">Opponent</div>
               </td>
@@ -144,15 +147,28 @@ export default function Contracts() {
               <td>
                 <div className="col-head">Location</div>
               </td>
-              {filter === 'Received' || filter === 'Accepted' ? (
-                <td className="col-head"></td>
-              ) : null}
             </tr>
           );
         }}
         renderItem={(contract) => {
           return (
             <tr key={contract.id}>
+            {filter === 'Received' || filter === 'Accepted' ? (
+              <td>
+                {
+                  <div className="single-row">
+                    <Button
+                      onClick={() => {
+                        setSelectedContract(contract);
+                        setOpenDetails(true);
+                      }}
+                    >
+                      See details
+                    </Button>
+                  </div>
+                }
+              </td>
+            ) : null}
               <td>
                 <div className="single-row">
                   {localStorage.getItem('playerId') === contract.playerId
@@ -180,22 +196,6 @@ export default function Contracts() {
                   <div className="first-row">{contract.location}</div>
                 </div>
               </td>
-              {filter === 'Received' || filter === 'Accepted' ? (
-                <td>
-                  {
-                    <div className="single-row">
-                      <Button
-                        onClick={() => {
-                          setSelectedContract(contract);
-                          setOpenDetails(true);
-                        }}
-                      >
-                        See details
-                      </Button>
-                    </div>
-                  }
-                </td>
-              ) : null}
             </tr>
           );
         }}
