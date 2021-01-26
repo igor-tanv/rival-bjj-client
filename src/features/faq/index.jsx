@@ -53,7 +53,7 @@ export default function FAQ({ }) {
       </div>
       <div>
         <h5>
-          7.)What can I do if my opponent or their instructor breaks the
+          7.) What can I do if my opponent or their instructor breaks the
           contract rules?
         </h5>
         After every match you can always review the quality of your opponent.
@@ -62,7 +62,7 @@ export default function FAQ({ }) {
         a copy of your contract for any disputes which may arise later on.
       </div>
       <div>
-        <h5>8.)What do the different tabs in my contract mean?</h5>
+        <h5>8.) What do the different tabs in my contract mean?</h5>
         All: All contracts that have your name on it Sent: Contracts you sent
         that have not been accepted or declined by the opponent Received:
         Contracts you received that have not been accepted or declined by you
