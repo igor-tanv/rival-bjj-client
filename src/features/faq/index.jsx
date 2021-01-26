@@ -80,7 +80,7 @@ export default function FAQ({ }) {
       </div>
       <div>
         <h5>
-          7.)What can I do if my opponent or their instructor breaks the
+          7.) What can I do if my opponent or their instructor breaks the
           contract rules?
         </h5>
         After every match you can always review the quality of your opponent.
