@@ -296,7 +296,7 @@ export default function RegisterForm({ setComplete }) {
             <span>I have read and agree to follow these <a href="/rules"> rules</a></span>
           </div>
         </div>
-        {serverError ? <div>Server Error</div> : <></>}
+        {serverError ? <div>Server Error</div> : null}
         <Button type="submit" disabled={!valid()}>
           Register Your Profile
         </Button>
