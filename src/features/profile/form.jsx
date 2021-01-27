@@ -100,7 +100,7 @@ export default function EditProfileForm({ player }) {
 
         // Resize the image
         const canvas = document.createElement('canvas')
-        const max_size = 140
+        const max_size = 180
         let width = image.width
         let height = image.height
 
@@ -234,7 +234,7 @@ export default function EditProfileForm({ player }) {
             <h5>Avatar</h5>
             {values.avatar ? (
               <div className="img-zone">
-                <img src={values.avatar} alt="" width={100} />{' '}
+                <img src={values.avatar} alt="" width={130} height={140} />{' '}
               </div>
             ) : (
                 ''
