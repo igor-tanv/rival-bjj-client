@@ -272,8 +272,7 @@ div.post-match h3 {
 }
 
 .issue-contract-container h3 span,
-.issue-contract-container h5 span,
-.issue-contract-container div.fee-note span {
+.issue-contract-container h5 span {
   color: #d20a0b;
 }
 
@@ -293,12 +292,6 @@ div.post-match h3 {
   width: 100%;
   border: 1px solid #e2e2e2;
   height: 40px;
-}
-
-.issue-contract-container div.fee-note {
-  background-color: #ffffff;
-  box-shadow: 0px 4px 20px 31px rgba(77, 77, 77, 0.05);
-  padding: 10px;
 }
 
 .issue-form .accept-rule {

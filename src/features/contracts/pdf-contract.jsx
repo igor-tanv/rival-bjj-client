@@ -41,10 +41,6 @@ export default function PDFContract({ selectedContract }) {
             <ol>
               <li>Print this contract and bring it to the match</li>
               <li>Sign your name in the box below</li>
-              <li>
-                Give this contract to the referee before the match starts along
-                with 100,000VND
-              </li>
               <li>Follow the Post Match Instructions</li>
             </ol>
           </h5>
@@ -120,8 +116,7 @@ export default function PDFContract({ selectedContract }) {
             </h1>
             <h5>
               <center>
-                (Referee completes 1-7: make sure each competitor has paid the
-                Match Fee)
+                (Referee completes 1-7)
               </center>
             </h5>
             <h3>1. Winner (circle one): RED / BLUE / DRAW</h3>

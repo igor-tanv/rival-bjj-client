@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 
 import ContractNote from './notes/contract-note';
-import FeeNote from './notes/fee-note';
 
 import DateTimePicker from '../../ui/date-time-picker';
 import Dropdown from '../../ui/dropdown';
@@ -156,7 +155,6 @@ export default function Form({
           Send Contract to Opponent
         </Button>
       </form>
-      <FeeNote />
     </>
   );
 }
