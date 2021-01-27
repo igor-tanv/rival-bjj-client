@@ -7,7 +7,8 @@ export default function Button({
   type = 'button',
   onClick,
   isSecondary,
-  className
+  className,
+  ...ortherProps
 }) {
   return (
     <button
@@ -15,6 +16,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={`${className} ${isSecondary ? '__rival_button_secondary' : '__rival_button'} `}
+      {...ortherProps}
     >
       {children}
     </button>

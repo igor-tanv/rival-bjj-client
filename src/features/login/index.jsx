@@ -54,7 +54,9 @@ export default function Login({ }) {
           value={password}
           onChange={(val) => setPassword(val)}
         />
-        <Button type='submit'>Log in</Button>
+        <div style={{textAlign: "center"}}>
+          <Button type='submit' style={{minWidth: "50vw"}}>Log in</Button>
+        </div>
       </form>
     </div>
   )
