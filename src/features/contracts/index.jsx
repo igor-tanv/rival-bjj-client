@@ -16,13 +16,7 @@ import './styles.css';
 
 export default function Contracts() {
   const [contracts, setContracts] = useState([]);
-  const filters = [
-    "Sent",
-    "Received",
-    "Declined",
-    "Accepted",
-    "Cancelled",
-  ];
+  const filters = ['Sent', 'Received', 'Declined', 'Accepted', 'Cancelled'];
   const [filter, setFilter] = useState(filters[0]);
   const [openDetails, setOpenDetails] = useState(false);
   const [selectedContract, setSelectedContract] = useState(null);
@@ -136,11 +130,16 @@ export default function Contracts() {
         renderHead={() => {
           return (
             <tr>
+            {filter === 'Received' || filter === 'Accepted' ? (
+              <td className="col-head"></td>
+            ) : null}
               <td>
                 <div className="col-head">Opponent</div>
               </td>
               <td>
-                <div className="col-head">Match type</div>
+                <div className="col-head" style={{ width: '70px' }}>
+                  Match type
+                </div>
               </td>
               <td>
                 <div className="col-head">Date</div>
@@ -148,71 +147,55 @@ export default function Contracts() {
               <td>
                 <div className="col-head">Location</div>
               </td>
-              {filter === 'Received' || filter === 'Accepted' ? (
-                <td className="col-head"></td>
-              ) : null}
             </tr>
           );
         }}
         renderItem={(contract) => {
-
           return (
             <tr key={contract.id}>
+            {filter === 'Received' || filter === 'Accepted' ? (
+              <td>
+                {
+                  <div className="single-row">
+                    <Button
+                      onClick={() => {
+                        setSelectedContract(contract);
+                        setOpenDetails(true);
+                      }}
+                    >
+                      See details
+                    </Button>
+                  </div>
+                }
+              </td>
+            ) : null}
+              <td>
+                <div className="single-row">
+                  {localStorage.getItem('playerId') === contract.playerId
+                    ? fullName(
+                        contract.opponentFirstName,
+                        contract.opponentLastName
+                      )
+                    : fullName(
+                        contract.playerFirstName,
+                        contract.playerLastName
+                      )}
+                </div>
+              </td>
+              <td>{matchTypes[contract.type]}</td>
+              <td>
+                <DateTimePicker
+                  className="react-datepicker-no-border"
+                  dateFormat="MMMM d, yyyy"
+                  selected={contract.startsAt}
+                  readOnly
+                />
+              </td>
               <td>
                 <div className="row-container">
-                  <div className="first-row text-truncation-second-line">
-                    {localStorage.getItem('playerId') === contract.playerId
-                      ? fullName(
-                          contract.opponentFirstName,
-                          contract.opponentLastName
-                        )
-                      : fullName(
-                          contract.playerFirstName,
-                          contract.playerLastName
-                        )}
-                  </div>
+                  <div className="first-row">{contract.location}</div>
                 </div>
               </td>
-              <td>
-                <div className="single-row text-truncation-second-line">
-                  {matchTypes[contract.type]}
-                </div>
-              </td>
-              <td>
-                <div className="row-container">
-                  <div className="first-row text-truncation">
-                    <DateTimePicker
-                      className="react-datepicker-no-border"
-                      dateFormat="MMMM d, yyyy"
-                      selected={contract.startsAt}
-                      readOnly
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>
-              <div className="row-container">
-                  <div className="first-row text-truncation">
-                    {contract.location}
-                  </div>
-                </div>
-              </td>
-              {filter === 'Received' || filter === 'Accepted' ? (
-                <td>
-                  <div className="single-row text-truncation-second-line">
-                    {
-                      <Button
-                        onClick={() => {
-                          setSelectedContract(contract);
-                          setOpenDetails(true);
-                        }}
-                      >
-                        See details
-                      </Button>
-                    }
-                  </div>
-                </td>
-              ) : null}
             </tr>
           );
         }}
@@ -226,8 +209,8 @@ export default function Contracts() {
       >
         <div id="contract-detail">
           <h3>
-            {selectedContract && selectedContract.playerFirstName} vs.{' '}
-            {selectedContract && selectedContract.opponentFirstName}
+            {selectedContract && (selectedContract.playerFirstName + " " + selectedContract.playerLastName)}<br/> <span style={{color:"#939393"}}>vs</span><br/>
+            {selectedContract && (selectedContract.opponentFirstName + " " + selectedContract.opponentLastName)}
           </h3>
 
           <p className="title">

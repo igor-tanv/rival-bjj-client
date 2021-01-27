@@ -188,7 +188,7 @@ div.post-match h3 {
 
 @media (max-width: 600px) {
   .single-row .__rival_button {
-    padding: 0;
+    padding: 5px;
     font-size: 14px;
   }
 }

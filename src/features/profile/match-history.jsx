@@ -33,68 +33,70 @@ const renderResult = (contract, playerId) => {
 
 export default function Contracts({ playerId, contracts }) {
   return (
-    <table className="table-match-history">
-      <thead>
-        <tr>
-          <td className="col-head result-head">Result</td>
-          <td className="col-head">Type</td>
-          <td className="col-head">Opponent Name</td>
-          <td className="col-head">Date</td>
-          <td className="col-head">Method</td>
-          <td className="col-head">W. Class</td>
-        </tr>
-      </thead>
-      <tbody>
-        {contracts.map((contract) => (
-          <tr key={contract.id}>
-            <td>
-              {
-                <div
-                  className={`result-win margin-auto ${renderResultClass(
-                    contract,
-                    playerId
-                  )}`}
-                >
-                  {renderResult(contract, playerId)}
-                </div>
-              }
-            </td>
-            <td>
-              <div className="single-row text-truncation-second-line">
-                {matchTypes[contract.type]}
-              </div>
-            </td>
-            <td>
-              <div className="row-container">
-                <div className="first-row text-truncation-second-line">
-                  {playerId === contract.playerId
-                    ? `${contract.opponentFirstName} ${contract.opponentLastName}`
-                    : `${contract.playerFirstName} ${contract.playerLastName}`}
-                </div>
-              </div>
-            </td>
-            <td>
-              <div className="single-row text-truncation-second-line">
-                <DateTimePicker
-                  className="react-datepicker-no-border"
-                  dateFormat="MMMM d, yyyy"
-                  selected={contract.startsAt * 1000}
-                  readOnly
-                />
-              </div>
-            </td>
-            <td>
-              <div className="single-row text-truncation-second-line">
-                {contract.method}
-              </div>
-            </td>
-
-            <td className="single-row text-truncation-second-line">
-              {getWeightClass(contract.weightClass)}
-            </td>
+    <div className="table-container">
+      <table className="table-match-history">
+        <thead>
+          <tr>
+            <td className="col-head result-head">Result</td>
+            <td className="col-head">Type</td>
+            <td className="col-head" style={{minWidth: "106px"}}>Opponent Name</td>
+            <td className="col-head">Date</td>
+            <td className="col-head">Method</td>
+            <td className="col-head">W. Class</td>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {contracts.map((contract) => (
+            <tr key={contract.id}>
+              <td>
+                {
+                  <div
+                    className={`result-win margin-auto ${renderResultClass(
+                      contract,
+                      playerId
+                    )}`}
+                  >
+                    {renderResult(contract, playerId)}
+                  </div>
+                }
+              </td>
+              <td>
+                <div className="single-row text-truncation-second-line">
+                  {matchTypes[contract.type]}
+                </div>
+              </td>
+              <td>
+                <div className="row-container">
+                  <div className="first-row text-truncation-second-line">
+                    {playerId === contract.playerId
+                      ? `${contract.opponentFirstName} ${contract.opponentLastName}`
+                      : `${contract.playerFirstName} ${contract.playerLastName}`}
+                  </div>
+                </div>
+              </td>
+              <td>
+                  <DateTimePicker
+                    className="react-datepicker-no-border"
+                    dateFormat="MMMM d, yyyy"
+                    selected={contract.startsAt * 1000}
+                    readOnly
+                  />
+              </td>
+              <td>
+                <div className="single-row text-truncation-second-line">
+                  {contract.method}
+                </div>
+              </td>
+
+              <td>
+                <div className="single-row text-truncation-second-line">
+                  {getWeightClass(contract.weightClass)}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
