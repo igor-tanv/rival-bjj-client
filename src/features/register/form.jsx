@@ -76,7 +76,7 @@ export default function RegisterForm({ setComplete }) {
 
         // Resize the image
         const canvas = document.createElement('canvas')
-        const max_size = 140
+        const max_size = 160
         let width = image.width
         let height = image.height
 

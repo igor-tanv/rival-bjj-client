@@ -36,19 +36,6 @@ export default function EditProfileForm({ player }) {
   });
   const fileRef = useRef();
 
-  // function imageChanged() {
-  //   const file = fileRef.current && fileRef.current.files[0];
-  //   if (!file) return;
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = function (e) {
-  //     setValues((prev) => ({
-  //       ...prev,
-  //       avatar: reader.result,
-  //     }));
-  //   };
-  // }
-
   function handleSubmit(e) {
     e.preventDefault();
     apiFetch(`players/${localStorage.getItem('playerId')}`, 'patch', values)
@@ -100,7 +87,7 @@ export default function EditProfileForm({ player }) {
 
         // Resize the image
         const canvas = document.createElement('canvas')
-        const max_size = 140
+        const max_size = 160
         let width = image.width
         let height = image.height
 
