@@ -36,19 +36,6 @@ export default function EditProfileForm({ player }) {
   });
   const fileRef = useRef();
 
-  // function imageChanged() {
-  //   const file = fileRef.current && fileRef.current.files[0];
-  //   if (!file) return;
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = function (e) {
-  //     setValues((prev) => ({
-  //       ...prev,
-  //       avatar: reader.result,
-  //     }));
-  //   };
-  // }
-
   function handleSubmit(e) {
     e.preventDefault();
     apiFetch(`players/${localStorage.getItem('playerId')}`, 'patch', values)

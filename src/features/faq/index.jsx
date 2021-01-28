@@ -36,8 +36,7 @@ export default function FAQ({ }) {
           </li>
           <li>
             On the day of the match print your match contract and bring it with
-            you to the match. Give the contract and pay the match fee (listed in
-            the contract) to the referee before the match begins.
+            you to the match. Give the contract to the ref before the match starts.
           </li>
           <li>
             After the match, the referee will sign and return the contract to
@@ -93,13 +92,13 @@ export default function FAQ({ }) {
         <span style={{ color: '#D20A0B' }}>Sent:</span>{' '}
         Contracts you sent that have not been accepted or declined by the
         opponent.
-        <br /> <span style={{color: "#D20A0B"}}>Received:</span> Contracts you received that have not been
+        <br /> <span style={{ color: "#D20A0B" }}>Received:</span> Contracts you received that have not been
         accepted or declined by you. <br />
-        <span style={{color: "#D20A0B"}}>Declined:</span> Contracts declined by you or the opponent.
-        <br /> <span style={{color: "#D20A0B"}}>Accepted:</span> Upcoming contracts that have been accepted
+        <span style={{ color: "#D20A0B" }}>Declined:</span> Contracts declined by you or the opponent.
+        <br /> <span style={{ color: "#D20A0B" }}>Accepted:</span> Upcoming contracts that have been accepted
         by you and opponent. This is where your print off your contract by
         clicking on See Details. <br />
-        <span style={{color: "#D20A0B"}}>Cancelled:</span> Contracts that were accepted but then cancelled
+        <span style={{ color: "#D20A0B" }}>Cancelled:</span> Contracts that were accepted but then cancelled
         by either you or the opponent.
       </div>
       <div>
