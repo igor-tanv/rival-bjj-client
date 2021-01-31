@@ -26,6 +26,7 @@ const validations = {
   lastName: [isRequired],
   birthYear: [isValidAge],
   school: [isRequired],
+  email: [isRequired]
 };
 
 export default function EditProfileForm({ player }) {
@@ -54,7 +55,7 @@ export default function EditProfileForm({ player }) {
         window.location = `/profiles/${localStorage.getItem('playerId')}`;
       })
       .catch((error) => {
-        debugger;
+        console.log(error)
       });
   }
 
@@ -64,14 +65,13 @@ export default function EditProfileForm({ player }) {
     })
       .then((json) => {
         if (json.errors) {
-          // ??
           return;
         }
         localStorage.removeItem('jwt');
         window.location = '/';
       })
       .catch((error) => {
-        debugger;
+        console.log(error)
       });
   }
 
@@ -150,6 +150,20 @@ export default function EditProfileForm({ player }) {
               setValues((prev) => ({
                 ...prev,
                 lastName,
+              }));
+            }}
+          />
+
+          <TextField
+            label="Email"
+            value={values.email}
+            validate={() => validate('email', validations['email'])}
+            errors={errors.email}
+            onChange={(val) => {
+              const email = val;
+              setValues((prev) => ({
+                ...prev,
+                email,
               }));
             }}
           />
