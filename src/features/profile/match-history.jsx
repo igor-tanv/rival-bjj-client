@@ -39,7 +39,7 @@ export default function Contracts({ playerId, contracts }) {
           <tr>
             <td className="col-head result-head">Result</td>
             <td className="col-head">Type</td>
-            <td className="col-head" style={{minWidth: "106px"}}>Opponent Name</td>
+            <td className="col-head" style={{ minWidth: "106px" }}>Opponent Name</td>
             <td className="col-head">Date</td>
             <td className="col-head">Method</td>
             <td className="col-head">W. Class</td>
@@ -75,12 +75,12 @@ export default function Contracts({ playerId, contracts }) {
                 </div>
               </td>
               <td>
-                  <DateTimePicker
-                    className="react-datepicker-no-border"
-                    dateFormat="MMMM d, yyyy"
-                    selected={contract.startsAt * 1000}
-                    readOnly
-                  />
+                <DateTimePicker
+                  className="react-datepicker-no-border"
+                  dateFormat="MMMM d, yyyy"
+                  selected={contract.startsAt}
+                  readOnly
+                />
               </td>
               <td>
                 <div className="single-row text-truncation-second-line">

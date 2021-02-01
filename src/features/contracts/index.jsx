@@ -187,7 +187,7 @@ export default function Contracts() {
                 <DateTimePicker
                   className="react-datepicker-no-border"
                   dateFormat="MMMM d, yyyy"
-                  selected={contract.startsAt * 1000}
+                  selected={contract.startsAt}
                   readOnly
                 />
               </td>
@@ -226,7 +226,7 @@ export default function Contracts() {
                 <DateTimePicker
                   className="date-picker"
                   dateFormat="MMMM d, yyyy h:mm aa"
-                  selected={selectedContract.startsAt * 1000}
+                  selected={selectedContract.startsAt}
                   readOnly
                 />
               ) : null}
