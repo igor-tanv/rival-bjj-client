@@ -56,9 +56,9 @@ export default function Contracts() {
       prev.map((contract) =>
         contract.id === selectedContract.id
           ? {
-              ...contract,
-              status: status,
-            }
+            ...contract,
+            status: status,
+          }
           : contract
       )
     );
@@ -130,9 +130,9 @@ export default function Contracts() {
         renderHead={() => {
           return (
             <tr>
-            {filter === 'Received' || filter === 'Accepted' ? (
-              <td className="col-head"></td>
-            ) : null}
+              {filter === 'Received' || filter === 'Accepted' ? (
+                <td className="col-head"></td>
+              ) : null}
               <td>
                 <div className="col-head">Opponent</div>
               </td>
@@ -153,33 +153,33 @@ export default function Contracts() {
         renderItem={(contract) => {
           return (
             <tr key={contract.id}>
-            {filter === 'Received' || filter === 'Accepted' ? (
-              <td>
-                {
-                  <div className="single-row">
-                    <Button
-                      onClick={() => {
-                        setSelectedContract(contract);
-                        setOpenDetails(true);
-                      }}
-                    >
-                      See details
+              {filter === 'Received' || filter === 'Accepted' ? (
+                <td>
+                  {
+                    <div className="single-row">
+                      <Button
+                        onClick={() => {
+                          setSelectedContract(contract);
+                          setOpenDetails(true);
+                        }}
+                      >
+                        See details
                     </Button>
-                  </div>
-                }
-              </td>
-            ) : null}
+                    </div>
+                  }
+                </td>
+              ) : null}
               <td>
                 <div className="single-row">
                   {localStorage.getItem('playerId') === contract.playerId
                     ? fullName(
-                        contract.opponentFirstName,
-                        contract.opponentLastName
-                      )
+                      contract.opponentFirstName,
+                      contract.opponentLastName
+                    )
                     : fullName(
-                        contract.playerFirstName,
-                        contract.playerLastName
-                      )}
+                      contract.playerFirstName,
+                      contract.playerLastName
+                    )}
                 </div>
               </td>
               <td>{matchTypes[contract.type]}</td>
@@ -187,7 +187,7 @@ export default function Contracts() {
                 <DateTimePicker
                   className="react-datepicker-no-border"
                   dateFormat="MMMM d, yyyy"
-                  selected={contract.startsAt}
+                  selected={contract.startsAt * 1000}
                   readOnly
                 />
               </td>
@@ -209,7 +209,7 @@ export default function Contracts() {
       >
         <div id="contract-detail">
           <h3>
-            {selectedContract && (selectedContract.playerFirstName + " " + selectedContract.playerLastName)}<br/> <span style={{color:"#939393"}}>vs</span><br/>
+            {selectedContract && (selectedContract.playerFirstName + " " + selectedContract.playerLastName)}<br /> <span style={{ color: "#939393" }}>vs</span><br />
             {selectedContract && (selectedContract.opponentFirstName + " " + selectedContract.opponentLastName)}
           </h3>
 
@@ -272,13 +272,13 @@ export default function Contracts() {
             <Button onClick={saveAsPdf}>Print PDF</Button>
           </div>
         ) : (
-          <div className="contract-action">
-            <Button onClick={accept}>Accept</Button>
-            <Button isSecondary onClick={decline}>
-              Decline
+            <div className="contract-action">
+              <Button onClick={accept}>Accept</Button>
+              <Button isSecondary onClick={decline}>
+                Decline
             </Button>
-          </div>
-        )}
+            </div>
+          )}
       </div>
 
       <div
