@@ -1,5 +1,16 @@
-import React from "react"
-export default function Rules({ }) {
+import React, {useEffect} from "react";
+import {
+  useLocation
+} from "react-router-dom";
+export default function Rules({}) {
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash
+    if (hash && document.getElementById(hash.substr(1))) {
+        document.getElementById(hash.substr(1)).scrollIntoView({behavior: "smooth"})
+    }
+}, [location.hash])
 
   return <div className="common-container">
     <h1>Competition Rules</h1>
@@ -69,7 +80,7 @@ export default function Rules({ }) {
     Once you send the contract, your opponent then has the option to accept or reject the match.
     </p>
 
-    <h3>Weight Classes- Gi and NoGi <h5>(Kilograms)</h5></h3>
+    <h3 id="rules">Weight Classes- Gi and NoGi <h5>(Kilograms)</h5></h3>
     <ul>
       <li>Flyweight: 57.5 and under</li>
       <li>Featherweight: 57.6 - 64</li>
