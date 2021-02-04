@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import Dropdown from '../../ui/dropdown';
+import Dropdown from "../../ui/dropdown";
 
-import { apiFetch } from '../../modules/api-fetch';
-import { toValueLabel } from '../../modules/object';
+import { apiFetch } from "../../modules/api-fetch";
+import { toValueLabel } from "../../modules/object";
 
-import weightClasses from '../../data/weight-classes.json';
-import matchTypes from '../../data/match-types.json';
-import communities from '../../data/communities.json';
+import weightClasses from "../../data/weight-classes.json";
+import matchTypes from "../../data/match-types.json";
+import communities from "../../data/communities.json";
 
-import Button from '../../ui/button';
-import Banner from '../../ui/banner';
+import Button from "../../ui/button";
+import Banner from "../../ui/banner";
 
-import './styles.css';
+import "./styles.css";
 
 export default function PlayerSearch({}) {
   const [players, setPlayers] = useState([]);
@@ -22,7 +22,7 @@ export default function PlayerSearch({}) {
   const [community, setCommunity] = useState(Object.keys(communities)[0]);
 
   useEffect(() => {
-    apiFetch('players').then((json) => setPlayers(json.players));
+    apiFetch("players").then((json) => setPlayers(json.players));
   }, []);
 
   function search(players) {
@@ -35,25 +35,25 @@ export default function PlayerSearch({}) {
 
   function sortByGiNoGi(playersSortedByGiNoGi) {
     return playersSortedByGiNoGi.sort((a, b) => {
-      const aTotalMatches = a.wins + a.draws + a.losses;
-      const bTotalMatches = b.wins + b.draws + b.losses;
-      if (aTotalMatches === 0 && bTotalMatches > 0) return 1;
-      if (aTotalMatches > 0 && bTotalMatches === 0) return -1;
+      const aHasMatch = hasCompletedMatchByType(a.contracts, giNoGi);
+      const bHasMatch = hasCompletedMatchByType(b.contracts, giNoGi);
+      if (!aHasMatch && bHasMatch) return 1;
+      if (aHasMatch && !bHasMatch) return -1;
       return b[giNoGi] - a[giNoGi];
     });
   }
 
   function sortByWeightClass(communityPlayersSortedByGiNoGi) {
-    if (weightClass === 'OpenWeight') return communityPlayersSortedByGiNoGi;
+    if (weightClass === "OpenWeight") return communityPlayersSortedByGiNoGi;
     return communityPlayersSortedByGiNoGi.filter(
       (player) => player.weightClass === weightClass
     );
   }
 
   const getMedalForPlayer = (player, ranksWithMedal) => {
-    const imageNames = ['gold.png', 'silver.png', 'bronze.png'];
-    const totalMatch = player.wins + player.draws + player.losses;
-    if (totalMatch) {
+    const imageNames = ["gold.png", "silver.png", "bronze.png"];
+    const playerHasMatch = hasCompletedMatchByType(player.contracts, giNoGi);
+    if (playerHasMatch) {
       const index = ranksWithMedal.indexOf(player[giNoGi]);
       return index <= 2 ? (
         <img
@@ -67,11 +67,19 @@ export default function PlayerSearch({}) {
     return null;
   };
 
+  function hasCompletedMatchByType(contracts = [], type) {
+    return contracts.some(
+      (contract) =>
+        ["win", "loss", "draw"].includes(contract.result) &&
+        contract.type === type
+    );
+  }
+
   const found = search(players);
   const ranksWithMedal = [
     ...new Set(
       found
-        .filter((player) => player.wins + player.draws + player.losses)
+        .filter((player) => hasCompletedMatchByType(player.contracts, giNoGi))
         .map((player) => player[giNoGi])
     ),
   ].sort((a, b) => b - a);
@@ -129,7 +137,7 @@ export default function PlayerSearch({}) {
                     <div className="info-record">
                       Win: {wins} Loss: {losses} Draw: {draws}
                     </div>
-                    {giNoGi === 'nogi' ? (
+                    {giNoGi === "nogi" ? (
                       <div className="info-rank">
                         <div className="rank-type">Nogi Rank:</div>
                         <div className="rank-score">{nogi}</div>
