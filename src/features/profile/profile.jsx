@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import Contracts from './match-history';
 import Rating from './rating';
@@ -39,7 +39,9 @@ function Profile({
           <div className="detail-info">
             <div className="profile-title">{`${firstName} ${lastName}`}</div>
             <div className="info-weight">
+            <Link to="/rules/#rules" >
               <span>{weightClass}</span>
+            </Link>
             </div>
           </div>
         </div>

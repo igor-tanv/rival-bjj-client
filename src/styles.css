@@ -140,3 +140,7 @@ body {
 .table-container {
   overflow: auto;
 }
+
+.table-match-history tr td + td {
+  border-left: 1px solid #E2E2E2;
+}
