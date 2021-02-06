@@ -84,7 +84,6 @@ export default function Form({
           />
         </div>
         <div>
-          <label>School name</label>
           <TextField
             label="Enter the School Name"
             value={values.location}
@@ -100,8 +99,6 @@ export default function Form({
           />
         </div>
         <div>
-          <label>Referee name</label>
-
           <TextField
             label="Enter Referee Name"
             value={values.refereeName}
