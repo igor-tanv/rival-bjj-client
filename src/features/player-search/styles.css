@@ -29,6 +29,7 @@
   padding: 15px 10px 15px 20px;
   width: 145px;
   height: 160px;
+  object-fit: cover;
 }
 
 .item-container .info-wrapper .info-medal {
@@ -124,7 +125,7 @@
   grid-template-columns: 38vw 20vw 37vw;
 }
 
-.item-container .info-wrapper .info-rank ,
+.item-container .info-wrapper .info-rank,
 .item-container .info-wrapper .info-school {
   display: flex;
 }
@@ -138,16 +139,15 @@
 }
 
 .text-truncation {
-	padding-right: 4px;
-	white-space: nowrap;
-	overflow: hidden;
+  padding-right: 4px;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 @media (max-width: 450px) {
   .item-container .info-wrapper .info-title,
-  .item-container .info-wrapper .info-school .school-name
-  {
+  .item-container .info-wrapper .info-school .school-name {
     max-width: 45vw;
   }
   .item-container .info-weight span {
