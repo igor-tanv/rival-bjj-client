@@ -44,7 +44,7 @@
   width: 100%;
   padding: 0 0 30px;
   display: block;
-  background: url('/assets/images/option-1.jpg');
+  background: url("/assets/images/option-1.jpg");
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -123,6 +123,7 @@
   border: #d20a0b 1px solid;
   margin-top: -18px;
   background-color: #ffffff;
+  object-fit: cover;
 }
 
 .rating-stars {
