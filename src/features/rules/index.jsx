@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   useLocation
 } from "react-router-dom";
-export default function Rules({}) {
+export default function Rules({ }) {
   const location = useLocation();
 
   useEffect(() => {
     const hash = location.hash
     if (hash && document.getElementById(hash.substr(1))) {
-        document.getElementById(hash.substr(1)).scrollIntoView({behavior: "smooth"})
+      document.getElementById(hash.substr(1)).scrollIntoView({ behavior: "smooth" })
     }
-}, [location.hash])
+  }, [location.hash])
 
   return <div className="common-container">
     <h1>Competition Rules</h1>
@@ -73,8 +73,9 @@ export default function Rules({}) {
       </ol>
     </p>
     <h3>STANDARD COMPETITION RULES</h3>
-    <p>The standard rules for all Gi and NoGi matches are: 1 round, 10 minutes, no points,  submission only, all submissions allowed, no tiebreaker</p>
-    <p>You are allowed to make changes to the standard rules. For  example: "No heel hooks", "Match will be held under
+    <p>NOGI: 1 round, 10 minutes, no points, submission only, no tiebreaker, all submissions allowed</p>
+    <p>GI: 1 round, 10 minutes, no points,  submission only, no tiebreaker, no reaping of the knee, all submissions allowed except: Heel Hooks, Neck Cranks, Inverted Toe Holds</p>
+    <p>You are allowed to make changes to the standard rules. For  example: "No leg locks", "Change match to
     IBJJF Rules", "Change match time to 8 minutes" and so on. You must put these changes under "Rule Exceptions"
     when completing the Match Contract form. Rule Exceptions will override the standard rules.
     Once you send the contract, your opponent then has the option to accept or reject the match.
