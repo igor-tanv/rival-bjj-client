@@ -193,7 +193,7 @@ export default function EditProfileForm({ player }) {
             <h5>Avatar</h5>
             {values.avatar ? (
               <div className="img-zone">
-                <img src={values.avatar} alt="" width={130} height={140} />{' '}
+                <img src={values.avatar} alt="" classname="avatar" />{' '}
               </div>
             ) : (
                 ''

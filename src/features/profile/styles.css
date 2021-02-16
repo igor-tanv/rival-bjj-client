@@ -219,6 +219,13 @@
   text-align: center;
 }
 
+.avatar-wrapper .img-zone .avatar {
+  padding: 15px 10px 15px 20px;
+  width: 145px;
+  height: 160px;
+  object-fit: cover;
+}
+
 .avatar-wrapper h5 {
   text-align: center;
 }
