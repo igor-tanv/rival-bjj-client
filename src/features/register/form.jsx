@@ -270,21 +270,22 @@ export default function RegisterForm({ setComplete }) {
           <div>
             <input type="file" ref={fileRef} onChange={e => imageUpload(fileRef, setValues)} />
           </div>
-          <div className="accept-rule">
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                const acceptsTos = e.target.checked;
-                setValues((prev) => ({
-                  ...prev,
-                  acceptsTos,
-                }));
-              }}
-              value={values.acceptsTos}
-            />
-            <span>I have read and agree to follow these <a href="/rules"> rules</a></span>
-          </div>
         </div>
+        <div className="accept-rule">
+          <input
+            type="checkbox"
+            onChange={(e) => {
+              const acceptsTos = e.target.checked;
+              setValues((prev) => ({
+                ...prev,
+                acceptsTos,
+              }));
+            }}
+            value={values.acceptsTos}
+          />
+          <span>I have read and agree to follow these <a href="/rules"> rules</a></span>
+        </div>
+
         {serverError ? <div>Server Error</div> : null}
         <Button type="submit" disabled={!valid()}>
           Register Your Profile
