@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 
 import ContractNote from './notes/contract-note';
+import GiNote from './notes/gi-note';
+import NoGiNote from './notes/nogi-note';
 
 import DateTimePicker from '../../ui/date-time-picker';
 import Dropdown from '../../ui/dropdown';
@@ -46,6 +48,9 @@ export default function Form({
             value={values.type}
           />
         </div>
+
+
+        {values.type ? (values.type === 'gi' ? <GiNote /> : <NoGiNote />) : null}
 
         <div>
           <label>Match Date and Starting Time</label>
