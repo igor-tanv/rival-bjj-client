@@ -54,10 +54,13 @@ export default function Login({ }) {
           value={password}
           onChange={(val) => setPassword(val)}
         />
-        <div style={{textAlign: "center"}}>
-          <Button type='submit' style={{minWidth: "50vw"}}>Log in</Button>
+        <div style={{ textAlign: "center" }}>
+          <Button type='submit' style={{ minWidth: "50vw" }}>Log in</Button>
         </div>
       </form>
+      <Link to="/login/reset">
+        <Button isSecondary={true}>ForgotPassword</Button>
+      </Link>
     </div>
   )
 }
