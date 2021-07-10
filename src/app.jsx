@@ -9,7 +9,8 @@ import Admin from "./features/adminpage";
 
 import Homepage from "./features/homepage";
 import Login from "./features/login";
-import PasswordReset from "./features/login/reset";
+import EmailPasswordReset from "./features/login/email-password-reset";
+import PasswordReset from "./features/login/password-reset";
 import Profile from "./features/profile";
 import Contracts from "./features/contracts";
 import IssueContract from "./features/contracts/issue-contract";
@@ -35,7 +36,11 @@ export default function App() {
             <Login />
           </Route>
 
-          <Route exact path="/login/reset">
+          <Route exact path="/password/email">
+            <EmailPasswordReset />
+          </Route>
+
+          <Route exact path="/password/reset">
             <PasswordReset />
           </Route>
 

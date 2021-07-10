@@ -58,7 +58,7 @@ export default function Login({ }) {
           <Button type='submit' style={{ minWidth: "50vw" }}>Log in</Button>
         </div>
       </form>
-      <Link to="/login/reset">
+      <Link to="/password/email">
         <Button isSecondary={true}>ForgotPassword</Button>
       </Link>
     </div>
