@@ -24,6 +24,11 @@ export default function PasswordReset({ }) {
         setPassword("")
         return
       }
+      localStorage.setItem("jwt", json.jwt)
+      localStorage.setItem("playerId", json.id)
+      const redirectUrl = localStorage.getItem("redirectUrl")
+      localStorage.removeItem("redirectUrl")
+      window.location = redirectUrl || `/profiles/${id}`
     }).catch(error => {
       setError('Sorry, there was a server error, please contact igor!')
       return
@@ -44,7 +49,7 @@ export default function PasswordReset({ }) {
           value={password}
           onChange={(val) => setPassword(val)}
         />
-        <Button type='submit' onClick={() => setMessage('Password reset')}>Send</Button>
+        <Button type='submit' onClick={() => setMessage('Password reset')}>Submit</Button>
       </form>
     </div>
   )

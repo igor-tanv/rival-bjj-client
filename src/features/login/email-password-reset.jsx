@@ -21,6 +21,7 @@ export default function EmailPasswordReset({ }) {
         setEmail("")
         return
       }
+      setEmail("")
     }).catch(error => {
       setError('Sorry, there was a server error, please contact igor!')
       return
@@ -41,7 +42,7 @@ export default function EmailPasswordReset({ }) {
           value={email}
           onChange={(val) => setEmail(val)}
         />
-        <Button type='submit' onClick={() => setMessage('Check your email for the password reset')}>Send</Button>
+        <Button type='submit' onClick={() => setMessage('Check your email for the password reset, it may be in your spam')}>Send</Button>
       </form>
     </div>
   )
