@@ -3,6 +3,8 @@ import qs from 'query-string';
 
 import { apiFetch } from "../../modules/api-fetch"
 
+import redirectToProfile from "../../hooks/redirect-to-profile"
+
 import TextField from "../../ui/text-field"
 import Button from "../../ui/button"
 
@@ -11,7 +13,7 @@ export default function PasswordReset({ }) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState(null)
   const [message, setMessage] = useState(null)
-  localStorage.setItem("jwt", token)
+
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -24,11 +26,7 @@ export default function PasswordReset({ }) {
         setPassword("")
         return
       }
-      localStorage.setItem("jwt", json.jwt)
-      localStorage.setItem("playerId", json.id)
-      const redirectUrl = localStorage.getItem("redirectUrl")
-      localStorage.removeItem("redirectUrl")
-      window.location = redirectUrl || `/profiles/${id}`
+      redirectToProfile(json.id, json.jwt)
     }).catch(error => {
       setError('Sorry, there was a server error, please contact igor!')
       return
