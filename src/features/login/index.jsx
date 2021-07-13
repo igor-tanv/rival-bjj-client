@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 
 import { apiFetch } from "../../modules/api-fetch"
 
+import redirectToProfile from "../../hooks/redirect-to-profile"
+
 import TextField from "../../ui/text-field"
 import Button from "../../ui/button"
 
@@ -23,11 +25,8 @@ export default function Login({ }) {
         setPassword("")
         return
       }
-      localStorage.setItem("jwt", json.jwt)
-      localStorage.setItem("playerId", json.id)
-      const redirectUrl = localStorage.getItem("redirectUrl")
-      localStorage.removeItem("redirectUrl")
-      window.location = redirectUrl || `/profiles/${json.id}`
+      redirectToProfile(json.id, json.jwt)
+
     }).catch(error => {
       setError("Sorry, there was a server error, please contact igor!")
 
@@ -54,10 +53,17 @@ export default function Login({ }) {
           value={password}
           onChange={(val) => setPassword(val)}
         />
-        <div style={{textAlign: "center"}}>
-          <Button type='submit' style={{minWidth: "50vw"}}>Log in</Button>
+        <div style={{ textAlign: "center" }}>
+          <Button type='submit' style={{ minWidth: "50vw" }}>Log in</Button>
         </div>
       </form>
+      <br></br>
+      <div style={{ textAlign: "center" }}>
+        <Link to="/password/email">
+          <h6>Forgot Password</h6>
+        </Link>
+      </div>
+
     </div>
   )
 }
